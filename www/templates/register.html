@@ -1,0 +1,134 @@
+<ion-view ng-controller="RegisterController as register_ctrl">
+
+  <ion-nav-bar class="bar-positive nav-title-slide-ios7">
+
+
+    <ion-nav-title>
+      Register
+    </ion-nav-title>
+  </ion-nav-bar>
+
+  <ion-content class="has-header padding">
+
+
+    <form name="registerForm" novalidate ng-submit="register_ctrl.register(registerForm)">
+
+      <div class="list">
+
+           <!--                    USERNAME                        -->
+
+        <label class="item item-input" ng-class="{ 'has-errors' : registerForm.username.$invalid && registerForm.username.$dirty,
+         'no-errors': registerForm.username.$valid && registerForm.username.$dirty }">
+        <span class="input-label">Username: </span>
+        <input type="text"
+               name="username"
+               ng-model="register_ctrl.registration.username"
+               ng-minlength="2"
+               ng-maxlength="20"
+               user-availability-validator
+               required />
+        </label>
+
+        <div class="error-container" ng-show="registerForm.username.$error && registerForm.username.$dirty" ng-messages="registerForm.username.$error">
+          <div ng-messages-include src="../templates/errorlist.html"></div>
+        </div>
+
+                <!--                    HASLO                        -->
+
+        <label class="item item-input" ng-class="{ 'has-errors' : registerForm.password.$invalid && registerForm.password.$dirty,
+         'no-errors': registerForm.password.$valid && registerForm.password.$dirty }">
+          <span class="input-label">Password: </span>
+          <input type="password"
+                 name="password"
+                 ng-model="register_ctrl.registration.password"
+                 ng-minlength="3"
+                 ng-maxlength="20"
+                 clear-re-password
+                 required />
+        </label>
+
+        <div class="error-container" ng-show="registerForm.password.$error && registerForm.password.$dirty" ng-messages="registerForm.password.$error">
+          <div ng-messages-include src="../templates/errorlist.html"></div>
+        </div>
+
+                  <!--                POWTORNE HASLO                       -->
+
+
+        <label class="item item-input" ng-class="{ 'has-errors' : registerForm.RePassword.$invalid && registerForm.RePassword.$dirty,
+         'no-errors': registerForm.RePassword.$valid && registerForm.RePassword.$dirty }">
+          <span class="input-label">Password again: </span>
+          <input type="password"
+                 name="RePassword"
+                 ng-model="register_ctrl.registration.RePassword"
+                 ng-maxlength="20"
+                 password-validation
+                 required />
+        </label>
+
+        <div class="error-container last-error-container" ng-show="registerForm.RePassword.$error && registerForm.RePassword.$dirty" ng-messages="registerForm.RePassword.$error">
+          <div ng-messages-include src="../templates/errorlist.html"></div>
+        </div>
+
+
+      </div>
+
+      <div class="row">
+        <div class="col col-30">
+          <button class="button button-full button-positive" type="submit" ng-disabled="registerForm.$invalid">Register</button>
+        </div>
+
+      </div>
+
+      <div class="row text-center">
+        <div class="col">
+          <button class="button icon-left ion-home" ng-click="register_ctrl.returnHome()">Home</button>
+        </div>
+      </div>
+
+    </form>
+
+
+
+
+
+<!--
+
+    <form name="jwtRegisterForm" novalidate ng-submit="login_ctrl.jwtRegister(jwtRegisterForm)">
+
+      <div class="list">
+
+
+        <label class="item item-input" ng-class="{ 'has-errors' : jwtRegisterForm.username.$invalid && jwtRegisterForm.username.$touched,
+         'no-errors': jwtRegisterForm.username.$valid && jwtRegisterForm.username.$touched }">
+          <span class="input-label">Username</span>
+          <input type="text" name="username" ng-model="login_ctrl.authorization.username" ng-minlength="2" ng-maxlength="15" required>
+        </label>
+
+        <div class="error-container" ng-show="jwtRegisterForm.username.$error && jwtRegisterForm.username.$touched" ng-messages="jwtRegisterForm.username.$error">
+          <div ng-messages-include src="../templates/errorlist.html"></div>
+        </div>
+
+        <label class="item item-input" ng-class="{ 'has-errors' : jwtRegisterForm.password.$invalid && jwtRegisterForm.$submitted,
+       'no-errors' : jwtRegisterForm.password.$valid  && jwtRegisterForm.$submitted}">
+          <span class="input-label">Password</span>
+          <input type="password" name="password" ng-model="login_ctrl.authorization.password" ng-minlength="5" ng-maxlength="20" required>
+        </label>
+
+        <div class="error-container last-error-container" ng-show="jwtRegisterForm.password.$error && jwtRegisterForm.$submitted" ng-messages="jwtRegisterForm.password.$error">
+          <div ng-messages-include src="../templates/errorlist.html"></div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col col-30">
+          <button class="button button-full button-positive" type="submit" ng-disabled="jwtLoginForm.$invalid">Sign in</button>
+        </div>
+
+      </div>
+
+    </form> -->
+
+
+    </ion-content>
+  </ion-view>

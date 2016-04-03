@@ -1,0 +1,13 @@
+#logodiv {
+  padding-top: 50px;
+}
+
+.welcomeTextDiv {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.welcomeText {
+  font-weight: bold;
+  font-size: 15px;
+}
