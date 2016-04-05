@@ -4,16 +4,59 @@
     <ion-nav-title>
       Home
     </ion-nav-title>
+
   </ion-nav-bar>
 
     <ion-nav-buttons side="left">
         <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+
     </ion-nav-buttons>
 
     <ion-content class="has-header padding">
 
+                  <!--           PROFILE DLA FB         -->
 
-    <h1 ng-show="home_ctrl.userDetails.first_name || home_ctrl.jwtUserName ">Hello {{ home_ctrl.userDetails.first_name || home_ctrl.jwtUserName }}</h1>
+      <div class="list" ng-show="home_ctrl.userDetails">
+
+      <div class="item item-divider">
+        Profile
+      </div>
+
+      <a class="item item-avatar" href="#">
+        <img src="{{ home_ctrl.userDetails.picture.data.url }}">
+        <h2> {{ home_ctrl.userDetails.first_name }} {{ home_ctrl.userDetails.last_name }}</h2>
+      </a>
+
+      <div class="item item-divider">
+        Friends
+      </div>
+
+
+    </div>
+
+
+                  <!--           PROFILE DLA JWT          -->
+
+
+      <div class="list" ng-show="home_ctrl.jwtUserName">
+
+        <div class="item item-divider">
+          Profile
+        </div>
+
+        <a class="item item-avatar" href="#">
+          <img src="">
+          <h2> Username: {{ home_ctrl.jwtUserName }}</h2>
+        </a>
+
+        <div class="item item-divider">
+          Friends
+        </div>
+
+
+      </div>
+
+
 
 
       <div class="row">

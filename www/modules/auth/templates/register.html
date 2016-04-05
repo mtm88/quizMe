@@ -30,7 +30,7 @@
         </label>
 
         <div class="error-container" ng-show="registerForm.username.$error && registerForm.username.$dirty" ng-messages="registerForm.username.$error">
-          <div ng-messages-include src="../templates/errorlist.html"></div>
+          <div ng-messages-include src="../modules/auth/templates/errorlist.html"></div>
         </div>
 
                 <!--                    HASLO                        -->
@@ -48,7 +48,7 @@
         </label>
 
         <div class="error-container" ng-show="registerForm.password.$error && registerForm.password.$dirty" ng-messages="registerForm.password.$error">
-          <div ng-messages-include src="../templates/errorlist.html"></div>
+          <div ng-messages-include src="../modules/auth/templates/errorlist.html"></div>
         </div>
 
                   <!--                POWTORNE HASLO                       -->
@@ -66,7 +66,7 @@
         </label>
 
         <div class="error-container last-error-container" ng-show="registerForm.RePassword.$error && registerForm.RePassword.$dirty" ng-messages="registerForm.RePassword.$error">
-          <div ng-messages-include src="../templates/errorlist.html"></div>
+          <div ng-messages-include src="../modules/auth/templates/errorlist.html"></div>
         </div>
 
 

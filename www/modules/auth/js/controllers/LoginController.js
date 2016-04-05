@@ -58,7 +58,7 @@ angular.module('pmApp.LoginCtrl', [])
 
         me.jwtLogin = function() {
           me.jwtlogin = true;
-          }
+          };
 
         me.jwtSignIn = function(jwtLoginForm) {
 
@@ -67,7 +67,7 @@ angular.module('pmApp.LoginCtrl', [])
             postData.findJwtUser({ 'username' : me.authorization.username, 'password' : me.authorization.password })
               .then(function(response) {
 
-                if(response.userExists == false) {
+                if(response.wrongPassword == true) {
                 jwtLoginForm.username.$setValidity("required", false);
 
                 me.authorization.password = '';
@@ -79,6 +79,7 @@ angular.module('pmApp.LoginCtrl', [])
                   me.authorization.password = '';
 
                   localStorageService.set('user.id', response.username);
+                  localStorageService.set('userDbId', response.userDbId);
                   localStorageService.set('user.authToken', response.userToken);
                   localStorageService.set('loginService', 'jwt');
                   me.logged_in = true;

@@ -3,8 +3,8 @@
  */
 angular.module('pmApp.loginOriginService', [])
 
-.service('loginOrigin', ['$http', '$q', '$ionicLoading', 'localStorageService', 'SERVER',
-  function($http, $q, $ionicLoading, localStorageService, SERVER) {
+.service('loginOrigin', ['$http', '$q', '$ionicLoading', 'localStorageService',
+  function($http, $q, $ionicLoading, localStorageService) {
 
   var me = this;
 

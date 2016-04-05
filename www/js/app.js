@@ -1,16 +1,34 @@
 angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.LoginCtrl', 'pmApp.RegisterCtrl', 'pmApp.HomeCtrl',
-  'pmApp.postDataServices', 'pmApp.loginOriginService', 'pmApp.registerFormDirectives', 'pmApp.checkUsernameAvailability'])
+  'pmApp.postDataServices', 'pmApp.loginOriginService', 'pmApp.registerFormDirectives', 'pmApp.checkUsernameAvailability', 'pmApp.friendList'])
 
   .constant('SERVER', {
 
-  //  url: 'http://192.168.0.2:5000'
+    url: 'http://192.168.0.2:5000'
 
-  url: 'http://mtm88-pmserver.herokuapp.com',
-    port: 13530
+  //url: 'http://mtm88-pmserver.herokuapp.com',
+   // port: 13530
 
   })
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, friendList, localStorageService) {
+
+  var userDbId = localStorageService.get('userDbId');
+  var token = localStorageService.get('user.authToken');
+
+  $ionicPlatform.on('resume', function() {
+    if(token) {
+      friendList.setOnlineStatus(userDbId, token, true);
+      console.log("wrocilem z backgroundu");
+    }
+  });
+
+  $ionicPlatform.on('pause', function() {
+    if(token) {
+      friendList.setOnlineStatus(userDbId, token, false);
+      console.log("wychodze do backgroundu");
+    }
+  });
+
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -50,7 +68,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
         cache: false,
         views: {
           'menuContent': {
-            templateUrl: 'templates/login.html'
+            templateUrl: '../modules/auth/templates/login.html'
           }
         }
       })
@@ -59,7 +77,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
       url: 'register',
       views: {
         'menuContent': {
-          templateUrl: 'templates/register.html'
+          templateUrl: '../modules/auth/templates/register.html'
         }
       }
     })

@@ -3,7 +3,8 @@
  */
 angular.module('pmApp.HomeCtrl', [])
 
-.controller('HomeController', ['$scope', '$state', 'localStorageService', 'postData', 'loginOrigin', function($scope, $state, localStorageService, postData, loginOrigin) {
+.controller('HomeController', ['$scope', '$state', 'localStorageService', 'postData', 'loginOrigin', 'friendList',
+  function($scope, $state, localStorageService, postData, loginOrigin, friendList) {
 
   var me = this;
 
@@ -12,7 +13,7 @@ angular.module('pmApp.HomeCtrl', [])
   me.getUserInfo = function(){
 
     loginOrigin.checkLoginOrigin()
-      .then(function (respond) {
+      .then(function(respond) {
 
         if(respond == 'fb') {
 
@@ -22,12 +23,14 @@ angular.module('pmApp.HomeCtrl', [])
           var userOrigin = 'fb';
 
           facebookConnectPlugin.api(
-            FBuser_id + "/?fields=id,email,first_name,last_name,gender,age_range",
+            FBuser_id + "/?fields=picture,id,email,first_name,last_name,gender,age_range",
             ['public_profile', 'email'],
             function (successData) {
               postData.findFbUser(successData, FBtoken, FBverified, userOrigin)
-                .then( function() {
+                .then( function(response) {
                   me.userDetails = successData;
+                  localStorageService.set('userDbId', response._id);
+                  friendList.getFriendList();
                 });
 
             },
@@ -41,6 +44,7 @@ angular.module('pmApp.HomeCtrl', [])
         else if(respond == 'jwt') {
 
           me.jwtUserName = localStorageService.get('user.id');
+          friendList.getFriendList();
 
         }
 
@@ -48,12 +52,10 @@ angular.module('pmApp.HomeCtrl', [])
 
       });
 
-
-
-
-
-
   };
+
+
+
 
 
 
@@ -75,6 +77,7 @@ angular.module('pmApp.HomeCtrl', [])
             console.log('FB Logout successfull');
             $scope.logged_in = false;
             localStorageService.set('loginService', null);
+            localStorageService.set('user.authToken', null);
             $state.go('app.login');
           },
           function(err){
@@ -83,6 +86,7 @@ angular.module('pmApp.HomeCtrl', [])
         );
     } else {
       localStorageService.set('loginService', null);
+      localStorageService.set('user.authToken', null);
       me.logged_in = false;
       $state.go('app.login');
       console.log('JWT Logout successfull');

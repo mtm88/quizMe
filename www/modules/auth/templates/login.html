@@ -63,7 +63,7 @@
         </label>
 
         <div class="error-container" ng-show="jwtLoginForm.username.$error && jwtLoginForm.username.$touched" ng-messages="jwtLoginForm.username.$error">
-          <div ng-messages-include src="../templates/errorlist.html"></div>
+          <div ng-messages-include src="../modules/auth/templates/errorlist.html"></div>
         </div>
 
       <label class="item item-input" ng-class="{ 'has-errors' : jwtLoginForm.password.$invalid && jwtLoginForm.$submitted,
@@ -73,7 +73,7 @@
       </label>
 
       <div class="error-container last-error-container" ng-show="jwtLoginForm.password.$error && jwtLoginForm.$submitted" ng-messages="jwtLoginForm.password.$error">
-        <div ng-messages-include src="../templates/errorlist.html"></div>
+        <div ng-messages-include src="../modules/auth/templates/errorlist.html"></div>
       </div>
 
     </div>

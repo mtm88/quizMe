@@ -6,8 +6,8 @@ angular.module('pmApp.postDataServices', [])
         var me = this;
 
         me.timeout = {
-            value: 10000,
-            message: 'Connection timeout (10000)'
+            value: 20000,
+            message: 'Connection timeout (20000)'
         };
 
         function requestTimeout(deferred) {
@@ -84,8 +84,9 @@ angular.module('pmApp.postDataServices', [])
               }
 
 
-        function findFbUser(userData, token_fb, FBverified, userOrigin) {
 
+        function findFbUser(userData, token_fb, FBverified, userOrigin) {
+console.log(FBverified);
           $ionicLoading.show();
 
           var deferred = $q.defer();
