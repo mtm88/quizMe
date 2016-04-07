@@ -12,11 +12,12 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
 
 .run(function($ionicPlatform, friendList, localStorageService) {
 
-  var userDbId = localStorageService.get('userDbId');
+
   var token = localStorageService.get('user.authToken');
 
   $ionicPlatform.on('resume', function() {
     if(token) {
+      var userDbId = localStorageService.get('userDbId');
       friendList.setOnlineStatus(userDbId, token, true);
       console.log("wrocilem z backgroundu");
     }
@@ -24,6 +25,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
 
   $ionicPlatform.on('pause', function() {
     if(token) {
+      var userDbId = localStorageService.get('userDbId');
       friendList.setOnlineStatus(userDbId, token, false);
       console.log("wychodze do backgroundu");
     }

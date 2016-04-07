@@ -29,8 +29,12 @@ angular.module('pmApp.HomeCtrl', [])
               postData.findFbUser(successData, FBtoken, FBverified, userOrigin)
                 .then( function(response) {
                   me.userDetails = successData;
+
                   localStorageService.set('userDbId', response._id);
-                  friendList.getFriendList();
+                  friendList.getFriendList()
+                    .then(function(response){
+                      console.log(response);
+                    });
                 });
 
             },
@@ -44,7 +48,11 @@ angular.module('pmApp.HomeCtrl', [])
         else if(respond == 'jwt') {
 
           me.jwtUserName = localStorageService.get('user.id');
-          friendList.getFriendList();
+          friendList.getFriendList()
+            .then(function(response){
+              console.log(response);
+              me.friendList = response.friendList;
+            });
 
         }
 

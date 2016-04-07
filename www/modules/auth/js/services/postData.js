@@ -86,7 +86,7 @@ angular.module('pmApp.postDataServices', [])
 
 
         function findFbUser(userData, token_fb, FBverified, userOrigin) {
-console.log(FBverified);
+
           $ionicLoading.show();
 
           var deferred = $q.defer();
