@@ -59,7 +59,18 @@
 
         <div class="item item-divider">
           Friends
+
+          <label class="item item-input">
+            <input type="text" placeholder="Search for a friend..." ng-model="home_ctrl.friendSearch" friend-finder>
+          </label>
+
         </div>
+
+      <div class="card" ng-show="friendData">
+        <div class="item item-text-wrap">
+          {{ friendData.username }} {{ friendData._id }}
+        </div>
+      </div>
 
         <ul class="list">
 
