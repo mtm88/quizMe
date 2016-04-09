@@ -3,8 +3,8 @@
  */
 angular.module('pmApp.HomeCtrl', [])
 
-.controller('HomeController', ['$scope', '$state', 'localStorageService', 'postData', 'loginOrigin', 'friendList',
-  function($scope, $state, localStorageService, postData, loginOrigin, friendList) {
+.controller('HomeController', ['$scope', '$state', 'localStorageService', 'postData', 'loginOrigin', 'friendList', '$interval',
+  function($scope, $state, localStorageService, postData, loginOrigin, friendList, $interval) {
 
   var me = this;
 
@@ -29,12 +29,17 @@ angular.module('pmApp.HomeCtrl', [])
               postData.findFbUser(successData, FBtoken, FBverified, userOrigin)
                 .then( function(response) {
                   me.userDetails = successData;
-
                   localStorageService.set('userDbId', response._id);
+
                   friendList.getFriendList()
                     .then(function(response){
-                      console.log(response);
-                    });
+                        me.friendList = response.friendList;
+                      },
+                      function(error) {
+                        console.log(error);
+                      }
+                    )
+
                 });
 
             },
@@ -50,15 +55,25 @@ angular.module('pmApp.HomeCtrl', [])
           me.jwtUserName = localStorageService.get('user.id');
           friendList.getFriendList()
             .then(function(response){
-              console.log(response);
               me.friendList = response.friendList;
-            });
+            },
+            function(error) {
+              console.log(error);
+            }
+        )
 
         }
 
-
-
       });
+
+    me.friendListInterval = $interval( function() {
+      friendList.getFriendList()
+        .then(function(response){
+          console.log(response);
+          me.friendList = response.friendList;
+        })
+
+    }, 30000);
 
   };
 
@@ -79,6 +94,8 @@ angular.module('pmApp.HomeCtrl', [])
 
     this.loginServiceCheck = localStorageService.get('loginService');
 
+    $interval.cancel(me.friendListInterval);
+
     if(this.loginServiceCheck == 'fb') {
         facebookConnectPlugin.logout(
           function(){
@@ -92,6 +109,7 @@ angular.module('pmApp.HomeCtrl', [])
             console.log('Logout failed: %s', err);
           }
         );
+
     } else {
       localStorageService.set('loginService', null);
       localStorageService.set('user.authToken', null);

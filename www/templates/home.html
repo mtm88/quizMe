@@ -27,18 +27,17 @@
         <h2> {{ home_ctrl.userDetails.first_name }} {{ home_ctrl.userDetails.last_name }}</h2>
       </a>
 
-      <div class="item item-divider">
-        Friends
       </div>
 
 
-    </div>
+
+
 
 
                   <!--           PROFILE DLA JWT          -->
 
 
-      <div class="list" ng-show="home_ctrl.jwtUserName">
+      <div ng-show="home_ctrl.jwtUserName">
 
         <div class="item item-divider">
           Profile
@@ -53,6 +52,10 @@
           </li>
         </ul>
 
+      </div>
+
+
+               <!--           WSPOLNY WIDOK PRZYJACIOL          -->
 
         <div class="item item-divider">
           Friends
@@ -60,17 +63,25 @@
 
         <ul class="list">
 
-          <li ng-repeat="friend in home_ctrl.friendList"> {{ friend.username }} </li>
+          <li ng-repeat="friend in home_ctrl.friendList">
 
-        {{ home_ctrl.friendList }}
+            <a class="item item-icon-left item-icon-right" href="#">
+              <i class="icon ion-chatbubble-working"></i>
+              {{ friend.username }}
+              <i class="icon ion-checkmark-round green-icon" ng-show="friend.userStatus"></i>
 
+            </a>
+
+          </li>
 
 
         </ul>
 
-
+      <div class="card" ng-show="home_ctrl.friendList">
+        <div class="item item-text-wrap friendRefreshInfo">
+          Friend list is being auto-refreshed every 30 secs
+        </div>
       </div>
-
 
 
 
