@@ -69,7 +69,6 @@ angular.module('pmApp.HomeCtrl', [])
     me.friendListInterval = $interval( function() {
       friendList.getFriendList()
         .then(function(response){
-          console.log(response);
           me.friendList = response.friendList;
         })
 

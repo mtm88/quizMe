@@ -68,7 +68,15 @@
 
       <div class="card" ng-show="friendData">
         <div class="item item-text-wrap">
-          {{ friendData.username }} {{ friendData._id }}
+          {{ friendData.friendDetails.username }}
+
+          <button class="button button-small button-calm" ng-show="friendData.alreadyFriend">
+            Already a Friend
+          </button>
+          <button class="button button-small button-balanced" ng-show="friendData.friendExists && !friendData.alreadyFriend">
+            Invite
+          </button>
+          <span ng-hide="friendData.friendExists"> no users with that username found </span>
         </div>
       </div>
 
