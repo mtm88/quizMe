@@ -78,6 +78,15 @@ angular.module('pmApp.HomeCtrl', [])
 
 
 
+  me.inviteUser = function(chosenUserData) {
+
+    me.sendingInvite = true;
+    friendList.sendInvite(chosenUserData)
+      .then(function(){
+        me.inviteSent = true;
+      });
+
+  };
 
 
 
@@ -88,8 +97,7 @@ angular.module('pmApp.HomeCtrl', [])
 
 
 
-
-  $scope.Logout = function(){
+  me.logout = function(){
 
     this.loginServiceCheck = localStorageService.get('loginService');
 
@@ -121,4 +129,4 @@ angular.module('pmApp.HomeCtrl', [])
 
 
 
-}])
+}]);
