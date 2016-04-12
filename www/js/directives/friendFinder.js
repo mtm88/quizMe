@@ -50,7 +50,7 @@ angular.module('pmApp.friendFinderDirectives', [])
 
               if(response.friendExists == 'yes') {
 
-                scope.friendData = { friendExists : true, friendDetails : response.friendInfo, alreadyFriend : false };
+                scope.friendData = { friendExists : true, friendDetails : response.friendInfo, alreadyFriend : false, requestAlreadySent : response.requestAlreadySent };
 
                 // console.log(scope.$parent.home_ctrl.friendList);
 
@@ -58,11 +58,11 @@ angular.module('pmApp.friendFinderDirectives', [])
 
                   for(i = 0; i < scope.$parent.home_ctrl.friendList.length; i++) {
                     if(scope.$parent.home_ctrl.friendList[i].userDbId == response.friendInfo._id) {
-                      scope.friendData = { friendExists : true, friendDetails : response.friendInfo, alreadyFriend : true };
+                      scope.friendData = { friendExists : true, friendDetails : response.friendInfo, alreadyFriend : true, requestAlreadySent : response.requestAlreadySent };
                       console.log('juz przyjaciel');
                     }
                   }
-            //    console.log(scope.friendData);
+                console.log(scope.friendData);
 
               }
 

@@ -73,7 +73,7 @@
           <button class="button button-small button-calm" ng-show="friendData.alreadyFriend">
             Already a Friend
           </button>
-          <button class="button button-small button-balanced" ng-show="friendData.friendExists && !friendData.alreadyFriend && !home_ctrl.sendingInvite" ng-click="home_ctrl.inviteUser(friendData)">
+          <button class="button button-small button-balanced" ng-show="friendData.friendExists && !friendData.alreadyFriend && !home_ctrl.sendingInvite && !friendData.requestAlreadySent" ng-click="home_ctrl.inviteUser(friendData)">
             Invite
           </button>
 
@@ -81,7 +81,7 @@
 
           <span ng-hide="friendData.friendExists"> no users with that username found </span>
 
-          <button class="button button-small button-positive" ng-show="home_ctrl.inviteSent">
+          <button class="button button-small button-positive" ng-show="home_ctrl.inviteSent || friendData.requestAlreadySent">
             Request sent
           </button>
         </div>
