@@ -3,8 +3,8 @@
  */
 angular.module('pmApp.HomeCtrl', [])
 
-.controller('HomeController', ['$scope', '$state', 'localStorageService', 'postData', 'loginOrigin', 'friendList', '$interval',
-  function($scope, $state, localStorageService, postData, loginOrigin, friendList, $interval) {
+.controller('HomeController', ['$scope', '$state', 'localStorageService', 'postData', 'loginOrigin', 'friendList', '$interval', '$q',
+  function($scope, $state, localStorageService, postData, loginOrigin, friendList, $interval, $q) {
 
   var me = this;
 
@@ -28,12 +28,30 @@ angular.module('pmApp.HomeCtrl', [])
             function (successData) {
               postData.findFbUser(successData, FBtoken, FBverified, userOrigin)
                 .then( function(response) {
-                  me.userDetails = successData;
-                  localStorageService.set('userDbId', response._id);
+
+                  $scope.userDetails = successData;
+
+                  setUserDbId();
+
+                  function setUserDbId() {
+
+                  var deferred = $q.defer();
+                    if(response) {
+                      localStorageService.set('userDbId', response._id);
+                      console.log(response._id);
+                      deferred.resolve();
+                    } else {
+                      deferred.reject();
+                    }
+                    return deferred.promise;
+                  }
+
 
                   friendList.getFriendList()
                     .then(function(response){
                         me.friendList = response.friendList;
+                        me.receivedInvites = response.receivedInvites;
+                      console.log(me.receivedInvites);
                       },
                       function(error) {
                         console.log(error);
@@ -52,10 +70,11 @@ angular.module('pmApp.HomeCtrl', [])
 
         else if(respond == 'jwt') {
 
-          me.jwtUserName = localStorageService.get('user.id');
+          $scope.userDetails =  { 'username' : localStorageService.get('user.id') };
           friendList.getFriendList()
             .then(function(response){
               me.friendList = response.friendList;
+              me.receivedInvites = response.receivedInvites;
             },
             function(error) {
               console.log(error);
@@ -79,9 +98,8 @@ angular.module('pmApp.HomeCtrl', [])
 
 
   me.inviteUser = function(chosenUserData) {
-
     me.sendingInvite = true;
-    friendList.sendInvite(chosenUserData)
+    friendList.sendInvite(chosenUserData, $scope.userDetails)
       .then(function(){
         me.inviteSent = true;
       });
@@ -119,6 +137,7 @@ angular.module('pmApp.HomeCtrl', [])
 
     } else {
       localStorageService.set('loginService', null);
+      localStorageService.set('userDbId', null);
       localStorageService.set('user.authToken', null);
       me.logged_in = false;
       $state.go('app.login');

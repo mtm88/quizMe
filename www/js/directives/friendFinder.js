@@ -12,7 +12,7 @@ angular.module('pmApp.friendFinderDirectives', [])
 
       var loginService = localStorageService.get('loginService');
       var token = localStorageService.get('user.authToken');
-      var userDbId = localStorageService.get('userDbId');
+
 
       if(loginService == 'fb')
         FBverified = true;
@@ -20,7 +20,13 @@ angular.module('pmApp.friendFinderDirectives', [])
 
 
 
+
+
     ngModel.$parsers.push(function(value) {
+
+      var userDbId = localStorageService.get('userDbId'); // DOESNT WORK WHEN OUTSIDE OF PUSH, LEFT TO CHECK
+
+      console.log(userDbId);
 
       var searchedFriend = ngModel.$viewValue;
 
@@ -43,7 +49,7 @@ angular.module('pmApp.friendFinderDirectives', [])
       if(!value || value.length == 0) return;
 
 
-          $http.post(SERVER.url + '/api/friendFinder', { friendUsername : value, token : token, userDbId : userDbId, FBverified : FBverified })
+          $http.post(SERVER.url + '/api/friendFinder', { friendUsername : value, token : token, userDbId : userDbId, FBverified : FBverified, loginService : loginService })
             .success( function(response) {
 
               // console.log(response);

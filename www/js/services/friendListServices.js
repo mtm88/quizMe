@@ -59,17 +59,26 @@ angular.module('pmApp.friendList', [])
   }
 
 
-    function sendInvite(chosenUserData) {
+    function sendInvite(chosenUserData, userData) {
 
       var sendingUserDbId = localStorageService.get('userDbId');
       var token = localStorageService.get('user.authToken');
       var loginService = localStorageService.get('loginService');
-      if(loginService == 'fb')
+
+      if(loginService == 'fb') {
         var FBverified = true;
+        var username = userData.email;
+      }
+      else {
+        var username = userData.username;
+      }
+
+      console.log(userData);
 
       var deferred = $q.defer();
 
-      $http.post(SERVER.url + '/api/sendInvite', { chosenUserData : chosenUserData.friendDetails, FBverified : FBverified, token : token, loginService : loginService, sendingUserDbId : sendingUserDbId })
+      $http.post(SERVER.url + '/api/sendInvite', { chosenUserData : chosenUserData.friendDetails, FBverified : FBverified, token : token,
+        loginService : loginService, sendingUserDbId : sendingUserDbId, sendingUsername : username })
         .success(function(response) {
 
           if(response.success == true)

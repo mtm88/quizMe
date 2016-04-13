@@ -16,15 +16,15 @@
 
                   <!--           PROFILE DLA FB         -->
 
-      <div class="list" ng-show="home_ctrl.userDetails">
+      <div class="list" ng-show="userDetails.first_name">
 
       <div class="item item-divider">
         Profile
       </div>
 
       <a class="item item-avatar" href="#">
-        <img src="{{ home_ctrl.userDetails.picture.data.url }}">
-        <h2> {{ home_ctrl.userDetails.first_name }} {{ home_ctrl.userDetails.last_name }}</h2>
+        <img src="{{ userDetails.picture.data.url }}">
+        <h2> {{ userDetails.first_name }} {{ userDetails.last_name }}</h2>
       </a>
 
       </div>
@@ -37,7 +37,7 @@
                   <!--           PROFILE DLA JWT          -->
 
 
-      <div ng-show="home_ctrl.jwtUserName">
+      <div ng-show="userDetails.username">
 
         <div class="item item-divider">
           Profile
@@ -47,7 +47,7 @@
           <li>
             <a class="item item-avatar" href="#">
               <img src="">
-              <h2> Username: {{ home_ctrl.jwtUserName }}</h2>
+              <h2> Username: {{ userDetails.username }}</h2>
             </a>
           </li>
         </ul>
@@ -57,8 +57,10 @@
 
                <!--           WSPOLNY WIDOK PRZYJACIOL          -->
 
-        <div class="item item-divider">
-          Friends
+
+      <div class="item item-divider">
+        FRIENDS
+      </div>
 
           <label class="item item-input">
             <input type="text" placeholder="Search for a friend..." ng-model="home_ctrl.friendSearch" friend-finder>
@@ -81,15 +83,42 @@
 
           <span ng-hide="friendData.friendExists"> no users with that username found </span>
 
-          <button class="button button-small button-positive" ng-show="home_ctrl.inviteSent || friendData.requestAlreadySent">
+          <button class="button button-small button-positive" ng-show="home_ctrl.inviteSent && !friendData.requestAlreadySent || friendData.requestAlreadySent">
             Request sent
           </button>
         </div>
       </div>
 
-        <ul class="list">
+        <div class="list">
 
-          <li ng-repeat="friend in home_ctrl.friendList">
+          <div class="item item-divider" ng-show="home_ctrl.receivedInvites">
+            Requests
+          </div>
+
+          <div ng-repeat="friendRequest in home_ctrl.receivedInvites">
+
+
+              <div class="row">
+                  <div class="col">
+                      {{ friendRequest.username }}
+                  </div>
+                  <div class="col col-offset-40">
+                      <button class="button button-small button-outline button-positive">
+                        Accept
+                      </button>
+                  </div>
+              </div>
+
+
+
+
+          </div>
+
+          <div class="item item-divider">
+            List
+          </div>
+
+          <div ng-repeat="friend in home_ctrl.friendList">
 
             <a class="item item-icon-left item-icon-right" href="#">
               <i class="icon ion-chatbubble-working"></i>
@@ -98,10 +127,10 @@
 
             </a>
 
-          </li>
+          </div>
 
 
-        </ul>
+        </div>
 
       <div class="card" ng-show="home_ctrl.friendList">
         <div class="item item-text-wrap friendRefreshInfo">
