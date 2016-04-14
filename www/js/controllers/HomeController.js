@@ -97,12 +97,26 @@ angular.module('pmApp.HomeCtrl', [])
 
 
 
-  me.inviteUser = function(chosenUserData) {
+  me.inviteUser = function() {
+
+    console.log(me);
+    console.log($scope);
+
+    friendList.sendInvite( { 'username' : me.userSearch.userField.$modelValue }, $scope.userDetails )
+      .then(function() {
+        me.userSearch.userField.$setValidity('friendFinder', true);
+      });
+
+    /*
     me.sendingInvite = true;
     friendList.sendInvite(chosenUserData, $scope.userDetails)
       .then(function(){
-        me.inviteSent = true;
+        console.log($scope);
+        console.log($scope.userSearch);
+        $scope.userSearch.userField.$setValidity('friend-finder', true);
       });
+
+      */
 
   };
 

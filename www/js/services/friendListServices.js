@@ -73,11 +73,9 @@ angular.module('pmApp.friendList', [])
         var username = userData.username;
       }
 
-      console.log(userData);
-
       var deferred = $q.defer();
 
-      $http.post(SERVER.url + '/api/sendInvite', { chosenUserData : chosenUserData.friendDetails, FBverified : FBverified, token : token,
+      $http.post(SERVER.url + '/api/sendInvite', { chosenUserData : chosenUserData, FBverified : FBverified, token : token,
         loginService : loginService, sendingUserDbId : sendingUserDbId, sendingUsername : username })
         .success(function(response) {
 

@@ -62,32 +62,50 @@
         FRIENDS
       </div>
 
-          <label class="item item-input">
-            <input type="text" placeholder="Search for a friend..." ng-model="home_ctrl.friendSearch" friend-finder>
-          </label>
+        <form name="home_ctrl.userSearch" novalidate ng-submit="home_ctrl.inviteUser()">
 
-        </div>
+                <label class="item item-input">
+                  <input type="text" name="userField" placeholder="Search for a friend..." ng-model="userfield" friend-finder>
+                </label>
 
-      <div class="card" ng-show="friendData">
-        <div class="item item-text-wrap">
-          {{ friendData.friendDetails.username }}
 
-          <button class="button button-small button-calm" ng-show="friendData.alreadyFriend">
-            Already a Friend
-          </button>
-          <button class="button button-small button-balanced" ng-show="friendData.friendExists && !friendData.alreadyFriend && !home_ctrl.sendingInvite && !friendData.requestAlreadySent" ng-click="home_ctrl.inviteUser(friendData)">
-            Invite
-          </button>
+            <div class="userSearchInfo" ng-show="home_ctrl.userSearch.userField.$valid">
+              <i class="ion-information-circled"></i>
+              Request success
+            </div>
 
-          <span ng-show="home_ctrl.sendingInvite && !home_ctrl.inviteSent">Sending request...</span>
+            <div class="error" ng-show="userSearch.userField.$invalid">
+              <i class="ion-information-circled"></i>
+              Error processing your request
+            </div>
 
-          <span ng-hide="friendData.friendExists"> no users with that username found </span>
 
-          <button class="button button-small button-positive" ng-show="home_ctrl.inviteSent && !friendData.requestAlreadySent || friendData.requestAlreadySent">
-            Request sent
-          </button>
-        </div>
-      </div>
+
+            <div class="card" ng-show="friendData">
+              <div class="item item-text-wrap">
+                {{ friendData.friendDetails.username }}
+
+                <button class="button button-small button-calm" ng-show="friendData.alreadyFriend">
+                  Already a Friend
+                </button>
+                <button type="submit" class="button button-small button-balanced" ng-show="friendData.friendExists && !friendData.alreadyFriend &&
+                 !home_ctrl.sendingInvite && !friendData.requestAlreadySent">
+                  <!-- ng-click="home_ctrl.inviteUser(friendData)" -->
+                  Invite
+
+                </button>
+
+                <span ng-show="home_ctrl.sendingInvite && !home_ctrl.inviteSent">Sending request...</span>
+
+                <span ng-hide="friendData.friendExists"> no users with that username found </span>
+
+                <button class="button button-small button-positive" ng-show="home_ctrl.inviteSent && !friendData.requestAlreadySent || friendData.requestAlreadySent">
+                  Request sent
+                </button>
+              </div>
+            </div>
+
+        </form>
 
         <div class="list">
 
