@@ -20,36 +20,39 @@ angular.module('pmApp.friendFinderDirectives', [])
 
 
     ngModel.$setValidity('friendFinder', false);
-      console.log(ngModel);
-      console.log(scope);
-
 
     ngModel.$parsers.push(function(value) {
 
       var userDbId = localStorageService.get('userDbId'); // DOESNT WORK WHEN OUTSIDE OF PUSH, LEFT TO CHECK
 
       var searchedFriend = ngModel.$viewValue;
+      
+      scope.friendData = null;
 
       $timeout(function () {
 
-        if(ngModel.$viewValue == searchedFriend)
+        if(ngModel.$viewValue == searchedFriend) {
           searchDbForFriend();
-        
+        }
+
       }, 1000);
 
-     //  console.log(ngModel);
+      scope.loadingData = true;
 
       function searchDbForFriend() {
 
-      scope.friendData = null;
+      if(!value || value.length == 0) {
+        scope.loadingData = false;
+        return;
+      }
 
-      if(!value || value.length == 0) return;
+
 
 
           $http.post(SERVER.url + '/api/friendFinder', { friendUsername : value, token : token, userDbId : userDbId, FBverified : FBverified, loginService : loginService })
             .success( function(response) {
 
-              console.log(scope);
+              scope.loadingData = false;
 
               if(response.friendExists == 'yes') {
 

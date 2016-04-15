@@ -33,3 +33,36 @@
 .no-errors {
   border-bottom: 3px solid green;
 }
+
+.green-icon {
+  color: #4B946A;
+  font-size: 12px;
+}
+
+.friendRefreshInfo {
+  font-size: 10px;
+}
+
+.friendname {
+  color: #0a9dc7;
+  font-weight: bold;
+}
+
+.userField {
+  margin-left: 5px;
+  border: none;
+  border-color: transparent;
+  height: 30px;
+}
+
+
+.friendsDivider {
+  background-color: #44c308;
+  color: white;
+}
+
+.findingsDivider {
+  background-color: #44c308;
+  color: white;
+}
+
