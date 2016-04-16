@@ -10,7 +10,31 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
 
   })
 
-.run(function($ionicPlatform, friendList, localStorageService) {
+.run(function($ionicPlatform, friendList, localStorageService, $rootScope) {
+
+
+
+   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+   console.log('$stateChangeStart to ' + toState.to + '- fired when the transition begins. toState,toParams : \n', toState, toParams);
+   });
+   $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
+   $rootScope.$on("$stateChangeError", console.log.bind(console));
+   });
+   $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+   console.log('$stateChangeSuccess to ' + toState.name + '- fired once the state transition is complete.');
+   });
+   // $rootScope.$on('$viewContentLoading',function(event, viewConfig){
+   //   // runs on individual scopes, so putting it in "run" doesn't work.
+   //   console.log('$viewContentLoading - view begins loading - dom not rendered',viewConfig);
+   // });
+   $rootScope.$on('$viewContentLoaded', function (event) {
+   console.log('$viewContentLoaded - fired after dom rendered', event);
+   });
+   $rootScope.$on('$stateNotFound', function (event, unfoundState, fromState, fromParams) {
+   console.log('$stateNotFound ' + unfoundState.to + '  - fired when a state cannot be found by its name.');
+   console.log(unfoundState, fromState, fromParams);
+   });
+
 
 
   var token = localStorageService.get('user.authToken');
@@ -57,8 +81,6 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
 
   $stateProvider
 
-
-
     .state('app', {
       url: '/app',
       abstract: true,
@@ -92,8 +114,44 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
                   templateUrl: 'templates/home.html'
               }
           }
-      });
+      })
 
+      .state('app.friends', {
+        url: '/friends',
+        abstract: true,
+        views: {
+          'menuContent': {
+          templateUrl: 'templates/friends.html'
+        }
+      }
+      })
+
+  .state('app.friends.list', {
+    url: '/list',
+    views: {
+      'friendlistContent': {
+        templateUrl: 'templates/list.html'
+      }
+    }
+  })
+
+  .state('app.friends.requests', {
+    url: '/requests',
+    views: {
+      'requestsContent': {
+        templateUrl: 'templates/requests.html'
+      }
+    }
+  })
+
+  .state('app.friends.search', {
+    url: '/search',
+    views: {
+      'searchContent': {
+        templateUrl: 'templates/search.html'
+      }
+    }
+  });
 
 
     $urlRouterProvider.otherwise('/app/login');

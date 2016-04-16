@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cf63bade-43c5-4bd0-aec1-bf28ba9a4b67" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/css/homeStyles.css" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/templates/friends.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/templates/list.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/templates/requests.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/templates/search.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server" afterPath="$PROJECT_DIR$/server" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/app-server.js" afterPath="$PROJECT_DIR$/server/app-server.js" />
@@ -10,11 +13,8 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/userData/models/fbUserData.js" afterPath="$PROJECT_DIR$/server/src/userData/models/fbUserData.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/userData/service/friendListModels.js" afterPath="$PROJECT_DIR$/server/src/userData/service/friendListModels.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/userData/service/userDataModels.js" afterPath="$PROJECT_DIR$/server/src/userData/service/userDataModels.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/css/homeStyle.css" afterPath="$PROJECT_DIR$/www/css/homeStyle.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/controllers/HomeController.js" afterPath="$PROJECT_DIR$/www/js/controllers/HomeController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/directives/friendFinder.js" afterPath="$PROJECT_DIR$/www/js/directives/friendFinder.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/services/friendListServices.js" afterPath="$PROJECT_DIR$/www/js/services/friendListServices.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/home.html" afterPath="$PROJECT_DIR$/www/templates/home.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/app.js" afterPath="$PROJECT_DIR$/www/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/menu.html" afterPath="$PROJECT_DIR$/www/templates/menu.html" />
     </list>
     <ignored path="pm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,11 +35,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="friendListServices.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="friendListServices.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/services/friendListServices.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="388">
-              <caret line="101" column="38" selection-start-line="101" selection-start-column="38" selection-end-line="101" selection-end-column="38" />
+            <state relative-caret-position="528">
+              <caret line="105" column="7" selection-start-line="105" selection-start-column="7" selection-end-line="105" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="menu.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/templates/menu.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="260">
+              <caret line="13" column="68" selection-start-line="13" selection-start-column="68" selection-end-line="13" selection-end-column="68" />
               <folding />
             </state>
           </provider>
@@ -48,18 +58,58 @@
       <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/templates/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="180" column="0" selection-start-line="180" selection-start-column="0" selection-end-line="180" selection-end-column="0" />
+            <state relative-caret-position="280">
+              <caret line="14" column="44" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="homeStyle.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/css/homeStyle.css">
+      <file leaf-file-name="friends.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/templates/friends.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+            <state relative-caret-position="220">
+              <caret line="11" column="37" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="list.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/templates/list.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="9" selection-start-line="0" selection-start-column="9" selection-end-line="0" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="requests.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/templates/requests.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="9" selection-start-line="0" selection-start-column="9" selection-end-line="0" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="search.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/templates/search.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="17" column="10" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/www/js/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="409">
+              <caret line="122" column="22" selection-start-line="122" selection-start-column="22" selection-end-line="122" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -80,44 +130,10 @@
       <file leaf-file-name="app-server.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/app-server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="449">
+            <state relative-caret-position="1469">
               <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
               <folding>
                 <element signature="e#0#39#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="friendFinder.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/directives/friendFinder.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="friendListModels.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/src/userData/service/friendListModels.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="register.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/modules/auth/templates/register.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="80">
-              <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
-              <folding>
-                <marker date="1460667423507" expanded="true" signature="482:647" placeholder="{...}" />
-                <marker date="1460667423507" expanded="true" signature="1355:1520" placeholder="{...}" />
-                <marker date="1460667423507" expanded="true" signature="2245:2418" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -154,7 +170,6 @@
         <option value="$PROJECT_DIR$/www/templates/emails.json" />
         <option value="$PROJECT_DIR$/www/js/services/checkUsernameAvailability.js" />
         <option value="$PROJECT_DIR$/www/css/loginFormStyle.css" />
-        <option value="$PROJECT_DIR$/www/templates/menu.html" />
         <option value="$PROJECT_DIR$/www/templates/errorlist.html" />
         <option value="$PROJECT_DIR$/www/js/directives/RegisterForm.js" />
         <option value="$PROJECT_DIR$/www/js/directives/RegisterFormDirectives.js" />
@@ -172,7 +187,6 @@
         <option value="$PROJECT_DIR$/server/src/userData/models/userData.js" />
         <option value="$PROJECT_DIR$/server/src/userData/models/JwtuserData.js" />
         <option value="$PROJECT_DIR$/server/src/userData/models/onlineStatus.js" />
-        <option value="$PROJECT_DIR$/www/js/app.js" />
         <option value="$PROJECT_DIR$/server/src/userData/models/jwtUserData.js" />
         <option value="$PROJECT_DIR$/server/src/userData/models/fbUserData.js" />
         <option value="$PROJECT_DIR$/server/src/userData/service/userDataModels.js" />
@@ -187,6 +201,12 @@
         <option value="$PROJECT_DIR$/www/js/controllers/HomeController.js" />
         <option value="$PROJECT_DIR$/server/src/userData/service/friendListModels.js" />
         <option value="$PROJECT_DIR$/www/js/services/friendListServices.js" />
+        <option value="$PROJECT_DIR$/www/templates/search.html" />
+        <option value="$PROJECT_DIR$/www/templates/menu.html" />
+        <option value="$PROJECT_DIR$/www/templates/requests.html" />
+        <option value="$PROJECT_DIR$/www/templates/list.html" />
+        <option value="$PROJECT_DIR$/www/templates/friends.html" />
+        <option value="$PROJECT_DIR$/www/js/app.js" />
       </list>
     </option>
   </component>
@@ -584,8 +604,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Programming\APLIKACJE\pm\www\css" />
       <recent name="D:\Programming\APLIKACJE\pm\www\templates" />
+      <recent name="D:\Programming\APLIKACJE\pm\www\css" />
       <recent name="D:\Programming\HerokuTests\pm\www\templates" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -670,12 +690,12 @@
       <workItem from="1459763565166" duration="30061000" />
       <workItem from="1460024566088" duration="22918000" />
       <workItem from="1460304019281" duration="36552000" />
-      <workItem from="1460660655542" duration="18056000" />
+      <workItem from="1460660655542" duration="26067000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="194052000" />
+    <option name="totallyTimeSpent" value="202063000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
@@ -717,38 +737,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/server/src/userData/service/userDataModels.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/app-server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#39#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="26" column="42" selection-start-line="26" selection-start-column="42" selection-end-line="26" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="51" column="9" selection-start-line="51" selection-start-column="9" selection-end-line="51" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/menu.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
@@ -879,13 +867,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/emails.json" />
-    <entry file="file://$PROJECT_DIR$/www/templates/menu.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/modules/auth/templates/login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -912,13 +893,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
           <caret line="5" column="2" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-760">
-          <caret line="1" column="172" selection-start-line="1" selection-start-column="172" selection-end-line="1" selection-end-column="172" />
         </state>
       </provider>
     </entry>
@@ -1029,16 +1003,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/app-server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="449">
-          <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#39#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/modules/auth/js/directives/RegisterFormDirectives.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="609">
@@ -1063,19 +1027,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="180" column="0" selection-start-line="180" selection-start-column="0" selection-end-line="180" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/src/userData/service/friendListModels.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="460">
           <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/services/friendListServices.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="105" column="7" selection-start-line="105" selection-start-column="7" selection-end-line="105" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/app-server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1469">
+          <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#39#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1089,10 +1063,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/services/friendListServices.js">
+    <entry file="file://$PROJECT_DIR$/www/templates/search.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="101" column="38" selection-start-line="101" selection-start-column="38" selection-end-line="101" selection-end-column="38" />
+        <state relative-caret-position="340">
+          <caret line="17" column="10" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/menu.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="13" column="68" selection-start-line="13" selection-start-column="68" selection-end-line="13" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="14" column="44" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="9" selection-start-line="0" selection-start-column="9" selection-end-line="0" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/requests.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="9" selection-start-line="0" selection-start-column="9" selection-end-line="0" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/friends.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="11" column="37" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="409">
+          <caret line="122" column="22" selection-start-line="122" selection-start-column="22" selection-end-line="122" selection-end-column="22" />
           <folding />
         </state>
       </provider>
