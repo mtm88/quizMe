@@ -26,7 +26,7 @@ angular.module('pmApp.friendFinderDirectives', [])
       var userDbId = localStorageService.get('userDbId'); // DOESNT WORK WHEN OUTSIDE OF PUSH, LEFT TO CHECK
 
       var searchedFriend = ngModel.$viewValue;
-      
+
       scope.friendData = null;
 
       $timeout(function () {
@@ -37,7 +37,6 @@ angular.module('pmApp.friendFinderDirectives', [])
 
       }, 1000);
 
-      scope.loadingData = true;
 
       function searchDbForFriend() {
 
@@ -46,7 +45,13 @@ angular.module('pmApp.friendFinderDirectives', [])
         return;
       }
 
+      if(value == scope.$parent.friend_ctrl.username)
+        this.searchedForMyself = true;
 
+      else       this.searchedForMyself = false;
+
+
+        scope.loadingData = true;
 
 
           $http.post(SERVER.url + '/api/friendFinder', { friendUsername : value, token : token, userDbId : userDbId, FBverified : FBverified, loginService : loginService })
@@ -56,20 +61,23 @@ angular.module('pmApp.friendFinderDirectives', [])
 
               if(response.friendExists == 'yes') {
 
-                scope.friendData = { friendExists : true, friendDetails : response.friendInfo, alreadyFriend : false, requestAlreadySent : response.requestAlreadySent };
+                scope.friendData = { friendExists : true, friendDetails : response.friendInfo, alreadyFriend : false, requestAlreadySent : response.requestAlreadySent, searchedForMyself : this.searchedForMyself };
 
                 // console.log(scope.$parent.home_ctrl.friendList);
 
                 // CHECK IF THE SEARCHED FRIEND IS ALREADY ON THE FRIEND LIST
-
-                  for(i = 0; i < scope.$parent.home_ctrl.friendList.length; i++) {
-                    if(scope.$parent.home_ctrl.friendList[i].userDbId == response.friendInfo._id) {
-                      scope.friendData = { friendExists : true, friendDetails : response.friendInfo, alreadyFriend : true, requestAlreadySent : response.requestAlreadySent };
+                if(scope.$parent.friend_ctrl.friendList) {
+                  for(i = 0; i < scope.$parent.friend_ctrl.friendList.length; i++) {
+                    if(scope.$parent.friend_ctrl.friendList[i].userDbId == response.friendInfo._id) {
+                      scope.friendData = { friendExists : true, friendDetails : response.friendInfo, alreadyFriend : true, requestAlreadySent : response.requestAlreadySent, searchedForMyself : this.searchedForMyself };
                       console.log('juz przyjaciel');
                     }
                   }
-                console.log(scope.friendData);
+                }
 
+                else {
+                  scope.friendData = { friendExists : true, friendDetails : response.friendInfo, alreadyFriend : false, requestAlreadySent : response.requestAlreadySent, searchedForMyself : this.searchedForMyself };
+                }
 
               }
 
@@ -77,11 +85,12 @@ angular.module('pmApp.friendFinderDirectives', [])
                 scope.friendData = { friendExists : false, alreadyFriend : false };
               }
 
-
             })
             .error(function(error) {
               console.log(error);
             });
+
+
 
       }
 

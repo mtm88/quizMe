@@ -38,25 +38,12 @@ angular.module('pmApp.HomeCtrl', [])
                   var deferred = $q.defer();
                     if(response) {
                       localStorageService.set('userDbId', response._id);
-                      console.log(response._id);
                       deferred.resolve();
                     } else {
                       deferred.reject();
                     }
                     return deferred.promise;
                   }
-
-
-                  friendList.getFriendList()
-                    .then(function(response){
-                        me.friendList = response.friendList;
-                        me.receivedInvites = response.receivedInvites;
-                      console.log(me.receivedInvites);
-                      },
-                      function(error) {
-                        console.log(error);
-                      }
-                    )
 
                 });
 
@@ -69,65 +56,12 @@ angular.module('pmApp.HomeCtrl', [])
         }
 
         else if(respond == 'jwt') {
-
           $scope.userDetails =  { 'username' : localStorageService.get('user.id') };
-          friendList.getFriendList()
-            .then(function(response){
-              me.friendList = response.friendList;
-              me.receivedInvites = response.receivedInvites;
-            },
-            function(error) {
-              console.log(error);
-            }
-        )
-
         }
 
       });
 
-    me.friendListInterval = $interval( function() {
-      friendList.getFriendList()
-        .then(function(response){
-          me.friendList = response.friendList;
-        })
-
-    }, 30000);
-
   };
-
-
-
-  me.inviteUser = function() {
-
-    friendList.sendInvite( { 'username' : me.userSearch.userField.$modelValue }, $scope.userDetails )
-      .then(function() {
-        me.userSearch.userField.$setValidity('friendFinder', true);
-        me.inviteSent = true;
-        me.userSearch.userField.$setViewValue(null);
-        me.userSearch.userField.$render();
-      });
-
-  };
-
-    me.acceptInvite = function(chosenUserData) {
-
-      friendList.acceptInvite(chosenUserData)
-        .then(function() {
-          friendList.getFriendList()
-            .then(function(response) {
-              me.friendList = response.friendList;
-            })
-        })
-
-    };
-
-
-
-
-
-
-
-
 
 
   me.logout = function(){

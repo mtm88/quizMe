@@ -44,15 +44,15 @@
 }
 
 .friendname {
-  color: #0a9dc7;
+  color: #555555;
   font-weight: bold;
+  font-size: 13px;
 }
 
 .userField {
   margin-left: 5px;
   border: none;
   border-color: transparent;
-  height: 30px;
 }
 
 
@@ -62,7 +62,7 @@
 }
 
 .findingsDivider {
-  background-color: #44c308;
+  background-color: #a2a2a2;
   color: white;
 }
 

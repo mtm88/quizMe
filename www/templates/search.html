@@ -1,8 +1,8 @@
-<ion-view ng-controller="HomeController as home_ctrl">
+<ion-view ng-controller="FriendController as friend_ctrl" ng-init="friend_ctrl.getUserInfo()">
 
   <ion-nav-bar class="bar-positive nav-title-slide-ios7">
     <ion-nav-title>
-      Search
+      Friends
     </ion-nav-title>
 
   </ion-nav-bar>
@@ -15,7 +15,80 @@
   <ion-content class="has-header padding has-tabs">
 
 
-    Search
+    <form name="friend_ctrl.userSearch" novalidate ng-submit="friend_ctrl.inviteUser()">
+
+      <ul class="list">
+        <li class="item">
+
+              <input type="text" name="userField" placeholder="Search for a friend..." ng-model="userfield" friend-finder>
+
+        </li>
+      </ul>
+
+
+      <div class="userSearchInfo" ng-show="loadingData">
+        <i class="ion-information-circled"></i>
+        Searching...
+      </div>
+
+      <div class="userSearchInfo" ng-show="friend_ctrl.userSearch.userField.$valid">
+        <i class="ion-information-circled"></i>
+        Invite request sent
+      </div>
+
+      <div class="error" ng-show="userSearch.userField.$invalid">
+        <i class="ion-information-circled"></i>
+        Error processing your request
+      </div>
+
+      <div class="userSearchInfo" ng-show="friendData.searchedForMyself">
+        <i class="ion-information-circled"></i>
+        Are you trying to look for yourself ? :-)
+      </div>
+
+
+
+      <ul class="list" ng-show="friendData" ng-hide="friend_ctrl.inviteSent">
+
+        <div class="item item-divider findingsDivider" ng-hide="friendData.searchedForMyself">
+          Results
+        </div>
+
+        <li class="item" ng-hide="friendData.searchedForMyself">
+
+          <div class="row">
+
+            <div class="col friendname" ng-show="friendData.friendDetails"> {{ friendData.friendDetails.username }} </div>
+
+
+            <div class="col">
+
+              <div class="userSearchInfo" ng-show="friendData.alreadyFriend">
+                <i class="ion-information-circled"></i>
+                Already a Friend
+              </div>
+
+              <button type="submit" class="button button-small button-clear button-balanced" ng-show="friendData.friendExists && !friendData.alreadyFriend &&
+               !friendData.requestAlreadySent && !friendData.searchedForMyself" ng-hide="friend_ctrl.inviteSent">
+                Invite
+              </button>
+
+              <span ng-show="friend_ctrl.sendingInvite && !friend_ctrl.inviteSent">Sending request...</span>
+
+              <span ng-hide="friendData.friendExists"> no users with that username found </span>
+
+              <span class="button button-clear button-positive" ng-show="friendData.requestAlreadySent">
+                Request already sent
+              </span>
+
+            </div>
+
+          </div>
+
+        </li>
+      </ul>
+
+    </form>
 
 
   </ion-content>

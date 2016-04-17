@@ -1,8 +1,8 @@
-<ion-view>
+<ion-view ng-controller="FriendController as friend_ctrl" ng-init="friend_ctrl.getUserInfo()">
 
   <ion-nav-bar class="bar-positive nav-title-slide-ios7">
     <ion-nav-title>
-      Requests
+      Friends
     </ion-nav-title>
 
   </ion-nav-bar>
@@ -15,7 +15,28 @@
   <ion-content class="has-header padding has-tabs">
 
 
-    Requests
+    <div class="item item-divider">
+      Friend requests
+    </div>
+
+    <div ng-repeat="friendRequest in friend_ctrl.receivedInvites" ng-show="friend_ctrl.receivedInvites">
+
+
+      <div class="row">
+        <div class="col">
+          {{ friendRequest.username }}
+        </div>
+        <div class="col col-offset-40">
+          <button class="button button-small button-outline button-positive" ng-click="friend_ctrl.acceptInvite(friendRequest)">
+            Accept
+          </button>
+        </div>
+      </div>
+
+
+
+
+    </div>
 
 
   </ion-content>

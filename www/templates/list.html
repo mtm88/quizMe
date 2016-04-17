@@ -1,8 +1,8 @@
-<ion-view>
+<ion-view ng-controller="FriendController as friend_ctrl" ng-init="friend_ctrl.getUserInfo(); friend_ctrl.startInterval()">
 
   <ion-nav-bar class="bar-positive nav-title-slide-ios7">
     <ion-nav-title>
-      Friend list
+      Friends
     </ion-nav-title>
 
   </ion-nav-bar>
@@ -15,7 +15,34 @@
   <ion-content class="has-header padding has-tabs">
 
 
-list
+    <div class="item item-divider">
+      Friend list
+    </div>
+
+    <div ng-hide="friend_ctrl.friendList">
+      <a class="item item-icon-left item-icon-right">
+        Friend list is empty
+      </a>
+    </div>
+
+    <div ng-repeat="friend in friend_ctrl.friendList">
+
+      <a class="item item-icon-left item-icon-right" href="#">
+        <i class="icon ion-chatbubble-working"></i>
+        {{ friend.username }}
+        <i class="icon ion-checkmark-round green-icon" ng-show="friend.userStatus"></i>
+      </a>
+
+    </div>
+
+
+    </div>
+
+    <div class="card" ng-show="friend_ctrl.friendList">
+      <div class="item item-text-wrap friendRefreshInfo">
+        Friend list is being auto-refreshed every 30 secs
+      </div>
+    </div>
 
 
   </ion-content>

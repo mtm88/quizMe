@@ -30,10 +30,6 @@
       </div>
 
 
-
-
-
-
                   <!--           PROFILE DLA JWT          -->
 
 
@@ -54,155 +50,17 @@
 
       </div>
 
-
-               <!--           WSPOLNY WIDOK PRZYJACIOL          -->
-
-
-      <div class="item item-divider friendsDivider">
-        Friends
-      </div>
-
-
-
-        <form name="home_ctrl.userSearch" novalidate ng-submit="home_ctrl.inviteUser()">
-
-          <ul class="list">
-            <li class="item">
-
-          <div class="row">
-            <div ng-class="{ 'col-100 userFieldDiv' : !loadingData, 'col-50' : loadingData }">
-
-                <input type="text" name="userField" placeholder="Search for a friend..." ng-model="userfield" friend-finder>
-
-            </div>
-
-            <div class="col" ng-show="loadingData">
-              <div class="userSearchInfo">
-                <i class="ion-information-circled"></i>
-                Searching...
-              </div>
-            </div>
-          </div>
-
-            </li>
-          </ul>
-
-
-            <div class="userSearchInfo" ng-show="home_ctrl.userSearch.userField.$valid">
-              <i class="ion-information-circled"></i>
-              Invite request sent
-            </div>
-
-            <div class="error" ng-show="userSearch.userField.$invalid">
-              <i class="ion-information-circled"></i>
-              Error processing your request
-            </div>
-
-
-
-            <ul class="list" ng-show="friendData" ng-hide="home_ctrl.inviteSent">
-
-              <div class="item item-divider findingsDivider">
-                Results
-              </div>
-
-              <li class="item">
-
-                <div class="row">
-
-                   <div class="col friendname" ng-show="friendData.friendDetails"> {{ friendData.friendDetails.username }} </div>
-
-
-                    <div class="col">
-
-                    <button class="button button-small button-calm" ng-show="friendData.alreadyFriend">
-                      Already a Friend
-                    </button>
-                    <button type="submit" class="button button-small button-clear button-balanced" ng-show="friendData.friendExists && !friendData.requestAlreadySent"
-                            ng-hide="home_ctrl.inviteSent">
-                      <!-- ng-click="home_ctrl.inviteUser(friendData)" -->
-                      Invite
-
-                    </button>
-
-                    <span ng-show="home_ctrl.sendingInvite && !home_ctrl.inviteSent">Sending request...</span>
-
-                    <span ng-hide="friendData.friendExists"> no users with that username found </span>
-
-                    <span class="button button-clear button-positive" ng-show="friendData.requestAlreadySent">
-                      Request already sent
-                    </span>
-
-                    </div>
-
-                </div>
-
-              </li>
-            </ul>
-
-        </form>
-
-
-
-        <div class="list">
-
-          <div class="item item-divider" ng-show="home_ctrl.receivedInvites">
-            Friend requests
-          </div>
-
-          <div ng-repeat="friendRequest in home_ctrl.receivedInvites">
-
-
-              <div class="row">
-                  <div class="col">
-                      {{ friendRequest.username }}
-                  </div>
-                  <div class="col col-offset-40">
-                      <button class="button button-small button-outline button-positive" ng-click="home_ctrl.acceptInvite(friendRequest)">
-                        Accept
-                      </button>
-                  </div>
-              </div>
-
-
-
-
-          </div>
-
-          <div class="item item-divider">
-            Friend list
-          </div>
-
-          <div ng-hide="home_ctrl.friendList">
-            <a class="item item-icon-left item-icon-right">
-              Friend list is empty
-            </a>
-          </div>
-
-          <div ng-repeat="friend in home_ctrl.friendList">
-
-            <a class="item item-icon-left item-icon-right" href="#">
-              <i class="icon ion-chatbubble-working"></i>
-              {{ friend.username }}
-              <i class="icon ion-checkmark-round green-icon" ng-show="friend.userStatus"></i>
-            </a>
-
-          </div>
-
-
+        <div class="item item-divider">
+          Notifications
         </div>
 
-      <div class="card" ng-show="home_ctrl.friendList">
-        <div class="item item-text-wrap friendRefreshInfo">
-          Friend list is being auto-refreshed every 30 secs
-        </div>
-      </div>
 
 
+<br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
       <div class="row">
         <div class="col col-60 col-offset-20">
-          <a class="button button-assertive button-block" ng-click="home_ctrl.logout()">Logout</a>
+          <a class="button button-small button-assertive button-block" ng-click="home_ctrl.logout()">Logout</a>
         </div>
       </div>
 

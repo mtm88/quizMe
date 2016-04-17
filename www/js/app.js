@@ -1,4 +1,4 @@
-angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.LoginCtrl', 'pmApp.RegisterCtrl', 'pmApp.HomeCtrl',
+angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.LoginCtrl', 'pmApp.RegisterCtrl', 'pmApp.HomeCtrl', 'pmApp.FriendCtrl',
   'pmApp.postDataServices', 'pmApp.loginOriginService', 'pmApp.registerFormDirectives', 'pmApp.checkUsernameAvailability', 'pmApp.friendList', 'pmApp.friendFinderDirectives'])
 
   .constant('SERVER', {
@@ -14,7 +14,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
 
 
 
-   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+   /* $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
    console.log('$stateChangeStart to ' + toState.to + '- fired when the transition begins. toState,toParams : \n', toState, toParams);
    });
    $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
@@ -33,7 +33,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
    $rootScope.$on('$stateNotFound', function (event, unfoundState, fromState, fromParams) {
    console.log('$stateNotFound ' + unfoundState.to + '  - fired when a state cannot be found by its name.');
    console.log(unfoundState, fromState, fromParams);
-   });
+   }); */
 
 
 
@@ -119,6 +119,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
       .state('app.friends', {
         url: '/friends',
         abstract: true,
+        parent: 'app',
         views: {
           'menuContent': {
           templateUrl: 'templates/friends.html'
@@ -128,6 +129,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
 
   .state('app.friends.list', {
     url: '/list',
+    cache: false,
     views: {
       'friendlistContent': {
         templateUrl: 'templates/list.html'
@@ -137,6 +139,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
 
   .state('app.friends.requests', {
     url: '/requests',
+    cache: false,
     views: {
       'requestsContent': {
         templateUrl: 'templates/requests.html'

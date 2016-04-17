@@ -20,11 +20,7 @@ angular.module('pmApp.friendList', [])
 
       $http.post(SERVER.url + '/api/setOnlineStatus', ({ userDbId : userDbId, token : token, status : status }))
         .success(function(response) {
-
-          console.log(response);
-
           deferred.resolve(response);
-
         })
         .error(function(err) {
           if(err) throw err;
@@ -69,10 +65,14 @@ angular.module('pmApp.friendList', [])
     function acceptInvite(chosenUserData) {
 
       var localData = setLocalData();
+      FBverified = false;
+
+      if(localData.loginService == 'fb')
+        FBverified = true;
 
       var deferred = $q.defer();
 
-      $http.post(SERVER.url + '/api/acceptInvite', { chosenUserData : chosenUserData, token : localData.token, loginService : localData.loginService, userDbId : localData.userDbId })
+      $http.post(SERVER.url + '/api/acceptInvite', { chosenUserData : chosenUserData, token : localData.token, loginService : localData.loginService, userDbId : localData.userDbId, FBverified : FBverified })
         .success(function(response) {
 
           console.log(response);
@@ -93,22 +93,19 @@ angular.module('pmApp.friendList', [])
     }
 
 
-    function sendInvite(chosenUserData, userData) {
+    function sendInvite(chosenUserData) {
+
 
       var localData = setLocalData();
 
-      if(localData.loginService == 'fb') {
+      if(localData.loginService == 'fb')
         var FBverified = true;
-        var username = userData.email;
-      }
-      else {
-        var username = userData.username;
-      }
+
 
       var deferred = $q.defer();
 
       $http.post(SERVER.url + '/api/sendInvite', { chosenUserData : chosenUserData, FBverified : FBverified, token : localData.token,
-        loginService : localData.loginService, sendingUserDbId : localData.userDbId, sendingUsername : username })
+        loginService : localData.loginService, sendingUserDbId : localData.userDbId, sendingUsername : chosenUserData.ownUsername })
         .success(function(response) {
 
           if(response.success == true)
