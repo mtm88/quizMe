@@ -17,8 +17,8 @@
 
            <!--                    USERNAME                        -->
 
-        <label class="item item-input" ng-class="{ 'has-errors' : registerForm.username.$invalid && registerForm.username.$dirty,
-         'no-errors': registerForm.username.$valid && registerForm.username.$dirty }">
+        <label class="item item-input" ng-class="{ 'has-errors' : registerForm.username.$invalid && registerForm.username.$dirty && !isSearching,
+         'no-errors': registerForm.username.$valid && registerForm.username.$dirty, 'is-checking' : isSearching }">
         <span class="input-label">Username: </span>
         <input type="text"
                name="username"

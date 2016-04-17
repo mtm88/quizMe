@@ -38,6 +38,10 @@
   border-bottom: 3px solid #B83E2C;
 }
 
+.is-checking {
+  border-bottom: 3px solid coral;
+}
+
 .no-errors {
   border-bottom: 3px solid green;
 }

@@ -68,12 +68,22 @@ angular.module('pmApp.LoginCtrl', [])
               .then(function(response) {
 
                 if(response.wrongPassword == true) {
-                jwtLoginForm.username.$setValidity("required", false);
+                jwtLoginForm.password.$setValidity("correctPassword", false);
 
-                me.authorization.password = '';
+                jwtLoginForm.password.$setViewValue(null);
+                jwtLoginForm.password.$render();
                 jwtLoginForm.$submitted = false;
 
-                } else {
+                }
+
+                else if(response.userExists == false) {
+                  jwtLoginForm.username.$setValidity("wrongUsername", false);
+                  jwtLoginForm.password.$setViewValue(null);
+                  jwtLoginForm.password.$render();
+                  jwtLoginForm.$submitted = false;
+                }
+
+                else {
 
                   me.authorization.username = '';
                   me.authorization.password = '';

@@ -59,7 +59,7 @@
         <label class="item item-input" ng-class="{ 'has-errors' : jwtLoginForm.username.$invalid && jwtLoginForm.username.$touched,
          'no-errors': jwtLoginForm.username.$valid && jwtLoginForm.username.$touched }">
           <span class="input-label">Username</span>
-          <input type="text" name="username" ng-model="login_ctrl.authorization.username" ng-minlength="2" ng-maxlength="15" required>
+          <input type="text" name="username" ng-model="login_ctrl.authorization.username" ng-minlength="2" ng-maxlength="15">
         </label>
 
         <div class="error-container" ng-show="jwtLoginForm.username.$error && jwtLoginForm.username.$touched" ng-messages="jwtLoginForm.username.$error">
@@ -69,10 +69,10 @@
       <label class="item item-input" ng-class="{ 'has-errors' : jwtLoginForm.password.$invalid && jwtLoginForm.$submitted,
        'no-errors' : jwtLoginForm.password.$valid  && jwtLoginForm.$submitted}">
         <span class="input-label">Password</span>
-        <input type="password" name="password" ng-model="login_ctrl.authorization.password" ng-minlength="3" ng-maxlength="20" required>
+        <input type="password" name="password" ng-model="login_ctrl.authorization.password" ng-minlength="3" ng-maxlength="15">
       </label>
 
-      <div class="error-container last-error-container" ng-show="jwtLoginForm.password.$error && jwtLoginForm.$submitted" ng-messages="jwtLoginForm.password.$error">
+      <div class="error-container last-error-container" ng-show="jwtLoginForm.password.$error" ng-messages="jwtLoginForm.password.$error">
         <div ng-messages-include src="../modules/auth/templates/errorlist.html"></div>
       </div>
 

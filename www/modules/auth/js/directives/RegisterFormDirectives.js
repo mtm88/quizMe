@@ -1,11 +1,12 @@
 angular.module('pmApp.registerFormDirectives', [])
 
-.directive('userAvailabilityValidator', ['$http', 'SERVER', function($http, SERVER) {
+.directive('userAvailabilityValidator', ['$http', 'SERVER', '$timeout', function($http, SERVER, $timeout) {
 
   return {
 
     require : 'ngModel',
     link : function(scope, element, attrs, ngModel) {
+
 
       function setAsLoading(bool) {
         ngModel.$setValidity('recordLoading', !bool);
@@ -15,11 +16,31 @@ angular.module('pmApp.registerFormDirectives', [])
         ngModel.$setValidity('recordAvailable', bool);
       }
 
+
+
       ngModel.$parsers.push(function(value) {
         if(!value || value.length == 0) return;
 
         setAsLoading(true);
         setAsAvailable(true);
+
+        if(value.length >= 2)
+        scope.isSearching = true;
+
+        console.log(ngModel);
+        console.log(scope);
+
+        var checkedUsername = ngModel.$viewValue;
+
+        $timeout(function () {
+
+          if(ngModel.$viewValue == checkedUsername) {
+            searchDbForUsername();
+          }
+
+        }, 1000);
+
+        function searchDbForUsername() {
 
         $http.post(SERVER.url + '/api/checkUsernameAvailability', { username : value })
           .success(function(userInfo) {
@@ -34,12 +55,16 @@ angular.module('pmApp.registerFormDirectives', [])
               setAsAvailable(false);
             }
 
+            scope.isSearching = false;
+
           })
           .error(function() {
             console.log('Could\'nt connect to server');
             setAsLoading(false);
             setAsAvailable(false);
           });
+
+        }
 
         return value
 
