@@ -1,4 +1,4 @@
-angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.LoginCtrl', 'pmApp.RegisterCtrl', 'pmApp.HomeCtrl', 'pmApp.FriendCtrl',
+angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.LoginCtrl', 'pmApp.RegisterCtrl', 'pmApp.HomeCtrl', 'pmApp.FriendCtrl', 'pmApp.ChatCtrl',
   'pmApp.postDataServices', 'pmApp.loginOriginService', 'pmApp.registerFormDirectives', 'pmApp.checkUsernameAvailability', 'pmApp.friendList', 'pmApp.friendFinderDirectives'])
 
   .constant('SERVER', {
@@ -122,7 +122,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
         parent: 'app',
         views: {
           'menuContent': {
-          templateUrl: 'templates/friends.html'
+          templateUrl: '../modules/friendList/templates/friends.html'
         }
       }
       })
@@ -132,7 +132,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
     cache: false,
     views: {
       'friendlistContent': {
-        templateUrl: 'templates/list.html'
+        templateUrl: '../modules//friendList/templates/list.html'
       }
     }
   })
@@ -142,7 +142,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
     cache: false,
     views: {
       'requestsContent': {
-        templateUrl: 'templates/requests.html'
+        templateUrl: '../modules/friendList/templates/requests.html'
       }
     }
   })
@@ -151,7 +151,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
     url: '/search',
     views: {
       'searchContent': {
-        templateUrl: 'templates/search.html'
+        templateUrl: '../modules/friendList/templates/search.html'
       }
     }
   })
