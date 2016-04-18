@@ -1,0 +1,41 @@
+<style>
+  { margin: 0; padding: 0; box-sizing: border-box; }
+  form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+  form input { border: 0; padding: 10px; width: 80%; margin-right: .5%; }
+  form button { width: 19%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+  #messages { list-style-type: none; margin: 0; padding: 0; }
+  #messages li { padding: 5px 10px; }
+  #messages li:nth-child(odd) { background: #eee; }
+</style>
+
+
+<ion-view ng-controller="FriendController as friend_ctrl" ng-init="friend_ctrl.getUserInfo()">
+
+  <ion-nav-bar class="bar-positive nav-title-slide-ios7">
+    <ion-nav-title>
+      Chat
+    </ion-nav-title>
+
+  </ion-nav-bar>
+
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+
+  </ion-nav-buttons>
+
+      <ion-content class="has-header padding has-tabs">
+
+        <ul id="messages"></ul>
+        <form action="">
+          <input id="m" autocomplete="off" /><button>Send</button>
+        </form>
+
+
+      </ion-content>
+
+
+
+
+
+
+  </ion-view>

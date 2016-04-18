@@ -154,7 +154,18 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
         templateUrl: 'templates/search.html'
       }
     }
-  });
+  })
+
+    .state('app.chat', {
+      url: '/chat',
+      views : {
+        'menuContent': {
+          templateUrl: 'templates/chat.html'
+        }
+      }
+
+
+    })
 
 
     $urlRouterProvider.otherwise('/app/login');
