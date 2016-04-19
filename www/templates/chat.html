@@ -1,13 +1,3 @@
-<style>
-  { margin: 0; padding: 0; box-sizing: border-box; }
-  form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-  form input { border: 0; padding: 10px; width: 80%; margin-right: .5%; }
-  form button { width: 19%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-  #messages { list-style-type: none; margin: 0; padding: 0; }
-  #messages li { padding: 5px 10px; }
-  #messages li:nth-child(odd) { background: #eee; }
-</style>
-
 
 <ion-view ng-controller="ChatController as chat_ctrl">
 
@@ -23,39 +13,35 @@
 
   </ion-nav-buttons>
 
-      <ion-content class="has-header padding has-tabs">
 
-        You are known as: <span ng-bind="chat_ctrl.nickName"></span>.
-        <br/>
-        Change your nickname with <code>/nick [yourNewNick]</code>
-        <div class='row'>
-          <div class='col-md-9'>
-        <textarea style='width: 100%; height: 200px'
-                  ng-disable='true' ng-model='chat_ctrl.messageLog'></textarea>
-          </div>
-        </div>
-        <div class='row'>
+      <ion-content class="has-header has-footer" has-bouncing="true" delegate-handle="userMessageScroll">
 
-        </div>
-        <div class='row'>
-          <div class='col-md-8'>
-            <form role='form' novalidate name='form'>
-              <div class='form-group'>
-                <input type='text' style='width: 80%'
-                       required
-                       ng-max='50'
-                       ng-model='chat_ctrl.message'
-                       focus>
-                <button class='btn btn-sm btn-primary'
-                        ng-enable='form.$valid'
-                        ng-click="chat_ctrl.sendMessage(message)">Send!</button>
-              </div>
-            </form>
-          </div>
-        </div>
 
+        <ion-item>
+          <ion-label>Messages:</ion-label>
+          <ion-textarea ng-model="chatLog"></ion-textarea>
+        </ion-item>
 
       </ion-content>
+
+
+  <form name="chatForm" novalidate ng-submit="chat_ctrl.submitChatMsg(chatForm)">
+
+    <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
+
+      <label class="item-input-wrapper">
+        <textarea name="chatInput" placeholder="message goes here...!" ng-model="chatInput" max-length="1500" value="" required minlength="1" msd-elastic></textarea>
+      </label>
+
+      <div class="footer-btn-wrap">
+
+        <button class="button button-icon icon ion-android-send footer-btn" type="submit" ng-disabled="!chatInput || chatInput === ''"></button>
+
+      </div>
+
+    </ion-footer-bar>
+
+  </form>
 
 
 
