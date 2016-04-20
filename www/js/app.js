@@ -158,6 +158,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
 
     .state('app.chat', {
       url: '/chat',
+      cache: false,
       views : {
         'menuContent': {
           templateUrl: 'templates/chat.html'

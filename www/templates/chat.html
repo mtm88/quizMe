@@ -1,5 +1,5 @@
 
-<ion-view ng-controller="ChatController as chat_ctrl">
+<ion-view ng-controller="ChatController as chat_ctrl" ng-init="chat_ctrl.getChatLog()">
 
   <ion-nav-bar class="bar-positive nav-title-slide-ios7">
     <ion-nav-title>
@@ -16,26 +16,27 @@
 
       <ion-content class="has-header has-footer" has-bouncing="true" delegate-handle="userMessageScroll">
 
+        <ul id="messages">
 
-        <ion-item>
-          <ion-label>Messages:</ion-label>
-          <ion-textarea ng-model="chatLog"></ion-textarea>
-        </ion-item>
+          <li ng-repeat="message in chat_ctrl.messages">{{ message.user }}: {{ message.message }}</li>
 
-      </ion-content>
+        </ul>
+
+        </ion-content>
 
 
-  <form name="chatForm" novalidate ng-submit="chat_ctrl.submitChatMsg(chatForm)">
+
+  <form name="chatForm" novalidate ng-submit="chat_ctrl.submitChatMsg()">
 
     <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
 
       <label class="item-input-wrapper">
-        <textarea name="chatInput" placeholder="message goes here...!" ng-model="chatInput" max-length="1500" value="" required minlength="1" msd-elastic></textarea>
+        <textarea name="chatInput" placeholder="message goes here...!" ng-model="chat_ctrl.chatInput" max-length="1500" value="" required minlength="1" msd-elastic></textarea>
       </label>
 
       <div class="footer-btn-wrap">
 
-        <button class="button button-icon icon ion-android-send footer-btn" type="submit" ng-disabled="!chatInput || chatInput === ''"></button>
+        <button class="button button-icon icon ion-android-send footer-btn" type="submit" ng-disabled="!chat_ctrl.chatInput || chat_ctrl.chatInput === ''"></button>
 
       </div>
 

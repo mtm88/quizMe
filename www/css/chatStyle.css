@@ -1,4 +1,7 @@
 
+#messages { list-style-type: none; margin: 0; padding: 0; }
+#messages li { padding: 15px 20px; }
+#messages li:nth-child(odd) { background: #e6f5ff; }
 
 /* allows the bar-footer to be elastic /*
 /* optionally set a max-height */

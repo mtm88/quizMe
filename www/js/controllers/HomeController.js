@@ -3,8 +3,8 @@
  */
 angular.module('pmApp.HomeCtrl', [])
 
-.controller('HomeController', ['$scope', '$state', 'localStorageService', 'postData', 'loginOrigin', 'friendList', '$interval', '$q',
-  function($scope, $state, localStorageService, postData, loginOrigin, friendList, $interval, $q) {
+.controller('HomeController', ['$scope', '$state', 'localStorageService', 'postData', 'loginOrigin', 'friendList', '$interval', '$q', '$rootScope',
+  function($scope, $state, localStorageService, postData, loginOrigin, friendList, $interval, $q, $rootScope) {
 
   var me = this;
 
@@ -30,6 +30,7 @@ angular.module('pmApp.HomeCtrl', [])
                 .then( function(response) {
 
                   $scope.userDetails = successData;
+                  localStorageService.set('username', response.username);
 
                   setUserDbId();
 
@@ -57,6 +58,7 @@ angular.module('pmApp.HomeCtrl', [])
 
         else if(respond == 'jwt') {
           $scope.userDetails =  { 'username' : localStorageService.get('user.id') };
+          localStorageService.set('username', localStorageService.get('user.id'));
         }
 
       });
