@@ -74,6 +74,9 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
 
     // CENTRUJE TYTUL NAGLOWKA
 .config(function( $ionicConfigProvider) {
+
+  if(!ionic.Platform.isIOS())$ionicConfigProvider.scrolling.jsScrolling(false); // MOZE BYC PROBLEMATYCZNE, NIE TESTOWANE - MOZNA USUNAC
+
   $ionicConfigProvider.navBar.alignTitle('center');
 })
 
@@ -166,7 +169,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
       }
 
 
-    })
+    });
 
 
     $urlRouterProvider.otherwise('/app/login');

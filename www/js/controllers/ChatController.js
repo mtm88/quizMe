@@ -3,7 +3,7 @@
  */
 angular.module('pmApp.ChatCtrl', ['monospaced.elastic'])
 
-.controller('ChatController', function($scope, $log, SERVER, localStorageService, $rootScope) {
+.controller('ChatController', function($scope, $log, SERVER, localStorageService, $rootScope, $ionicScrollDelegate) {
 
   var socket = io.connect(SERVER.url); // uzycie server.url jako constant zamiast IP/localhost pomoglo usunac problem z access-control origin !!!!!!!!!!!!!!!
 
@@ -12,55 +12,57 @@ angular.module('pmApp.ChatCtrl', ['monospaced.elastic'])
     console.log(data);
   });
 
-  socket.on('connect', function() {
+  /* socket.on('connect', function() {
     console.log('connected');
-  });
+  }); */
 
   socket.on('chat message', function(message) {
 
-    console.log('message received at client');
+    var currentTime = new Date().toLocaleTimeString();
 
-    $scope.chat_ctrl.messages.push(message);
+    var messageData = {
+      user: message.user,
+      message: message.message,
+      timeAdded: currentTime
+    };
+
+    $scope.chat_ctrl.messages.push(messageData);
     $scope.$apply();
+    $ionicScrollDelegate.scrollBottom(true);
 
   });
 
   socket.on('chat log', function(chatLog) {
-    console.log('message received at client');
-    for( i = 0 ; i < chatLog.length ; i++) {
+
+    for( i = chatLog.length - 5 ; i < chatLog.length ; i++) {
       $scope.chat_ctrl.messages.push(chatLog[i]);
     }
     $scope.$apply();
+    $ionicScrollDelegate.scrollBottom(true);
+  });
+
+  socket.on('users online', function(usersOnline) {
+    console.log('Users online: %s', usersOnline);
+    $scope.chat_ctrl.usersOnline = usersOnline;
   });
 
 
   if(!this.messages)
     this.messages = [];
 
-  var user_id = localStorageService.get('user.id');
   var username = localStorageService.get('username');
 
-  $scope.$watch('chat_ctrl.chatInput', function(newValue, oldValue) {
-    if(!newValue) newValue = '';
-    console.log('chatInput $watch, newValue ' + newValue);
-
-  });
-
   this.submitChatMsg = function() {
-
-    var message = { 'user' : username, 'message' : this.chatInput };
-
+    var currentTime = new Date().toLocaleTimeString();
+    var message = { 'user' : username, 'message' : this.chatInput, timeAdded: currentTime };
     socket.emit('chat message', message);
-
-  }
-
-  this.getChatLog = function() {
-
-    console.log('wysylam request po historie');
-    socket.emit('get chat log')
+    this.chatInput = '';
 
   };
 
+  this.getChatLog = function() {
+    socket.emit('get chat log')
+  };
 
 
 });

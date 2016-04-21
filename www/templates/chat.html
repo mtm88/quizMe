@@ -1,24 +1,43 @@
 
 <ion-view ng-controller="ChatController as chat_ctrl" ng-init="chat_ctrl.getChatLog()">
 
-  <ion-nav-bar class="bar-positive nav-title-slide-ios7">
-    <ion-nav-title>
-      Chat
-    </ion-nav-title>
+  <ion-header-bar class="bar-positive">
 
-  </ion-nav-bar>
+    <div class="buttons">
 
-  <ion-nav-buttons side="left">
-    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+      <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
 
-  </ion-nav-buttons>
+    </div>
+
+    <h1 class="title">Chat</h1>
 
 
-      <ion-content class="has-header has-footer" has-bouncing="true" delegate-handle="userMessageScroll">
+    <div class="buttons">
 
-        <ul id="messages">
+    <button class="button icon ion-person-stalker" ng-if="chat_ctrl.usersOnline">
+      Online: {{ chat_ctrl.usersOnline }}
+    </button>
 
-          <li ng-repeat="message in chat_ctrl.messages">{{ message.user }}: {{ message.message }}</li>
+    </div>
+
+  </ion-header-bar>
+
+
+
+
+
+      <ion-content class="has-header has-footer" overflow-scroll="true">
+
+        <ul id="messages" ng-model="chat_ctrl.messagesLine">
+
+          <li ng-repeat="message in chat_ctrl.messages" >
+            <div class="row">
+            <div class="chat-user col">{{ message.user }}</div> <div class="chat-time col col-20 col-offset-25"> {{ message.timeAdded }} </div> <br/>
+            </div>
+            <div class="row">
+            <div class="chat-message col"> {{ message.message }} </div>
+            </div>
+          </li>
 
         </ul>
 
