@@ -55,7 +55,7 @@ img.profile-pic {
   bottom: 10px;
 }
 
-input, textarea, .item-input, .item-input-wrapper {
+#chatForm input, textarea, .item-input, .item-input-wrapper {
   background-color: #f4f4f4 !important;
 }
 

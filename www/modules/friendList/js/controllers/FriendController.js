@@ -8,6 +8,43 @@ angular.module('pmApp.FriendCtrl', [])
 
   var me = this;
 
+
+    $scope.$on('$ionicView.enter', function() {
+
+      console.log('test');
+
+      $interval.cancel(me.friendListInterval);
+
+
+    });
+
+    $scope.$on('$ionicView.leave', function() {
+
+      console.log('test2');
+
+      $interval.cancel(me.friendListInterval);
+
+
+    });
+
+    $scope.$on('$ionicView.afterLeave', function() {
+
+      console.log('afterLeave');
+
+      $interval.cancel(me.friendListInterval);
+
+
+    });
+
+    $scope.$on('$ionicView.beforeLeave', function() {
+
+      console.log('beforeLeave');
+
+      $interval.cancel(me.friendListInterval);
+
+
+    });
+
 //    me.currentView = $ionicHistory.currentView().stateId;
 
     me.getUserInfo = function(){
@@ -33,7 +70,7 @@ angular.module('pmApp.FriendCtrl', [])
               me.receivedInvites = response.receivedInvites;
             })
 
-        }, 10000);
+        }, 1000);
       }
     };
 

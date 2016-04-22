@@ -1,0 +1,37 @@
+<ion-view ng-controller="PrivateChatController as prvchat_ctrl">
+
+  <ion-header-bar align-title="center" class="bar-positive">
+
+    <div class="buttons">
+      <button class="button button-icon icon ion-arrow-left-a" ng-click="prvchat_ctrl.goBack()"></button>
+    </div>
+
+    <h1 class="title"> {{ prvchat_ctrl.friendName }}</h1>
+
+  </ion-header-bar>
+
+
+
+  <ion-content class="has-header padding has-tabs">
+
+
+
+  </ion-content>
+
+
+  <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
+
+    <label class="item-input-wrapper">
+      <textarea name="chatInput" placeholder="message goes here...!" ng-model="chat_ctrl.chatInput" max-length="1500" value="" required minlength="1" msd-elastic></textarea>
+    </label>
+
+    <div class="footer-btn-wrap">
+
+      <button class="button button-icon icon ion-android-send footer-btn" type="submit"></button>
+
+    </div>
+
+  </ion-footer-bar>
+
+
+</ion-view>

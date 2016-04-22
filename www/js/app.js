@@ -1,5 +1,5 @@
-angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.LoginCtrl', 'pmApp.RegisterCtrl', 'pmApp.HomeCtrl', 'pmApp.FriendCtrl', 'pmApp.ChatCtrl',
-  'pmApp.postDataServices', 'pmApp.loginOriginService', 'pmApp.registerFormDirectives', 'pmApp.checkUsernameAvailability', 'pmApp.friendList', 'pmApp.friendFinderDirectives'])
+angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.LoginCtrl', 'pmApp.RegisterCtrl', 'pmApp.HomeCtrl', 'pmApp.FriendCtrl', 'pmApp.ChatCtrl', 'pmApp.PrivateChatCtrl',
+  'pmApp.postDataServices', 'pmApp.loginOriginService', 'pmApp.registerFormDirectives', 'pmApp.friendList', 'pmApp.friendFinderDirectives'])
 
   .constant('SERVER', {
 
@@ -13,8 +13,8 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
 .run(function($ionicPlatform, friendList, localStorageService, $rootScope) {
 
 
-
-   /* $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+  /*
+    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
    console.log('$stateChangeStart to ' + toState.to + '- fired when the transition begins. toState,toParams : \n', toState, toParams);
    });
    $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
@@ -130,46 +130,53 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
       }
       })
 
-  .state('app.friends.list', {
-    url: '/list',
-    cache: false,
-    views: {
-      'friendlistContent': {
-        templateUrl: '../modules//friendList/templates/list.html'
-      }
-    }
-  })
-
-  .state('app.friends.requests', {
-    url: '/requests',
-    cache: false,
-    views: {
-      'requestsContent': {
-        templateUrl: '../modules/friendList/templates/requests.html'
-      }
-    }
-  })
-
-  .state('app.friends.search', {
-    url: '/search',
-    views: {
-      'searchContent': {
-        templateUrl: '../modules/friendList/templates/search.html'
-      }
-    }
-  })
-
-    .state('app.chat', {
-      url: '/chat',
-      cache: false,
-      views : {
-        'menuContent': {
-          templateUrl: 'templates/chat.html'
+      .state('app.friends.list', {
+        url: '/list',
+        views: {
+          'friendlistContent': {
+            templateUrl: '../modules//friendList/templates/list.html'
+          }
         }
-      }
+      })
+
+      .state('app.friends.requests', {
+        url: '/requests',
+        views: {
+          'requestsContent': {
+            templateUrl: '../modules/friendList/templates/requests.html'
+          }
+        }
+      })
+
+      .state('app.friends.search', {
+        url: '/search',
+        views: {
+          'searchContent': {
+            templateUrl: '../modules/friendList/templates/search.html'
+          }
+        }
+      })
+
+        .state('app.privatechat', {
+          url: '/privatechat/:username',
+          views: {
+            'menuContent': {
+              templateUrl: 'templates/privatechat.html'
+            }
+          }
+
+        })
+
+        .state('app.chat', {
+          url: '/chat',
+          views : { // brak cache:false - inaczej sumuje ilosc online na tym samym oknie
+            'menuContent': {
+              templateUrl: '../modules/globalChat/templates/chat.html'
+            }
+          }
 
 
-    });
+        });
 
 
     $urlRouterProvider.otherwise('/app/login');
