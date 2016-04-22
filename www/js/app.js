@@ -10,6 +10,10 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
 
   })
 
+  .constant('CHAT', {
+    url: 'http://192.168.0.2:5001'
+  })
+
 .run(function($ionicPlatform, friendList, localStorageService, $rootScope) {
 
 
@@ -121,8 +125,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
 
       .state('app.friends', {
         url: '/friends',
-        abstract: true,
-        parent: 'app',
+        cache: false,
         views: {
           'menuContent': {
           templateUrl: '../modules/friendList/templates/friends.html'
@@ -132,6 +135,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
 
       .state('app.friends.list', {
         url: '/list',
+        cache: false,
         views: {
           'friendlistContent': {
             templateUrl: '../modules//friendList/templates/list.html'
@@ -141,6 +145,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
 
       .state('app.friends.requests', {
         url: '/requests',
+        cache: false,
         views: {
           'requestsContent': {
             templateUrl: '../modules/friendList/templates/requests.html'
@@ -150,6 +155,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
 
       .state('app.friends.search', {
         url: '/search',
+        cache: false,
         views: {
           'searchContent': {
             templateUrl: '../modules/friendList/templates/search.html'
@@ -169,6 +175,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
 
         .state('app.chat', {
           url: '/chat',
+          cache: false,
           views : { // brak cache:false - inaczej sumuje ilosc online na tym samym oknie
             'menuContent': {
               templateUrl: '../modules/globalChat/templates/chat.html'

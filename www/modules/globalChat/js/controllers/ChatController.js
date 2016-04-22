@@ -3,9 +3,21 @@
  */
 angular.module('pmApp.ChatCtrl', ['monospaced.elastic'])
 
-.controller('ChatController', function($scope, $log, SERVER, localStorageService, $rootScope, $ionicScrollDelegate) {
+.controller('ChatController', function($scope, $log, CHAT, localStorageService, $rootScope, $ionicScrollDelegate) {
 
-  var socket = io.connect(SERVER.url); // uzycie server.url jako constant zamiast IP/localhost pomoglo usunac problem z access-control origin !!!!!!!!!!!!!!!
+  $scope.$on('$ionicView.enter', function() {
+    console.log('UserMessages $ionicView.enter');
+  });
+
+  $scope.$on('$destroy', function() {
+    console.log('scope destroy');
+    socket.disconnect();
+  })
+
+
+
+
+  var socket = io.connect(CHAT.url); // uzycie server.url jako constant zamiast IP/localhost pomoglo usunac problem z access-control origin !!!!!!!!!!!!!!!
 
   socket.on('connect_error', function(data) {
     console.log('connect error');
