@@ -1,4 +1,4 @@
-<ion-view ng-controller="PrivateChatController as prvchat_ctrl">
+<ion-view>
 
   <ion-header-bar align-title="center" class="bar-positive">
 
@@ -22,7 +22,7 @@
   <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
 
     <label class="item-input-wrapper">
-      <textarea name="chatInput" placeholder="message goes here...!" ng-model="chat_ctrl.chatInput" max-length="1500" value="" required minlength="1" msd-elastic></textarea>
+      <textarea name="chatInput" placeholder="message goes here...!" ng-model="chat_ctrl.chatInput" max-length="150" required minlength="1" msd-elastic></textarea>
     </label>
 
     <div class="footer-btn-wrap">

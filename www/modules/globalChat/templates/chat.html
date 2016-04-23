@@ -1,5 +1,5 @@
 
-<ion-view ng-controller="ChatController as chat_ctrl" ng-init="chat_ctrl.getChatLog()">
+<ion-view ng-controller="ChatController as chat_ctrl" ng-init="chat_ctrl.getChatLog()" id="chatView">
 
   <ion-header-bar class="bar-positive">
 
@@ -26,11 +26,11 @@
 
 
 
-      <ion-content class="has-header has-footer" overflow-scroll="true">
+      <ion-content class="has-header has-footer" overflow-scroll="true" delegate-handle="userMessageScroll">
 
         <ul id="messages" ng-model="chat_ctrl.messagesLine">
 
-          <li ng-repeat="message in chat_ctrl.messages" >
+          <li ng-repeat="message in chat_ctrl.messages">
             <div class="row">
             <div class="chat-user col">{{ message.user }}</div> <div class="chat-time col col-20 col-offset-25"> {{ message.timeAdded }} </div> <br/>
             </div>
@@ -50,7 +50,7 @@
     <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
 
       <label class="item-input-wrapper">
-        <textarea name="chatInput" placeholder="message goes here...!" ng-model="chat_ctrl.chatInput" max-length="1500" value="" required minlength="1" msd-elastic></textarea>
+        <textarea placeholder="message goes here...!" ng-model="chat_ctrl.chatInput" max-length="1500" value="" required minlength="1" msd-elastic></textarea> <!-- usunalem name chatinput -->
       </label>
 
       <div class="footer-btn-wrap">

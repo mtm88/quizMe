@@ -5,28 +5,16 @@
 angular.module('pmApp.PrivateChatCtrl', [])
 
 
-.controller('PrivateChatController', function($scope, $stateParams, $ionicHistory) {
+.controller('PrivateChatController', function($scope, $stateParams, $ionicHistory, $timeout) {
 
-
+  
 
   this.friendName = $stateParams.username;
 
 
-
   $scope.$on('$ionicView.enter', function() {
     console.log('UserMessages $ionicView.enter');
-  })
-
-
-
-
-
-
-
-
-
-
-
+  });
 
 
 
@@ -39,4 +27,4 @@ angular.module('pmApp.PrivateChatCtrl', [])
   }
 
 
-});
+})
