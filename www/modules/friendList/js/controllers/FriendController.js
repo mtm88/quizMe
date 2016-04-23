@@ -8,42 +8,11 @@ angular.module('pmApp.FriendCtrl', [])
 
   var me = this;
 
-
-    $scope.$on('$ionicView.enter', function() {
-
-      console.log('test');
-
-      $interval.cancel(me.friendListInterval);
+     $scope.$on('$destroy', function() {
+       $interval.cancel(me.friendListInterval);
+     });
 
 
-    });
-
-    $scope.$on('$ionicView.leave', function() {
-
-      console.log('test2');
-
-      $interval.cancel(me.friendListInterval);
-
-
-    });
-
-    $scope.$on('$ionicView.afterLeave', function() {
-
-      console.log('afterLeave');
-
-      $interval.cancel(me.friendListInterval);
-
-
-    });
-
-    $scope.$on('$ionicView.beforeLeave', function() {
-
-      console.log('beforeLeave');
-
-      $interval.cancel(me.friendListInterval);
-
-
-    });
 
 //    me.currentView = $ionicHistory.currentView().stateId;
 
@@ -53,8 +22,6 @@ angular.module('pmApp.FriendCtrl', [])
         .then(function(response){
             me.friendList = response.friendList;
             me.receivedInvites = response.receivedInvites;
-            me.username = response.username;
-
           },
           function(error) {
             console.log(error);
@@ -78,7 +45,9 @@ angular.module('pmApp.FriendCtrl', [])
 
   me.inviteUser = function() {
 
-    friendList.sendInvite( { 'friendUsername' : me.userSearch.userField.$modelValue, 'ownUsername' : me.username } )
+    var username = localStorageService.get('username');
+
+    friendList.sendInvite( { 'friendUsername' : me.userSearch.userField.$modelValue, 'ownUsername' : username } )
       .then(function() {
         me.userSearch.userField.$setValidity('friendFinder', true);
         me.inviteSent = true;

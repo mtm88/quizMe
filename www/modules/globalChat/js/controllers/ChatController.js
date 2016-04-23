@@ -12,7 +12,7 @@ angular.module('pmApp.ChatCtrl', ['monospaced.elastic'])
 
   var viewScroll = $ionicScrollDelegate.$getByHandle('userMessageScroll');
 
-
+  var chatJustOpened = true;
 
   $scope.$on('$destroy', function() {
     console.log('scope destroy');
@@ -68,12 +68,20 @@ angular.module('pmApp.ChatCtrl', ['monospaced.elastic'])
 
   socket.on('chat log', function(chatLog) {
 
-    for( i = chatLog.length - 5 ; i < chatLog.length ; i++) {
-      $scope.chat_ctrl.messages.push(chatLog[i]);
-    }
-    $scope.$apply();
-    $ionicScrollDelegate.scrollBottom(true);
+    if(chatJustOpened == true) {
+
+      for (i = chatLog.length - 5; i < chatLog.length; i++) {
+        $scope.chat_ctrl.messages.push(chatLog[i]);
+      }
+
+      $scope.$apply();
+      $ionicScrollDelegate.scrollBottom(true);
+      chatJustOpened = false;
+
+      }
+
   });
+
 
   socket.on('users online', function(usersOnline) {
     console.log('Users online: %s', usersOnline);

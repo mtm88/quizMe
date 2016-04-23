@@ -61,7 +61,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
 
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
-      console.log('test');
+
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -100,7 +100,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
         cache: false,
         views: {
           'menuContent': {
-            templateUrl: '../modules/auth/templates/login.html'
+            templateUrl: 'templates/login.html'
           }
         }
       })
@@ -109,7 +109,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
       url: 'register',
       views: {
         'menuContent': {
-          templateUrl: '../modules/auth/templates/register.html'
+          templateUrl: 'templates/register.html'
         }
       }
     })
@@ -129,7 +129,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
         cache: false,
         views: {
           'menuContent': {
-          templateUrl: '../modules/friendList/templates/friends.html'
+          templateUrl: 'templates/friends.html'
         }
       }
       })
@@ -139,7 +139,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
         cache: false,
         views: {
           'friendlistContent': {
-            templateUrl: '../modules//friendList/templates/list.html'
+            templateUrl: 'templates/list.html'
           }
         }
       })
@@ -149,7 +149,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
         cache: false,
         views: {
           'requestsContent': {
-            templateUrl: '../modules/friendList/templates/requests.html'
+            templateUrl: 'templates/requests.html'
           }
         }
       })
@@ -159,7 +159,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
         cache: false,
         views: {
           'searchContent': {
-            templateUrl: '../modules/friendList/templates/search.html'
+            templateUrl: 'templates/search.html'
           }
         }
       })
@@ -179,7 +179,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
           cache: false,
           views : { // brak cache:false - inaczej sumuje ilosc online na tym samym oknie
             'menuContent': {
-              templateUrl: '../modules/globalChat/templates/chat.html'
+              templateUrl: 'templates/chat.html'
             }
           }
 
