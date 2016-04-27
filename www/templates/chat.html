@@ -29,16 +29,7 @@
       <ion-content class="has-header has-footer" overflow-scroll="true" delegate-handle="userMessageScroll">
 
         <ul id="messages" ng-model="chat_ctrl.messagesLine">
-
-          <li ng-repeat="message in chat_ctrl.messages">
-            <div class="row">
-            <div class="chat-user col">{{ message.user }}</div> <div class="chat-time col col-20 col-offset-25"> {{ message.timeAdded }} </div> <br/>
-            </div>
-            <div class="row">
-            <div class="chat-message col"> {{ message.message }} </div>
-            </div>
-          </li>
-
+            <li ng-repeat="message in chat_ctrl.messages">[{{ message.timeAdded }}] {{ message.user }}: <br/> {{ message.message }}   </li>
         </ul>
 
         </ion-content>

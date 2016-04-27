@@ -29,19 +29,30 @@ angular.module('pmApp.chatServices', [])
 
     var deferred = $q.defer();
 
+
     $http.post(SERVER.url + '/api/getChatLog', ({ token: localData.token, FBverified : FBverified }))
       .success(function (response) {
 
+        if(response.noMessagesYet == true) {
+          messages.push({ timeAdded : 'anytime', user : 'Admin', message : 'no messages today yet' })
+        }
+
+        else {
+
+          messages = [];
+
         var definedLength = null;
 
-        if(response.length < 10)
-          definedLength = 0;
-        else
-          definedLength = response.length - 5;
+          if(response.length < 10)
+            definedLength = 0;
+          else
+            definedLength = response.length - 5;
 
 
-        for( i = definedLength ; i < response.length ; i++) {
-          messages.push(response[i]);
+            for( i = definedLength ; i < response.length ; i++) {
+              messages.push(response[i]);
+            }
+
         }
 
         deferred.resolve(messages);

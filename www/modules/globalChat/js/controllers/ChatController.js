@@ -88,6 +88,7 @@ angular.module('pmApp.ChatCtrl', ['monospaced.elastic'])
   socket.on('users online', function(usersOnline) {
     console.log('Users online: %s', usersOnline);
     $scope.chat_ctrl.usersOnline = usersOnline;
+    $scope.$apply();
   });
 
 
