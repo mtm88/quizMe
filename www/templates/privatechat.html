@@ -1,12 +1,12 @@
-<ion-view>
+<ion-view ng-controller="PrivateChatController as prvChat_ctrl" ng-init="prvChat_ctrl.getPrvChatLog()">
 
   <ion-header-bar align-title="center" class="bar-positive">
 
     <div class="buttons">
-      <button class="button button-icon icon ion-arrow-left-a" ng-click="prvchat_ctrl.goBack()"></button>
+      <button class="button button-icon icon ion-arrow-left-a" ng-click="prvChat_ctrl.goBack()"></button>
     </div>
 
-    <h1 class="title"> {{ prvchat_ctrl.friendName }}</h1>
+    <h1 class="title"> {{ prvChat_ctrl.friendName }}</h1>
 
   </ion-header-bar>
 
@@ -14,15 +14,19 @@
 
   <ion-content class="has-header padding has-tabs">
 
-
+    <ul id="messages">
+      <li ng-repeat="message in prvChat_ctrl.prvChatLog"> {{ message }} </li>
+    </ul>
 
   </ion-content>
 
 
+  <form name="prvChatForm" id="prvChatForm" novalidate ng-submit="prvChat_ctrl.getPrvChatLog()">
+
   <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
 
     <label class="item-input-wrapper">
-      <textarea name="chatInput" placeholder="message goes here...!" ng-model="chat_ctrl.chatInput" max-length="150" required minlength="1" msd-elastic></textarea>
+      <textarea name="prvChatInput" placeholder="message goes here...!" ng-model="prvChat_ctrl.prvChatInput" max-length="150" required minlength="1" msd-elastic></textarea>
     </label>
 
     <div class="footer-btn-wrap">
@@ -32,6 +36,8 @@
     </div>
 
   </ion-footer-bar>
+
+  </form>
 
 
 </ion-view>
