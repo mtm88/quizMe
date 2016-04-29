@@ -5,7 +5,7 @@
 angular.module('pmApp.PrivateChatCtrl', ['pmApp.prvChatServices'])
 
 
-.controller('PrivateChatController', function($scope, $stateParams, prvChatService) {
+.controller('PrivateChatController', function($scope, $stateParams, prvChatService, $ionicHistory) {
 
 
   this.friendName = $stateParams.username;

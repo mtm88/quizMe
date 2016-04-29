@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cf63bade-43c5-4bd0-aec1-bf28ba9a4b67" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/src/prvChat/services/prvChat.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/js/services/prvChatServices.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/src/prvChat/models/userChatData.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server" afterPath="$PROJECT_DIR$/server" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/controllers/PrivateChatController.js" afterPath="$PROJECT_DIR$/www/js/controllers/PrivateChatController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/app-server.js" afterPath="$PROJECT_DIR$/server/app-server.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/global/models/fbUserData.js" afterPath="$PROJECT_DIR$/server/src/global/models/fbUserData.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/index.html" afterPath="$PROJECT_DIR$/www/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/privatechat.html" afterPath="$PROJECT_DIR$/www/templates/privatechat.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/modules/friendList/js/directives/friendFinder.js" afterPath="$PROJECT_DIR$/www/modules/friendList/js/directives/friendFinder.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/search.html" afterPath="$PROJECT_DIR$/www/templates/search.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="pm.iws" />
@@ -46,11 +42,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="privatechat.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="privatechat.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/templates/privatechat.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3107658" vertical-offset="0" max-vertical-offset="980">
-              <caret line="14" column="51" selection-start-line="14" selection-start-column="51" selection-end-line="14" selection-end-column="51" />
+            <state vertical-scroll-proportion="-7.586207" vertical-offset="0" max-vertical-offset="980">
+              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -60,10 +56,30 @@
         <entry file="file://$PROJECT_DIR$/www/js/controllers/PrivateChatController.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="980">
-              <caret line="20" column="23" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
+              <caret line="7" column="97" selection-start-line="7" selection-start-column="97" selection-end-line="7" selection-end-column="97" />
               <folding>
                 <element signature="e#0#39#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="friendFinder.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/www/modules/friendList/js/directives/friendFinder.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.37077427" vertical-offset="600" max-vertical-offset="2280">
+              <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="search.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/templates/search.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.586207" vertical-offset="60" max-vertical-offset="2060">
+              <caret line="14" column="51" selection-start-line="14" selection-start-column="51" selection-end-line="14" selection-end-column="51" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -132,14 +148,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/www/templates/friends.html" />
         <option value="$PROJECT_DIR$/www/templates/list.html" />
         <option value="$PROJECT_DIR$/www/js/controllers/FriendController.js" />
         <option value="$PROJECT_DIR$/www/templates/requests.html" />
         <option value="$PROJECT_DIR$/server/src/userData/service/friendListModels.js" />
         <option value="$PROJECT_DIR$/www/js/services/friendListServices.js" />
         <option value="$PROJECT_DIR$/www/css/homeStyle.css" />
-        <option value="$PROJECT_DIR$/www/templates/search.html" />
         <option value="$PROJECT_DIR$/www/js/directives/friendFinder.js" />
         <option value="$PROJECT_DIR$/server/src/userData/service/userDataModels.js" />
         <option value="$PROJECT_DIR$/www/modules/auth/templates/errorlist.html" />
@@ -183,6 +197,8 @@
         <option value="$PROJECT_DIR$/www/js/services/prvChatServices.js" />
         <option value="$PROJECT_DIR$/www/templates/privatechat.html" />
         <option value="$PROJECT_DIR$/www/js/controllers/PrivateChatController.js" />
+        <option value="$PROJECT_DIR$/www/templates/search.html" />
+        <option value="$PROJECT_DIR$/www/modules/friendList/js/directives/friendFinder.js" />
       </list>
     </option>
   </component>
@@ -1259,14 +1275,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/search.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="45" column="49" selection-start-line="45" selection-start-column="49" selection-end-line="45" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/home.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
@@ -1443,14 +1451,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/modules/friendList/js/directives/friendFinder.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0" vertical-offset="963" max-vertical-offset="2240">
-          <caret line="94" column="7" selection-start-line="94" selection-start-column="7" selection-end-line="94" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/src/friendList/services/friendListModels.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.021505376" vertical-offset="0" max-vertical-offset="9540">
@@ -1506,20 +1506,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/privatechat.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.586207" vertical-offset="0" max-vertical-offset="980">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/controllers/PrivateChatController.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="980">
-          <caret line="20" column="23" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
+          <caret line="7" column="97" selection-start-line="7" selection-start-column="97" selection-end-line="7" selection-end-column="97" />
           <folding>
             <element signature="e#0#39#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/privatechat.html">
+    <entry file="file://$PROJECT_DIR$/www/templates/search.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3107658" vertical-offset="0" max-vertical-offset="980">
+        <state vertical-scroll-proportion="-7.586207" vertical-offset="60" max-vertical-offset="2060">
           <caret line="14" column="51" selection-start-line="14" selection-start-column="51" selection-end-line="14" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/modules/friendList/js/directives/friendFinder.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37077427" vertical-offset="600" max-vertical-offset="2280">
+          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
           <folding />
         </state>
       </provider>

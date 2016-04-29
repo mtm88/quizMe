@@ -12,6 +12,7 @@ angular.module('pmApp.friendFinderDirectives', [])
 
       var loginService = localStorageService.get('loginService');
       var token = localStorageService.get('user.authToken');
+      var username = localStorageService.get('username');
 
 
       if(loginService == 'fb')
@@ -45,7 +46,8 @@ angular.module('pmApp.friendFinderDirectives', [])
         return;
       }
 
-      if(value == scope.$parent.friend_ctrl.username)
+
+      if(value == username)
         this.searchedForMyself = true;
 
       else       this.searchedForMyself = false;
