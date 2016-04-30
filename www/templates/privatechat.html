@@ -1,4 +1,4 @@
-<ion-view ng-controller="PrivateChatController as prvChat_ctrl" ng-init="prvChat_ctrl.getPrvChatLog()">
+<ion-view ng-controller="PrivateChatController as prvChat_ctrl" ng-init="prvChat_ctrl.getPrvChatLog()" id="prvChatView">
 
   <ion-header-bar align-title="center" class="bar-positive">
 
@@ -6,22 +6,53 @@
       <button class="button button-icon icon ion-arrow-left-a" ng-click="prvChat_ctrl.goBack()"></button>
     </div>
 
-    <h1 class="title"> {{ prvChat_ctrl.friendName }}</h1>
+    <h1 class="title"> {{ prvChat_ctrl.friendName }} </h1>
 
   </ion-header-bar>
 
 
 
-  <ion-content class="has-header padding has-tabs">
+  <ion-content class="has-header has-footer" delegate-handle="privateChatScroll">
 
-    <ul id="messages">
-      <li ng-repeat="message in prvChat_ctrl.prvChatLog"> {{ message }} </li>
-    </ul>
+    <div class="list" ng-show="prvChat_ctrl.noChatLog"> <div class="item"> {{ prvChat_ctrl.noChatLog }} </div></div>
+
+    <div ng-repeat="message in prvChat_ctrl.prvChatLog">
+
+        <div class="chat-bubble left" ng-if="prvChat_ctrl.userDbId !== message.userID">
+
+          <div class="message">
+            {{ message.message }}
+          </div>
+
+          <span class="bold"> {{ prvChat_ctrl.friendName }} </span>,
+          <span am-time-ago="message.timeAdded"></span>
+
+        </div>
+
+
+        <div class="chat-bubble right" ng-if="prvChat_ctrl.userDbId === message.userID">
+
+          <div class="message">
+            {{ message.message }}
+          </div>
+
+          <span ng-click="viewProfile(message)"
+                class="bold">{{ prvChat_ctrl.ownUsername }}</span>,
+          <span am-time-ago="message.timeAdded"></span>
+
+        </div>
+
+      <div class="cf"></div>
+
+    </div>
+
+
+
 
   </ion-content>
 
 
-  <form name="prvChatForm" id="prvChatForm" novalidate ng-submit="prvChat_ctrl.getPrvChatLog()">
+  <form name="prvChatForm" id="prvChatForm" novalidate ng-submit="prvChat_ctrl.sendPrvChatMsg()">
 
   <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
 

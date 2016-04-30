@@ -37,7 +37,7 @@ angular.module('pmApp.FriendCtrl', [])
               me.receivedInvites = response.receivedInvites;
             })
 
-        }, 1000);
+        }, 10000);
       }
     };
 
