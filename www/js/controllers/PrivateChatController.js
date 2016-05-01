@@ -5,7 +5,40 @@
 angular.module('pmApp.PrivateChatCtrl', ['pmApp.prvChatServices', 'angularMoment'])
 
 
-.controller('PrivateChatController', function($scope, $stateParams, prvChatService, $ionicHistory, localStorageService, $ionicScrollDelegate, $interval) {
+.controller('PrivateChatController', function($scope, $stateParams, prvChatService, $ionicHistory,
+                                              localStorageService, $ionicScrollDelegate, $interval, $ionicLoading, PRIVATECHAT) {
+
+
+  var userDbId = localStorageService.get('userDbId');
+  var loginService = localStorageService.get('loginService');
+
+  var socket = io.connect(PRIVATECHAT.url);
+
+    socket.on('connect_error', function(data) {
+      console.log('connect error');
+      console.log(data);
+    });
+
+    socket.on('connect', function() {
+      console.log('connected');
+    });
+
+    socket.on('private chat message from server', function(message) {
+
+      var currentTime = new Date().toISOString();
+
+      var messageData = {
+        userID: message.userDbId,
+        user: message.user,
+        message: message.message,
+        timeAdded: currentTime
+      };
+
+      $scope.prvChat_ctrl.prvChatLog.push(messageData);
+      $scope.$apply();
+      viewScroll.scrollBottom();
+
+    });
 
 
   this.friendName = $stateParams.username;
@@ -19,34 +52,20 @@ angular.module('pmApp.PrivateChatCtrl', ['pmApp.prvChatServices', 'angularMoment
 
 
     $scope.$on('$ionicView.beforeLeave', function() {
+      socket.emit('end');
       $interval.cancel(this.prvChatInterval);
       console.log('destroying interval');
     });
 
     $scope.$on('$ionicView.enter', function() {
 
-        this.prvChatInterval = $interval( function() {
-          console.log('starting interval');
-
-          prvChatService.getPrvChatLogService($stateParams.username)
-            .then(function(receivedData) {
-              if(receivedData == ''){
-                $scope.prvChat_ctrl.noChatLog = "No messages yet";
-              }
-              else {
-                $scope.prvChat_ctrl.prvChatLog = receivedData[0].chatLog;
-                viewScroll.scrollBottom();
-              }
-            });
-
-
-        }, 5000);
-
 
   });
 
 
     this.getPrvChatLog = function() {
+
+      $ionicLoading.show();
       prvChatService.getPrvChatLogService(this.friendName)
         .then(function(receivedData) {
           if(receivedData == ''){
@@ -56,17 +75,20 @@ angular.module('pmApp.PrivateChatCtrl', ['pmApp.prvChatServices', 'angularMoment
           $scope.prvChat_ctrl.prvChatLog = receivedData[0].chatLog;
           viewScroll.scrollBottom();
           }
+          $ionicLoading.hide();
         });
 
-      this.prvChatInput = '';
     };
 
 
     this.sendPrvChatMsg = function() {
 
-
       keepKeyboardOpen();
-      prvChatService.sendPrvChatMsgService(this.ownUsername, this.friendName, this.prvChatInput)
+
+      var prvChatMessage = { ownUsername : this.ownUsername, friendName : this.friendName, message : this.prvChatInput, userDbId : userDbId, loginService : loginService };
+      socket.emit('private chat message to server', prvChatMessage);
+
+   /*   prvChatService.sendPrvChatMsgService(this.ownUsername, this.friendName, this.prvChatInput)
         .then(function() {
           prvChatService.getPrvChatLogService($stateParams.username)
             .then(function(receivedData) {
@@ -77,6 +99,7 @@ angular.module('pmApp.PrivateChatCtrl', ['pmApp.prvChatServices', 'angularMoment
 
 
         });
+    */
 
       this.prvChatInput = '';
 

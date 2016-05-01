@@ -13,14 +13,16 @@
   <ion-content class="has-header padding has-tabs">
 
 
-    <div class="item item-divider">
+    <div ng-show="friend_Ctrl.friendList" class="item item-divider">
       Friend list
     </div>
 
     <div ng-hide="friend_ctrl.friendList">
-      <a class="item item-icon-left item-icon-right">
-        Friend list is empty
-      </a>
+      <ion-list>
+        <ion-item>
+          <ion-spinner></ion-spinner>
+        </ion-item>
+      </ion-list>
     </div>
 
     <div ng-repeat="friend in friend_ctrl.friendList">

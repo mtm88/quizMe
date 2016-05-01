@@ -14,6 +14,10 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
     url: 'http://192.168.0.2:5001'
   })
 
+  .constant('PRIVATECHAT', {
+    url: 'http://192.168.0.2:5002'
+  })
+
 .run(function($ionicPlatform, friendList, localStorageService, $rootScope) {
 
 

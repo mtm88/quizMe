@@ -15,9 +15,22 @@
   <ion-content class="has-header padding has-tabs">
 
 
-    <div class="item item-divider">
+    <div class="item item-divider" ng-show="friend_ctrl.receivedInvites">
       Friend requests
     </div>
+
+    <div ng-hide="friend_ctrl.receivedInvites">
+      <ion-list>
+        <ion-item>
+          <ion-spinner></ion-spinner>
+        </ion-item>
+      </ion-list>
+    </div>
+    <ion-list ng-show="friend_ctrl.noReceivedInvites">
+      <ion-item>
+    No friend requests atm
+      </ion-item>
+    </ion-list>
 
     <div ng-repeat="friendRequest in friend_ctrl.receivedInvites" ng-show="friend_ctrl.receivedInvites">
 

@@ -21,12 +21,13 @@ angular.module('pmApp.FriendCtrl', [])
       friendList.getFriendList()
         .then(function(response){
             me.friendList = response.friendList;
-            me.receivedInvites = response.receivedInvites;
-          },
-          function(error) {
-            console.log(error);
-          }
-        );
+              if(response.receivedInvites = []) {
+                me.noReceivedInvites = true;
+              }
+                me.receivedInvites = response.receivedInvites;
+
+
+          });
 
       me.startInterval = function() {
 
