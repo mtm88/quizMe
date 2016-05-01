@@ -1,4 +1,5 @@
-angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.LoginCtrl', 'pmApp.RegisterCtrl', 'pmApp.HomeCtrl', 'pmApp.FriendCtrl', 'pmApp.ChatCtrl', 'pmApp.PrivateChatCtrl',
+angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.LoginCtrl', 'pmApp.RegisterCtrl', 'pmApp.HomeCtrl', 'pmApp.FriendCtrl', 'pmApp.ChatCtrl',
+  'pmApp.PrivateChatCtrl', 'pmApp.QuizCtrl',
   'pmApp.postDataServices', 'pmApp.loginOriginService', 'pmApp.registerFormDirectives', 'pmApp.friendList', 'pmApp.friendFinderDirectives', 'pmApp.chatServices'])
 
   .constant('SERVER', {
@@ -188,7 +189,18 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
           }
 
 
-        });
+        })
+
+    .state('app.quiz', {
+      url: '/quiz',
+      views : {
+        'menuContent': {
+          templateUrl: 'templates/quiz.html'
+        }
+      }
+
+
+    });
 
 
     $urlRouterProvider.otherwise('/app/login');

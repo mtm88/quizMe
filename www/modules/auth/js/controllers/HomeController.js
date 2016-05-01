@@ -3,8 +3,8 @@
  */
 angular.module('pmApp.HomeCtrl', [])
 
-.controller('HomeController', ['$scope', '$state', 'localStorageService', 'postData', 'loginOrigin', 'friendList', '$interval', '$q', '$rootScope',
-  function($scope, $state, localStorageService, postData, loginOrigin, friendList, $interval, $q, $rootScope) {
+.controller('HomeController', ['$scope', '$state', 'localStorageService', 'postData', 'loginOrigin', 'friendList', '$interval', '$q',
+  function($scope, $state, localStorageService, postData, loginOrigin, friendList, $interval, $q) {
 
   var me = this;
 

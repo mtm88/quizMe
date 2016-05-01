@@ -13,6 +13,7 @@
     <link href="modules/auth/css/loginFormStyle.css" rel="stylesheet">
     <link href="modules/friendList/css/friendStyle.css" rel="stylesheet">
     <link href="modules/globalChat/css/chatStyle.css" rel="stylesheet">
+    <link href="css/quiz.css" rel="stylesheet">
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
@@ -32,6 +33,7 @@
     <!-- random stuff -->
 
     <script src="lib/angular-elastic/elastic.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
 
 
@@ -43,16 +45,18 @@
     <script src="modules/auth/js/controllers/LoginController.js"></script>
     <script src="modules/auth/js/controllers/RegisterController.js"></script>
     <script src="modules/friendList/js/controllers/FriendController.js"></script>
-    <script src="js/controllers/HomeController.js"></script>
-    <script src="js/controllers/PrivateChatController.js"></script>
+    <script src="modules/auth/js/controllers/HomeController.js"></script>
+    <script src="modules/privateChat/js/controllers/PrivateChatController.js"></script>
     <script src="modules/globalChat/js/controllers/ChatController.js"></script>
+    <Script src="js/QuizController.js"></Script>
 
 
     <script src="modules/auth/js/services/postData.js"></script>
     <script src="modules/auth/js/services/loginOrigin.js"></script>
     <script src="modules/friendList/js/services/friendListServices.js"></script>
     <script src="modules/globalChat/js/services/chatServices.js"></script>
-    <script src="js/services/prvChatServices.js"></script>
+    <script src="modules/privateChat/js/services/prvChatServices.js"></script>
+    <script src="js/services/quizQueServices.js"></script>
 
 
     <script src="modules/auth/js/directives/RegisterFormDirectives.js"></script>
