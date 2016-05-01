@@ -32,7 +32,18 @@
       </ion-item>
     </ion-list>
 
-    <div ng-repeat="friendRequest in friend_ctrl.receivedInvites" ng-show="friend_ctrl.receivedInvites">
+
+    <div ng-show="friend_ctrl.acceptingInvite">
+
+      <ion-list>
+        <ion-item>
+          <ion-spinner></ion-spinner>
+        </ion-item>
+      </ion-list>
+
+    </div>
+
+    <div ng-repeat="friendRequest in friend_ctrl.receivedInvites" ng-show="friend_ctrl.receivedInvites && !friend_ctrl.acceptingInvite">
 
 
       <div class="row">

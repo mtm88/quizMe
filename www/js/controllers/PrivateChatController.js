@@ -8,6 +8,7 @@ angular.module('pmApp.PrivateChatCtrl', ['pmApp.prvChatServices', 'angularMoment
 .controller('PrivateChatController', function($scope, $stateParams, prvChatService, $ionicHistory,
                                               localStorageService, $ionicScrollDelegate, $interval, $ionicLoading, PRIVATECHAT) {
 
+  window.cordova.plugins.Keyboard.disableScroll(true);
 
   var userDbId = localStorageService.get('userDbId');
   var loginService = localStorageService.get('loginService');
@@ -70,6 +71,7 @@ angular.module('pmApp.PrivateChatCtrl', ['pmApp.prvChatServices', 'angularMoment
         .then(function(receivedData) {
           if(receivedData == ''){
             $scope.prvChat_ctrl.noChatLog = "No messages yet";
+            $scope.prvChat_ctrl.prvChatLog = [];
           }
           else {
           $scope.prvChat_ctrl.prvChatLog = receivedData[0].chatLog;
@@ -86,6 +88,7 @@ angular.module('pmApp.PrivateChatCtrl', ['pmApp.prvChatServices', 'angularMoment
       keepKeyboardOpen();
 
       var prvChatMessage = { ownUsername : this.ownUsername, friendName : this.friendName, message : this.prvChatInput, userDbId : userDbId, loginService : loginService };
+      console.log(prvChatMessage);
       socket.emit('private chat message to server', prvChatMessage);
 
    /*   prvChatService.sendPrvChatMsgService(this.ownUsername, this.friendName, this.prvChatInput)

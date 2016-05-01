@@ -20,11 +20,13 @@ angular.module('pmApp.FriendCtrl', [])
 
       friendList.getFriendList()
         .then(function(response){
+          console.log(response);
             me.friendList = response.friendList;
-              if(response.receivedInvites = []) {
+              if(response.receivedInvites == '') {
                 me.noReceivedInvites = true;
               }
                 me.receivedInvites = response.receivedInvites;
+
 
 
           });
@@ -60,12 +62,15 @@ angular.module('pmApp.FriendCtrl', [])
 
     me.acceptInvite = function(chosenUserData) {
 
+      me.acceptingInvite = true;
+
       friendList.acceptInvite(chosenUserData)
         .then(function() {
           friendList.getFriendList()
             .then(function(response) {
               me.friendList = response.friendList;
               me.receivedInvites = response.receivedInvites;
+              me.acceptingInvite = false;
             })
         })
 

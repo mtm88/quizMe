@@ -11,3 +11,9 @@
   font-weight: bold;
   font-size: 15px;
 }
+
+.headerText {
+  margin-left: 0px;
+  padding-left: 50px;
+  color: red;
+}
