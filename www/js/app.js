@@ -4,7 +4,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
 
   .constant('SERVER', {
 
-    url: 'http://192.168.0.2:5000'
+    url: 'http://192.168.0.6:5000'
 
   //url: 'http://mtm88-pmserver.herokuapp.com',
    // port: 13530
@@ -12,11 +12,15 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
   })
 
   .constant('CHAT', {
-    url: 'http://192.168.0.2:5001'
+    url: 'http://192.168.0.6:5001'
   })
 
   .constant('PRIVATECHAT', {
-    url: 'http://192.168.0.2:5002'
+    url: 'http://192.168.0.6:5002'
+  })
+
+  .constant('QUIZQUE', {
+    url: 'http://192.168.0.6:5003'
   })
 
 .run(function($ionicPlatform, friendList, localStorageService, $rootScope) {
