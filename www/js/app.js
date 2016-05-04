@@ -197,6 +197,7 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
 
     .state('app.quiz', {
       url: '/quiz',
+      cache: false,
       views : {
         'menuContent': {
           templateUrl: 'templates/quiz.html'
