@@ -195,12 +195,24 @@ angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.Log
 
         })
 
-    .state('app.quiz', {
-      url: '/quiz',
+    .state('app.quizQue', {
+      url: '/quizQue',
       cache: false,
       views : {
         'menuContent': {
-          templateUrl: 'templates/quiz.html'
+          templateUrl: 'templates/quizQue.html'
+        }
+      }
+
+
+    })
+
+    .state('app.quizGame', {
+      url: '/quizGame',
+      cache: false,
+      views : {
+        'menuContent': {
+          templateUrl: 'templates/quizGame.html'
         }
       }
 

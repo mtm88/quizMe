@@ -1,8 +1,8 @@
 angular.module('pmApp.QuizCtrl', [])
 
 
-.controller('QuizController', ['$scope', '$timeout', 'localStorageService', 'QUIZQUE',
-    function($scope, $timeout, localStorageService, QUIZQUE) {
+.controller('QuizController', ['$scope', '$timeout', 'localStorageService', 'QUIZQUE', '$state',
+    function($scope, $timeout, localStorageService, QUIZQUE, $state) {
 
 
     $('#quizSearcher').hide();
@@ -13,7 +13,7 @@ angular.module('pmApp.QuizCtrl', [])
     $('#preparingQuiz').hide();
     $('#quizPrepared').hide();
     $('.opponentDeclined').hide();
-    $('.waitingForOpponent').hide();
+    $('.waitingForServer').hide();
     $('.bothPlayersReady').hide();
 
 
@@ -46,23 +46,22 @@ angular.module('pmApp.QuizCtrl', [])
 
       });
 
-      socket.on(localData.userDbId + ' - opponent found', function(playersInfo) {
-        console.log(playersInfo);
+      socket.on(localData.userDbId + ' - opponent found', function() {
 
         $('#lookingForOpponent').hide(100);
         $('#cancelSearch').hide(100);
         $('#opponentFound').show(400);
-        $('#preparingQuiz').show(800);
+        $('#preparingQuiz').show(400);
+
 
 
       });
 
-      socket.on(localData.userDbId + ' - quiz prepared', function(playersInfo) {
-        console.log(playersInfo);
+      socket.on(localData.userDbId + ' - quiz prepared', function() {
 
         $('#preparingQuiz').hide(100);
         $('#quizPrepared').show(400);
-        $('.opponentFoundDivs').show(800);
+        $('.opponentFoundDivs').show(400);
 
       });
 
@@ -105,22 +104,23 @@ angular.module('pmApp.QuizCtrl', [])
 
         $timeout(function() {
           setFieldBackToNormal();
+          $('.opponentDeclined').hide();
+          $('#quizMeHeader').text('Game Search in progress...');
         }, 2000);
       });
 
 
-      socket.on(localData.username + ' - opponent not yet accepted quiz', function() {
-        console.log('1');
+      socket.on(localData.username + ' - user accepted quiz', function() {
 
         $('.opponentFoundDivs').hide(100);
-        $('.waitingForOpponent').show(400);
+        $('.waitingForServer').show(400);
 
       });
 
-      socket.on(localData.username + ' - opponent accepted quiz', function() {
-        console.log('2');
-        $('.opponentFoundDivs').hide(100);
-        $('.bothPlayersReady').show(400);
+      socket.on(localData.userDbId + ' - readyToLoadGame', function(info) {
+
+        console.log(info);
+        $state.go('app.quizGame');
 
       });
 
@@ -135,7 +135,11 @@ angular.module('pmApp.QuizCtrl', [])
         $('#addedToQueMark').hide(100);
         $('#opponentFound').hide(100);
         $('#quizChooser').show(400);
+        $('#quizPrepared').hide();
+        $('.waitingForServer').hide();
+        $('.opponentFoundDivs').hide();
         $('#discardQuiz').text('Cancel');
+
       }
 
 
