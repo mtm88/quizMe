@@ -1,5 +1,5 @@
 
-<ion-view ng-controller="QuizController as quiz_ctrl" ng-init="quiz_ctrl.stopQue()">
+<ion-view ng-controller="QuizQueController as quizQue_ctrl" ng-init="quizQue_ctrl.stopQue()">
 
   <ion-nav-bar class="bar-positive nav-title-slide-ios7">
     <ion-nav-title>
@@ -43,7 +43,7 @@
       </a>
 
 
-      <a class="item text-center" id="cancelSearch" ng-click="quiz_ctrl.stopQue()">
+      <a class="item text-center" id="cancelSearch" ng-click="quizQue_ctrl.stopQue()">
       Cancel search
       </a>
 
@@ -64,8 +64,8 @@
       </div>
 
       <div class="button-bar opponentFoundDivs">
-        <a class="button" ng-click="quiz_ctrl.acceptQuiz()">Yes</a>
-        <a class="button" id="discardQuiz" ng-click="quiz_ctrl.discardQuiz()">No</a>
+        <a class="button" ng-click="quizQue_ctrl.acceptQuiz()">Yes</a>
+        <a class="button" id="discardQuiz" ng-click="quizQue_ctrl.discardQuiz()">No</a>
       </div>
 
     </div>
@@ -78,15 +78,15 @@
         Please choose <span class="bold">QuizME</span> mode:
       </div>
 
-      <a class="item text-center" ng-click="quiz_ctrl.startQuiz('regular')">
+      <a class="item text-center" ng-click="quizQue_ctrl.startQuiz('regular')">
         Regular mode
       </a>
 
-      <a class="item text-center" ng-click="quiz_ctrl.startQuiz('ranked')">
+      <a class="item text-center" ng-click="quizQue_ctrl.startQuiz('ranked')">
         Ranked mode
       </a>
 
-      <a class="item text-center" ng-click="quiz_ctrl.startQuiz('solo')">
+      <a class="item text-center" ng-click="quizQue_ctrl.startQuiz('solo')">
         Solo Quiz (no opponent)
       </a>
 

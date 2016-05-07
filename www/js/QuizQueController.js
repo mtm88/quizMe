@@ -1,7 +1,7 @@
-angular.module('pmApp.QuizCtrl', [])
+angular.module('pmApp.QuizQueCtrl', [])
 
 
-.controller('QuizController', ['$scope', '$timeout', 'localStorageService', 'QUIZQUE', '$state',
+.controller('QuizQueController', ['$scope', '$timeout', 'localStorageService', 'QUIZQUE', '$state',
     function($scope, $timeout, localStorageService, QUIZQUE, $state) {
 
 
@@ -120,7 +120,10 @@ angular.module('pmApp.QuizCtrl', [])
       socket.on(localData.userDbId + ' - readyToLoadGame', function(info) {
 
         console.log(info);
+        localStorageService.set('firstCategory', info.firstCategory);
+        localStorageService.set('gameData', info.gameData);
         $state.go('app.quizGame');
+
 
       });
 
