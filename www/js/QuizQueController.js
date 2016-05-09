@@ -122,6 +122,7 @@ angular.module('pmApp.QuizQueCtrl', [])
         console.log(info);
         localStorageService.set('firstCategory', info.firstCategory);
         localStorageService.set('gameData', info.gameData);
+        localStorageService.set('questions', info.questions);
         $state.go('app.quizGame');
 
 

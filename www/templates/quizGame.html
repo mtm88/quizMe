@@ -52,6 +52,38 @@
       </a>
 
 
+
+                 <!-- ELEMENTY QUIZOWE -->
+
+
+    <ul class="list" id="listWithQuestions">
+      <li class="item">
+        <span class="bold">A. </span>{{ actualQuestion }}
+      </li>
+
+      <li class="item">
+        <span class="bold">B. </span>{{ firstAnswer }}
+      </li>
+
+      <li class="item">
+        <span class="bold">C. </span>{{ secondAnswer }}
+      </li>
+
+      <li class="item">
+        <span class="bold">D. </span>{{ thirdAnswer }}
+      </li>
+
+
+    </ul>
+
+    <a class="item" id="questionTimer">
+      Time left: {{ questionTimer }}s
+      <progress id="progressbar" value="{{questionTimer}}" max="10" class="progressbar"></progress>
+    </a>
+
+
+
+
   </ion-content>
 
 
