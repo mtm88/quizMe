@@ -9,13 +9,22 @@ angular.module('pmApp.QuizGameCtrl', [])
       $('#progressText').hide();
       $('#questionTimer').hide();
 
+     //$('#myAnswersList').hide();
+
+
       $('#listWithQuestions').hide();
+      $('#opponentAnswers').hide();
+      $('#opponentAnswersListSpinner').hide();
+      $('#opponentAnswersList').hide();
+
+
 
 
       var category = localStorageService.get('firstCategory');
       var questions = localStorageService.get('questions');
 
       var username = localStorageService.get('username');
+      var userDbId = localStorageService.get('userDbId');
 
       $scope.quizGame_ctrl.gameData = localStorageService.get('gameData');
 
@@ -91,18 +100,49 @@ angular.module('pmApp.QuizGameCtrl', [])
       socket.on('first questions data', function(questionsData) {
         localStorageService.set('firstCategory', '');
         $scope.questions = questionsData;
+        $scope.myAnswers = [];
         startAskingQuestions(0);
+      });
+
+
+      socket.on(userDbId + ' - opponent category results', function(opponentResult) {
+        
+        $timeout(function() {
+          $('#opponentAnswersListSpinner').text('Opponent results: ');
+        $scope.opponentAnswers = opponentResult;
+        $('#opponentAnswersList').show(400);
+        }, 2000);
+
       });
 
 
 
       function startAskingQuestions(i) {
 
+        if(i == 1) $('#quizMeRow').text('Your answers: ' );
+
         if(i > 2) {
-         return
+
+          var opponentNumberInArray = '';
+
+          if($scope.quizGame_ctrl.gameData.players[0].username == username)
+            opponentNumberInArray = 1;
+          else
+            opponentNumberInArray = 0;
+
+          socket.emit('category results', username, $scope.quizGame_ctrl.gameData.players[opponentNumberInArray], $scope.myAnswers);
+
+          $('#listWithQuestions').hide();
+          $('#questionTimer').hide();
+          $('#myAnswersList').show(400);
+          $('#opponentAnswers').show(200);
+          $('#opponentAnswersListSpinner').show(400);
+          return
+
         }
 
         var answers = [];
+
 
         answers.push($scope.questions[i].correctAnswer ,$scope.questions[i].incorrectAnswer1, $scope.questions[i].incorrectAnswer2, $scope.questions[i].incorrectAnswer3);
 
@@ -137,7 +177,8 @@ angular.module('pmApp.QuizGameCtrl', [])
 
           if($scope.questionTimer == 0) {
             $interval.cancel(countTenSecondsInterval);
-
+            $scope.myAnswers.push({ 'question' : i+1, 'correctAnswer' : 'false' });
+            console.log($scope.myAnswers);
             socket.emit('answer', false, category, username, $scope.quizGame_ctrl.gameData.quizID, i);
 
             i++;

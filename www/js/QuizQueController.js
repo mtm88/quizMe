@@ -28,6 +28,8 @@ angular.module('pmApp.QuizQueCtrl', [])
       var localData = setLocalData();
 
 
+
+
       var socket = io.connect(QUIZQUE.url);
 
       $scope.$on('$destroy', function() {
@@ -47,6 +49,7 @@ angular.module('pmApp.QuizQueCtrl', [])
       });
 
       socket.on(localData.userDbId + ' - opponent found', function() {
+        console.log('jestem w opponent found');
 
         $('#lookingForOpponent').hide(100);
         $('#cancelSearch').hide(100);
