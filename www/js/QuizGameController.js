@@ -1,8 +1,7 @@
 angular.module('pmApp.QuizGameCtrl', [])
 
 
-.controller('QuizGameController', ['$scope', 'localStorageService', '$timeout', 'QUIZGAME', '$interval',
-    function($scope, localStorageService, $timeout, QUIZGAME, $interval) {
+.controller('QuizGameController', function($scope, localStorageService, $timeout, QUIZGAME, $interval) {
 
       $('#rollingCard').hide();
       $('#progressbar').hide();
@@ -16,6 +15,7 @@ angular.module('pmApp.QuizGameCtrl', [])
       $('#opponentAnswers').hide();
       $('#opponentAnswersListSpinner').hide();
       $('#opponentAnswersList').hide();
+      $('#opponentChoosingNewCategory').hide();
 
 
 
@@ -33,7 +33,6 @@ angular.module('pmApp.QuizGameCtrl', [])
 
 
       $scope.$on('$destroy', function() {
-        console.log('scope destroy');
         socket.disconnect();
       });
 
@@ -106,14 +105,39 @@ angular.module('pmApp.QuizGameCtrl', [])
 
 
       socket.on(userDbId + ' - opponent category results', function(opponentResult) {
-        
-        $timeout(function() {
-          $('#opponentAnswersListSpinner').text('Opponent results: ');
+
+        $('#opponentAnswersListSpinner').text('Opponent results: ');
+        $('#opponentAnswersList').show(1000);
+
         $scope.opponentAnswers = opponentResult;
-        $('#opponentAnswersList').show(400);
-        }, 2000);
+
+
+        var answersCountArray = decideWhoWon();
+
+          var myCorrectAnswersCount = answersCountArray[0];
+          var opponentCorrectAnswersCount = answersCountArray[1];
+
+          if(myCorrectAnswersCount > opponentCorrectAnswersCount) {
+            $('#infoOnNewCategory').text('You have won this category');
+            $('#spinnerText').text('Opponent choosing next category...');
+          }
+
+          else if(myCorrectAnswersCount < opponentCorrectAnswersCount) {
+            $('#infoOnNewCategory').text('You have lost this category');
+            $('#newCategorySpinner').hide(200);
+          }
+
+          else {
+            $('#infoOnNewCategory').text('We have a draw!');
+            $('#spinnerText').text('Rolling new category...');
+            socket.emit('add me to draws', $scope.quizGame_ctrl.gameData.quizID, userDbId, usedCategories);
+          }
 
       });
+
+    socket.on(userDbId + ' - rolled category from draw', function(rolledCategory) {
+      console.log(rolledCategory);
+    });
 
 
 
@@ -170,6 +194,19 @@ angular.module('pmApp.QuizGameCtrl', [])
       }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
       function countTenSeconds(i) {
 
         var countTenSecondsInterval = $interval(function() {
@@ -208,8 +245,29 @@ angular.module('pmApp.QuizGameCtrl', [])
       }
 
 
+      function decideWhoWon() {
+
+        var correctAnswers = '';
+        var opponentCorrectAnswers = '';
+
+        for( i = 0 ; i < $scope.myAnswers.length ; i++ ) {
+
+          if($scope.myAnswers[i].correctAnswer == 'true')
+          correctAnswers++;
+
+          if($scope.opponentAnswers[i].correctAnswer == 'true') {
+          opponentCorrectAnswers++;
+          }
+
+        }
+
+        return [correctAnswers, opponentCorrectAnswers];
+
+      }
 
 
 
-}]);
+
+
+});
 
