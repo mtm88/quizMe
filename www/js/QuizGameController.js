@@ -13,15 +13,14 @@ angular.module('pmApp.QuizGameCtrl', [])
 
       $('#listWithQuestions').hide();
       $('#opponentAnswers').hide();
-      $('#opponentAnswersListSpinner').hide();
-      $('#opponentAnswersList').hide();
       $('#opponentChoosingNewCategory').hide();
 
 
 
 
-      var category = localStorageService.get('firstCategory');
-      var questions = localStorageService.get('questions');
+      var category = localStorageService.get('category');
+      $scope.questions = localStorageService.get('firstQuestionsData');
+      $scope.myAnswers = [];
 
       var username = localStorageService.get('username');
       var userDbId = localStorageService.get('userDbId');
@@ -84,7 +83,7 @@ angular.module('pmApp.QuizGameCtrl', [])
             $('#playersDiv').hide(200);
             $('#difficultyDiv').hide(200);
             $('#quizMeRow').text('Category: ' + category);
-            getQuestions(category, questions);
+            startAskingQuestions(0);
           }
 
         }, 1000);
@@ -92,12 +91,9 @@ angular.module('pmApp.QuizGameCtrl', [])
       }
 
 
-      function getQuestions(category) {
-        socket.emit('get first questions', { 'category' : category, 'questions' : questions });
-      }
-
-      socket.on('first questions data', function(questionsData) {
-        localStorageService.set('firstCategory', '');
+      socket.on('dupa', function(questionsData) {
+        console.log('5');
+        //localStorageService.set('category', '');
         $scope.questions = questionsData;
         $scope.myAnswers = [];
         startAskingQuestions(0);
@@ -107,9 +103,14 @@ angular.module('pmApp.QuizGameCtrl', [])
       socket.on(userDbId + ' - opponent category results', function(opponentResult) {
 
         $('#opponentAnswersListSpinner').text('Opponent results: ');
-        $('#opponentAnswersList').show(1000);
 
         $scope.opponentAnswers = opponentResult;
+
+        $timeout(function() {
+        $('#opponentAnswersList').show(200);
+        }, 2000);
+
+
 
 
         var answersCountArray = decideWhoWon();
@@ -129,15 +130,19 @@ angular.module('pmApp.QuizGameCtrl', [])
 
           else {
             $('#infoOnNewCategory').text('We have a draw!');
-            $('#spinnerText').text('Rolling new category...');
+            $('#categorySpinnerText').text('Rolling new category...');
             socket.emit('add me to draws', $scope.quizGame_ctrl.gameData.quizID, userDbId, usedCategories);
           }
 
       });
 
-    socket.on(userDbId + ' - rolled category from draw', function(rolledCategory) {
-      console.log(rolledCategory);
-    });
+
+
+      socket.on(userDbId + ' - rolled category from draw', function(rolledCategory) {
+        console.log('New category rolled: ' + rolledCategory.category);
+        $('#categorySpinnerText').text('New category: ' + rolledCategory.category);
+
+      });
 
 
 
@@ -160,7 +165,6 @@ angular.module('pmApp.QuizGameCtrl', [])
           $('#questionTimer').hide();
           $('#myAnswersList').show(400);
           $('#opponentAnswers').show(200);
-          $('#opponentAnswersListSpinner').show(400);
           return
 
         }

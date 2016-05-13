@@ -8,6 +8,11 @@
   font-weight: bold;
 }
 
+#categorySpinnerText {
+  padding-top: 10px;
+  padding-left: 15px;
+}
+
 .queMarks {
   padding: 10px 10px 10px 10px;
 }

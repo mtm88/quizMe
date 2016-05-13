@@ -33,7 +33,6 @@ angular.module('pmApp.QuizQueCtrl', [])
       var socket = io.connect(QUIZQUE.url);
 
       $scope.$on('$destroy', function() {
-        console.log('scope destroy');
         removeFromQue();
         socket.disconnect();
       });
@@ -49,8 +48,9 @@ angular.module('pmApp.QuizQueCtrl', [])
       });
 
       socket.on(localData.userDbId + ' - opponent found', function() {
-        console.log('jestem w opponent found');
 
+
+        $scope.hideLookingForOpponent = true;
         $('#lookingForOpponent').hide(100);
         $('#cancelSearch').hide(100);
         $('#opponentFound').show(400);
@@ -123,12 +123,18 @@ angular.module('pmApp.QuizQueCtrl', [])
       socket.on(localData.userDbId + ' - readyToLoadGame', function(info) {
 
         console.log(info);
-        localStorageService.set('firstCategory', info.firstCategory);
+        localStorageService.set('category', info.firstCategory);
         localStorageService.set('gameData', info.gameData);
-        localStorageService.set('questions', info.questions);
+        localStorageService.set('firstQuestionsData', info.questionsData);
         $state.go('app.quizGame');
 
 
+      });
+
+      socket.on('dupa jelenia', function(allQuizData, firstCategory, questionsData) {
+        console.log(allQuizData);
+        console.log(firstCategory);
+        console.log(questionsData);
       });
 
 
