@@ -16,11 +16,10 @@ angular.module('pmApp.QuizGameCtrl', [])
       $('#opponentChoosingNewCategory').hide();
 
 
-
-
-      var category = localStorageService.get('category');
-      $scope.questions = localStorageService.get('firstQuestionsData');
       $scope.myAnswers = [];
+
+      $scope.category = localStorageService.get('category');
+      $scope.questions = localStorageService.get('firstQuestionsData');
 
       var username = localStorageService.get('username');
       var userDbId = localStorageService.get('userDbId');
@@ -28,7 +27,7 @@ angular.module('pmApp.QuizGameCtrl', [])
       $scope.quizGame_ctrl.gameData = localStorageService.get('gameData');
 
       var usedCategories = [];
-      usedCategories.push(category);
+      usedCategories.push($scope.category);
 
 
       $scope.$on('$destroy', function() {
@@ -42,7 +41,7 @@ angular.module('pmApp.QuizGameCtrl', [])
 
           $timeout(function() {
             $('#quizMeHeaderSpinner').hide();
-            $('#quizMeRow').text('Rolled category: ' + category);
+            $('#quizMeRow').text('Rolled category: ' + $scope.category);
             startTimer();
           }, 2000);
 
@@ -63,7 +62,7 @@ angular.module('pmApp.QuizGameCtrl', [])
         var changeValue = '';
 
         var progressBar = $('#progressbar');
-        $scope.quizGame_ctrl.actualValue = $('#progressbar').attr('value');
+        $scope.quizGame_ctrl.actualValue = $('#progressbar').attr('max');
 
         changeValue = progressBar.val($scope.quizGame_ctrl.actualValue--);
 
@@ -82,7 +81,7 @@ angular.module('pmApp.QuizGameCtrl', [])
             $('#progressText').hide(200);
             $('#playersDiv').hide(200);
             $('#difficultyDiv').hide(200);
-            $('#quizMeRow').text('Category: ' + category);
+            $('#quizMeRow').text('Category: ' + $scope.category);
             startAskingQuestions(0);
           }
 
@@ -91,59 +90,70 @@ angular.module('pmApp.QuizGameCtrl', [])
       }
 
 
-      socket.on('dupa', function(questionsData) {
-        console.log('5');
-        //localStorageService.set('category', '');
+      socket.on(userDbId + ' - new questions data', function(questionsData, category) {
+
+        console.log('draw skoczony, mam dane nowej kategorii');
+
+        $scope.category = category;
+        usedCategories.push($scope.category);
+        $('#categorySpinnerText').text('New category: ' + category);
+
+        $timeout(function() {
         $scope.questions = questionsData;
-        $scope.myAnswers = [];
-        startAskingQuestions(0);
+
+          $scope.myAnswers = [];
+          $scope.opponentAnswers = [];
+
+        startTimer();
+
+
+        }, 1500);
+
       });
 
 
       socket.on(userDbId + ' - opponent category results', function(opponentResult) {
 
-        $('#opponentAnswersListSpinner').text('Opponent results: ');
-
+        $('#opponentAnswersListSpinner').text('Opponent answers: ');
         $scope.opponentAnswers = opponentResult;
+        $scope.$apply();
 
-        $timeout(function() {
-        $('#opponentAnswersList').show(200);
-        }, 2000);
+        if(opponentResult.length == 3) {
+          $interval.cancel($scope.opponentAnswersInterval);
+          console.log('mam wszystkie odpowiedzi przeciwnika, anuluje interval');
+          console.log(opponentResult);
+
+          checkIfDraw();
+
+        }
 
 
+        function checkIfDraw() {
 
+              var answersCountArray = decideWhoWon();
 
-        var answersCountArray = decideWhoWon();
+              var myCorrectAnswersCount = answersCountArray[0];
+              var opponentCorrectAnswersCount = answersCountArray[1];
 
-          var myCorrectAnswersCount = answersCountArray[0];
-          var opponentCorrectAnswersCount = answersCountArray[1];
+              if(myCorrectAnswersCount > opponentCorrectAnswersCount) {
+                $('#infoOnNewCategory').text('You have won this category');
+                $('#spinnerText').text('Opponent choosing next category...');
+              }
 
-          if(myCorrectAnswersCount > opponentCorrectAnswersCount) {
-            $('#infoOnNewCategory').text('You have won this category');
-            $('#spinnerText').text('Opponent choosing next category...');
-          }
+              else if(myCorrectAnswersCount < opponentCorrectAnswersCount) {
+                $('#infoOnNewCategory').text('You have lost this category');
+                $('#newCategorySpinner').hide(200);
+              }
 
-          else if(myCorrectAnswersCount < opponentCorrectAnswersCount) {
-            $('#infoOnNewCategory').text('You have lost this category');
-            $('#newCategorySpinner').hide(200);
-          }
+              else {
+                $('#infoOnNewCategory').text('We have a draw!');
+                $('#categorySpinnerText').text('Rolling new category...');
+                socket.emit('add me to draws', $scope.quizGame_ctrl.gameData.quizID, userDbId, usedCategories);
+              }
 
-          else {
-            $('#infoOnNewCategory').text('We have a draw!');
-            $('#categorySpinnerText').text('Rolling new category...');
-            socket.emit('add me to draws', $scope.quizGame_ctrl.gameData.quizID, userDbId, usedCategories);
-          }
+        }
 
       });
-
-
-
-      socket.on(userDbId + ' - rolled category from draw', function(rolledCategory) {
-        console.log('New category rolled: ' + rolledCategory.category);
-        $('#categorySpinnerText').text('New category: ' + rolledCategory.category);
-
-      });
-
 
 
       function startAskingQuestions(i) {
@@ -152,14 +162,11 @@ angular.module('pmApp.QuizGameCtrl', [])
 
         if(i > 2) {
 
-          var opponentNumberInArray = '';
-
-          if($scope.quizGame_ctrl.gameData.players[0].username == username)
-            opponentNumberInArray = 1;
-          else
-            opponentNumberInArray = 0;
-
-          socket.emit('category results', username, $scope.quizGame_ctrl.gameData.players[opponentNumberInArray], $scope.myAnswers);
+          $scope.opponentAnswersInterval = $interval(function() {
+            console.log(usedCategories);
+            console.log('Interval for opponent category results running...');
+          socket.emit('category results', userDbId, $scope.quizGame_ctrl.gameData, $scope.myAnswers, $scope.category);
+          }, 2000);
 
           $('#listWithQuestions').hide();
           $('#questionTimer').hide();
@@ -171,14 +178,13 @@ angular.module('pmApp.QuizGameCtrl', [])
 
         var answers = [];
 
-
         answers.push($scope.questions[i].correctAnswer ,$scope.questions[i].incorrectAnswer1, $scope.questions[i].incorrectAnswer2, $scope.questions[i].incorrectAnswer3);
 
-        console.log(answers);
+        //console.log(answers);
 
         var shuffledAnswers = shuffle(answers);
 
-        console.log(shuffledAnswers);
+        //console.log(shuffledAnswers);
 
 
         $timeout(function() {
@@ -199,18 +205,6 @@ angular.module('pmApp.QuizGameCtrl', [])
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
       function countTenSeconds(i) {
 
         var countTenSecondsInterval = $interval(function() {
@@ -220,7 +214,7 @@ angular.module('pmApp.QuizGameCtrl', [])
             $interval.cancel(countTenSecondsInterval);
             $scope.myAnswers.push({ 'question' : i+1, 'correctAnswer' : 'false' });
             console.log($scope.myAnswers);
-            socket.emit('answer', false, category, username, $scope.quizGame_ctrl.gameData.quizID, i);
+            socket.emit('answer', false, $scope.category, username, $scope.quizGame_ctrl.gameData.quizID, i);
 
             i++;
             startAskingQuestions(i);
@@ -251,21 +245,19 @@ angular.module('pmApp.QuizGameCtrl', [])
 
       function decideWhoWon() {
 
-        var correctAnswers = '';
-        var opponentCorrectAnswers = '';
+        var myCorrectAnswers = 0;
+        var opponentCorrectAnswers = 0;
 
         for( i = 0 ; i < $scope.myAnswers.length ; i++ ) {
 
           if($scope.myAnswers[i].correctAnswer == 'true')
-          correctAnswers++;
-
-          if($scope.opponentAnswers[i].correctAnswer == 'true') {
+          myCorrectAnswers++;
+          if($scope.opponentAnswers[i].correctAnswer == 'true')
           opponentCorrectAnswers++;
-          }
 
         }
 
-        return [correctAnswers, opponentCorrectAnswers];
+        return [myCorrectAnswers, opponentCorrectAnswers];
 
       }
 
