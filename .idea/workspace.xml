@@ -5,15 +5,9 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server" afterPath="$PROJECT_DIR$/server" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/QuizGameController.js" afterPath="$PROJECT_DIR$/www/js/QuizGameController.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/chatQue/chatGameIo.js" afterPath="$PROJECT_DIR$/server/src/chatQue/chatGameIo.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/chatQue/chatQueIo.js" afterPath="$PROJECT_DIR$/server/src/chatQue/chatQueIo.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/chatQue/services/drawFinder.js" afterPath="$PROJECT_DIR$/server/src/chatQue/services/drawFinder.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/chatQue/services/gameMatcher.js" afterPath="$PROJECT_DIR$/server/src/chatQue/services/gameMatcher.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/chatQue/services/playerSearcher.js" afterPath="$PROJECT_DIR$/server/src/chatQue/services/playerSearcher.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/chatQue/services/quizDataServices.js" afterPath="$PROJECT_DIR$/server/src/chatQue/services/quizDataServices.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/chatQue/services/quizDrawServices.js" afterPath="$PROJECT_DIR$/server/src/chatQue/services/quizDrawServices.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/quizGame.html" afterPath="$PROJECT_DIR$/www/templates/quizGame.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/chatQue/services/quizGameServices.js" afterPath="$PROJECT_DIR$/server/src/chatQue/services/quizGameServices.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/quizQue.html" afterPath="$PROJECT_DIR$/www/templates/quizQue.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="pm.iws" />
@@ -38,21 +32,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="QuizGameController.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/QuizGameController.js">
+      <file leaf-file-name="app-server.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/app-server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="17.857143" vertical-offset="2840" max-vertical-offset="5500">
-              <caret line="117" column="34" selection-start-line="117" selection-start-column="34" selection-end-line="117" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="quizDataServices.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/server/src/chatQue/services/quizDataServices.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6989247" vertical-offset="3610" max-vertical-offset="4560">
-              <caret line="213" column="10" selection-start-line="213" selection-start-column="10" selection-end-line="213" selection-end-column="10" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="560" max-vertical-offset="2640">
+              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -61,8 +45,18 @@
       <file leaf-file-name="quizGameServices.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/src/chatQue/services/quizGameServices.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-38.57143" vertical-offset="2280" max-vertical-offset="3980">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2160" max-vertical-offset="3980">
               <caret line="168" column="18" selection-start-line="168" selection-start-column="11" selection-end-line="168" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="quizDataServices.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/src/chatQue/services/quizDataServices.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3330" max-vertical-offset="4860">
+              <caret line="206" column="86" selection-start-line="206" selection-start-column="86" selection-end-line="206" selection-end-column="86" />
               <folding />
             </state>
           </provider>
@@ -71,8 +65,8 @@
       <file leaf-file-name="drawFinder.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/src/chatQue/services/drawFinder.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="80" max-vertical-offset="1600">
-              <caret line="5" column="68" selection-start-line="5" selection-start-column="68" selection-end-line="6" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="20" max-vertical-offset="1600">
+              <caret line="31" column="80" selection-start-line="31" selection-start-column="80" selection-end-line="31" selection-end-column="80" />
               <folding />
             </state>
           </provider>
@@ -81,22 +75,32 @@
       <file leaf-file-name="quizDrawServices.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/src/chatQue/services/quizDrawServices.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1480">
+            <state vertical-scroll-proportion="0.0" vertical-offset="550" max-vertical-offset="1480">
               <caret line="28" column="35" selection-start-line="28" selection-start-column="35" selection-end-line="28" selection-end-column="35" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="quizGame.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="quizGame.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/templates/quizGame.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.1034484" vertical-offset="1072" max-vertical-offset="2860">
-              <caret line="61" column="54" selection-start-line="61" selection-start-column="39" selection-end-line="61" selection-end-column="54" />
+            <state vertical-scroll-proportion="0.908362" vertical-offset="1807" max-vertical-offset="2960">
+              <caret line="130" column="10" selection-start-line="130" selection-start-column="10" selection-end-line="130" selection-end-column="10" />
               <folding>
-                <marker date="1463335922379" expanded="true" signature="1292:1449" placeholder="{...}" />
-                <marker date="1463335922379" expanded="true" signature="2007:2168" placeholder="{...}" />
+                <marker date="1463428909255" expanded="true" signature="1646:1807" placeholder="{...}" />
+                <marker date="1463428909255" expanded="true" signature="3024:3181" placeholder="{...}" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QuizGameController.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/QuizGameController.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.142857" vertical-offset="1820" max-vertical-offset="5680">
+              <caret line="101" column="0" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -104,18 +108,28 @@
       <file leaf-file-name="chatGameIo.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/src/chatQue/chatGameIo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.571428" vertical-offset="260" max-vertical-offset="1520">
-              <caret line="32" column="25" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="650" max-vertical-offset="1800">
+              <caret line="55" column="37" selection-start-line="55" selection-start-column="37" selection-end-line="55" selection-end-column="37" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gameMatcher.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/src/chatQue/services/gameMatcher.js">
+      <file leaf-file-name="chatQueIo.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/src/chatQue/chatQueIo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-30.714285" vertical-offset="0" max-vertical-offset="1440">
-              <caret line="43" column="32" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1780" max-vertical-offset="2260">
+              <caret line="89" column="2" selection-start-line="89" selection-start-column="2" selection-end-line="89" selection-end-column="2" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QuizQueController.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/QuizQueController.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="4200">
+              <caret line="127" column="51" selection-start-line="127" selection-start-column="33" selection-end-line="127" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -133,7 +147,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/server" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master-heroku" />
@@ -179,21 +193,21 @@
         <option value="$PROJECT_DIR$/config.xml" />
         <option value="$PROJECT_DIR$/server/src/chatQue/models/quizDataModel.js" />
         <option value="$PROJECT_DIR$/www/js/app.js" />
-        <option value="$PROJECT_DIR$/server/app-server.js" />
         <option value="$PROJECT_DIR$/server/src/chatQue/models/quizDrawModel.js" />
         <option value="$PROJECT_DIR$/www/css/quiz.css" />
         <option value="$PROJECT_DIR$/www/js/QuizQueController.js" />
         <option value="$PROJECT_DIR$/server/src/chatQue/services/gameMatcher.js" />
         <option value="$PROJECT_DIR$/server/src/chatQue/services/quizGameServices.js" />
         <option value="$PROJECT_DIR$/server/src/chatQue/services/playerSearcher.js" />
-        <option value="$PROJECT_DIR$/www/templates/quizGame.html" />
         <option value="$PROJECT_DIR$/www/templates/quizQue.html" />
         <option value="$PROJECT_DIR$/server/src/chatQue/chatQueIo.js" />
-        <option value="$PROJECT_DIR$/www/js/QuizGameController.js" />
         <option value="$PROJECT_DIR$/server/src/chatQue/services/quizDrawServices.js" />
-        <option value="$PROJECT_DIR$/server/src/chatQue/chatGameIo.js" />
+        <option value="$PROJECT_DIR$/server/app-server.js" />
         <option value="$PROJECT_DIR$/server/src/chatQue/services/drawFinder.js" />
         <option value="$PROJECT_DIR$/server/src/chatQue/services/quizDataServices.js" />
+        <option value="$PROJECT_DIR$/server/src/chatQue/chatGameIo.js" />
+        <option value="$PROJECT_DIR$/www/js/QuizGameController.js" />
+        <option value="$PROJECT_DIR$/www/templates/quizGame.html" />
       </list>
     </option>
   </component>
@@ -236,7 +250,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -827,6 +840,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -1032,9 +1046,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.06451613" vertical-offset="120" max-vertical-offset="2120">
           <caret line="5" column="133" selection-start-line="5" selection-start-column="133" selection-end-line="5" selection-end-column="133" />
-          <folding>
-            <element signature="e#0#39#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1042,7 +1053,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.021505376" vertical-offset="0" max-vertical-offset="2680">
           <caret line="1" column="85" selection-start-line="1" selection-start-column="83" selection-end-line="1" selection-end-column="85" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1067,13 +1077,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/prvChat/prvChatIo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.516129" vertical-offset="0" max-vertical-offset="1020">
-          <caret line="24" column="28" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.71032184" vertical-offset="0" max-vertical-offset="1140">
@@ -1085,10 +1088,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.30107528" vertical-offset="0" max-vertical-offset="2940">
           <caret line="16" column="2" selection-start-line="16" selection-start-column="2" selection-end-line="19" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#39#0" expanded="false" />
-            <element signature="e#3257#10433#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1096,7 +1095,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.19354838" vertical-offset="0" max-vertical-offset="930">
           <caret line="9" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1104,7 +1102,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5560488" vertical-offset="659" max-vertical-offset="1560">
           <caret line="58" column="77" selection-start-line="58" selection-start-column="77" selection-end-line="58" selection-end-column="77" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1204,7 +1201,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="100" max-vertical-offset="1620">
           <caret line="5" column="69" selection-start-line="5" selection-start-column="69" selection-end-line="5" selection-end-column="69" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1215,27 +1211,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/app-server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2640">
-          <caret line="13" column="59" selection-start-line="13" selection-start-column="59" selection-end-line="13" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/services/quizQueServices.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.10752688" vertical-offset="0" max-vertical-offset="930">
           <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.021505376" vertical-offset="180" max-vertical-offset="4740">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1243,7 +1222,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.571428" vertical-offset="0" max-vertical-offset="1800">
           <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1259,7 +1237,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.34408602" vertical-offset="0" max-vertical-offset="930">
           <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1275,23 +1252,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.15053764" vertical-offset="0" max-vertical-offset="930">
           <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/QuizQueController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56021506" vertical-offset="2019" max-vertical-offset="4200">
-          <caret line="127" column="51" selection-start-line="127" selection-start-column="33" selection-end-line="127" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/chatQue/chatQueIo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.9139785" vertical-offset="0" max-vertical-offset="2260">
-          <caret line="89" column="2" selection-start-line="89" selection-start-column="2" selection-end-line="89" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1299,49 +1259,91 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.48387095" vertical-offset="970" max-vertical-offset="1900">
           <caret line="71" column="72" selection-start-line="71" selection-start-column="65" selection-end-line="71" selection-end-column="72" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/src/chatQue/services/gameMatcher.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-30.714285" vertical-offset="0" max-vertical-offset="1440">
+        <state vertical-scroll-proportion="0.0" vertical-offset="860" max-vertical-offset="1440">
           <caret line="43" column="32" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/quizGame.html">
+    <entry file="file://$PROJECT_DIR$/server/src/friendList/services/friendListServices.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.1034484" vertical-offset="1072" max-vertical-offset="2860">
-          <caret line="61" column="54" selection-start-line="61" selection-start-column="39" selection-end-line="61" selection-end-column="54" />
-          <folding>
-            <marker date="1463335922379" expanded="true" signature="1292:1449" placeholder="{...}" />
-            <marker date="1463335922379" expanded="true" signature="2007:2168" placeholder="{...}" />
-          </folding>
+        <state vertical-scroll-proportion="0.6967742" vertical-offset="812" max-vertical-offset="9580">
+          <caret line="73" column="67" selection-start-line="73" selection-start-column="67" selection-end-line="73" selection-end-column="73" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/chatQue/services/quizGameServices.js">
+    <entry file="file://$PROJECT_DIR$/www/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-38.57143" vertical-offset="2280" max-vertical-offset="3980">
-          <caret line="168" column="18" selection-start-line="168" selection-start-column="11" selection-end-line="168" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4740">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/chatQue/chatGameIo.js">
+    <entry file="file://$PROJECT_DIR$/server/src/prvChat/prvChatIo.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.571428" vertical-offset="260" max-vertical-offset="1520">
-          <caret line="32" column="25" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.516129" vertical-offset="0" max-vertical-offset="1020">
+          <caret line="24" column="28" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/app-server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2640">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/chatQue/chatQueIo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2260">
+          <caret line="89" column="2" selection-start-line="89" selection-start-column="2" selection-end-line="89" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/QuizQueController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="4200">
+          <caret line="127" column="51" selection-start-line="127" selection-start-column="33" selection-end-line="127" selection-end-column="51" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/src/chatQue/services/drawFinder.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="80" max-vertical-offset="1600">
-          <caret line="5" column="68" selection-start-line="5" selection-start-column="68" selection-end-line="6" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="20" max-vertical-offset="1600">
+          <caret line="31" column="80" selection-start-line="31" selection-start-column="80" selection-end-line="31" selection-end-column="80" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/chatQue/services/quizGameServices.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2280" max-vertical-offset="3980">
+          <caret line="168" column="18" selection-start-line="168" selection-start-column="11" selection-end-line="168" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/chatQue/services/quizDataServices.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3330" max-vertical-offset="4860">
+          <caret line="206" column="86" selection-start-line="206" selection-start-column="86" selection-end-line="206" selection-end-column="86" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/chatQue/chatGameIo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="650" max-vertical-offset="1800">
+          <caret line="55" column="37" selection-start-line="55" selection-start-column="37" selection-end-line="55" selection-end-column="37" />
           <folding />
         </state>
       </provider>
@@ -1356,25 +1358,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/QuizGameController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="17.857143" vertical-offset="2840" max-vertical-offset="5500">
-          <caret line="117" column="34" selection-start-line="117" selection-start-column="34" selection-end-line="117" selection-end-column="34" />
+        <state vertical-scroll-proportion="-7.142857" vertical-offset="1820" max-vertical-offset="5680">
+          <caret line="101" column="0" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/friendList/services/friendListServices.js">
+    <entry file="file://$PROJECT_DIR$/www/templates/quizGame.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6967742" vertical-offset="812" max-vertical-offset="9580">
-          <caret line="73" column="67" selection-start-line="73" selection-start-column="67" selection-end-line="73" selection-end-column="73" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/chatQue/services/quizDataServices.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6989247" vertical-offset="3610" max-vertical-offset="4560">
-          <caret line="213" column="10" selection-start-line="213" selection-start-column="10" selection-end-line="213" selection-end-column="10" />
-          <folding />
+        <state vertical-scroll-proportion="0.908362" vertical-offset="1807" max-vertical-offset="2960">
+          <caret line="130" column="10" selection-start-line="130" selection-start-column="10" selection-end-line="130" selection-end-column="10" />
+          <folding>
+            <marker date="1463428909255" expanded="true" signature="1646:1807" placeholder="{...}" />
+            <marker date="1463428909255" expanded="true" signature="3024:3181" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>

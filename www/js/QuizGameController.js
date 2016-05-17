@@ -12,8 +12,9 @@ angular.module('pmApp.QuizGameCtrl', [])
 
 
       $('#listWithQuestions').hide();
+      $('#myAnswersInfo').hide();
       $('#opponentAnswers').hide();
-      $('#opponentChoosingNewCategory').hide();
+      $('#infoOnResults').hide();
 
 
       $scope.myAnswers = [];
@@ -59,6 +60,8 @@ angular.module('pmApp.QuizGameCtrl', [])
 
       function startTimer() {
 
+        $('#quizMeRow').text('Category: ' + $scope.category);
+
         var changeValue = '';
 
         var progressBar = $('#progressbar');
@@ -81,7 +84,6 @@ angular.module('pmApp.QuizGameCtrl', [])
             $('#progressText').hide(200);
             $('#playersDiv').hide(200);
             $('#difficultyDiv').hide(200);
-            $('#quizMeRow').text('Category: ' + $scope.category);
             startAskingQuestions(0);
           }
 
@@ -99,6 +101,12 @@ angular.module('pmApp.QuizGameCtrl', [])
         $('#categorySpinnerText').text('New category: ' + category);
 
         $timeout(function() {
+
+
+          $('#opponentAnswers').hide(200);
+          $('#myAnswersInfo').hide(200);
+          $('#infoOnResults').hide(200);
+
         $scope.questions = questionsData;
 
           $scope.myAnswers = [];
@@ -114,21 +122,21 @@ angular.module('pmApp.QuizGameCtrl', [])
 
       socket.on(userDbId + ' - opponent category results', function(opponentResult) {
 
-        $('#opponentAnswersListSpinner').text('Opponent answers: ');
-        $scope.opponentAnswers = opponentResult;
-        $scope.$apply();
+        $interval.cancel($scope.opponentAnswersInterval);
 
-        if(opponentResult.length == 3) {
-          $interval.cancel($scope.opponentAnswersInterval);
+
+          $('#infoOnResults').show(400);
+          $('#opponentAnswersListSpinner').text('Opponent answers: ');
+          $scope.opponentAnswers = opponentResult;
+
           console.log('mam wszystkie odpowiedzi przeciwnika, anuluje interval');
           console.log(opponentResult);
 
           checkIfDraw();
 
-        }
+          function checkIfDraw() {
 
-
-        function checkIfDraw() {
+            $('#infoOnResults').show(400);
 
               var answersCountArray = decideWhoWon();
 
@@ -158,7 +166,8 @@ angular.module('pmApp.QuizGameCtrl', [])
 
       function startAskingQuestions(i) {
 
-        if(i == 1) $('#quizMeRow').text('Your answers: ' );
+
+        if(i > 0) $('#myAnswersInfo').show(400);
 
         if(i > 2) {
 
