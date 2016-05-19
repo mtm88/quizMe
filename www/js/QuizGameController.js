@@ -7,7 +7,6 @@ angular.module('pmApp.QuizGameCtrl', [])
       $('#progressbar').hide();
       $('#progressText').hide();
       $('#questionTimer').hide();
-      $('#finalResultsDiv').hide();
 
      //$('#myAnswersList').hide();
 
@@ -123,15 +122,15 @@ angular.module('pmApp.QuizGameCtrl', [])
 
       socket.on(userDbId + ' - opponent category results', function(opponentResult) {
 
+        $interval.cancel($scope.opponentAnswersInterval);
+
+
           $('#infoOnResults').show(400);
           $('#opponentAnswersListSpinner').text('Opponent answers: ');
           $scope.opponentAnswers = opponentResult;
-          $scope.$apply();
 
-          console.log('mam wszystkie odpowiedzi przeciwnika');
+          console.log('mam wszystkie odpowiedzi przeciwnika, anuluje interval');
           console.log(opponentResult);
-
-
 
           checkIfDraw();
 
@@ -155,60 +154,14 @@ angular.module('pmApp.QuizGameCtrl', [])
               }
 
               else {
-
-                  if(usedCategories.length == 3) {
-
-                    $timeout(function() {
-                    $('#categorySpinnerText').text('Quiz Completed');
-
-                      $('#rollingCard').hide();
-                      $('#myAnswersInfo').hide();
-                      $('#opponentAnswers').hide();
-                      $('#infoOnNewCategory').hide();
-
-                      socket.emit('get quiz results', $scope.quizGame_ctrl.gameData.quizID, userDbId);
-                    }, 1500);
-
-                  }
-
-                  else {
-                  $('#infoOnNewCategory').text('We have a draw!');
-                  $('#categorySpinnerText').text('Rolling new category...');
-                  socket.emit('add me to draws', $scope.quizGame_ctrl.gameData.quizID, userDbId, usedCategories);
-                  }
-
+                $('#infoOnNewCategory').text('We have a draw!');
+                $('#categorySpinnerText').text('Rolling new category...');
+                socket.emit('add me to draws', $scope.quizGame_ctrl.gameData.quizID, userDbId, usedCategories);
               }
 
         }
 
       });
-
-    socket.on('final quiz results', function(quizAnswersArray) {
-
-      var myPositionInArray = quizAnswersArray[0];
-      var opponentPositionInArray = '';
-      if(myPositionInArray == 1)
-        opponentPositionInArray = 2;
-      else
-        opponentPositionInArray= 1;
-
-      $timeout(function (){
-      $scope.myAnswersResults = quizAnswersArray[myPositionInArray];
-      $scope.opponentAnswerResults = quizAnswersArray[opponentPositionInArray];
-      });
-
-      if($scope.myAnswersResults > $scope.opponentAnswerResults)
-        $('#finalResultsInfoFrame').text('You have won the Quiz :-)');
-      else if($scope.myAnswersResults < $scope.opponentAnswerResults)
-        $('#finalResultsInfoFrame').text('You have lost the Quiz :-(');
-      else
-        $('#finalResultsInfoFrame').text('Quiz ended as a draw');
-
-      $('#finalResultsDiv').show();
-
-
-
-    });
 
 
       function startAskingQuestions(i) {
@@ -218,10 +171,11 @@ angular.module('pmApp.QuizGameCtrl', [])
 
         if(i > 2) {
 
-
+          $scope.opponentAnswersInterval = $interval(function() {
             console.log(usedCategories);
-          //  console.log('Interval for opponent category results running...');
+            console.log('Interval for opponent category results running...');
           socket.emit('category results', userDbId, $scope.quizGame_ctrl.gameData, $scope.myAnswers, $scope.category);
+          }, 2000);
 
           $('#listWithQuestions').hide();
           $('#questionTimer').hide();
@@ -268,7 +222,7 @@ angular.module('pmApp.QuizGameCtrl', [])
           if($scope.questionTimer == 0) {
             $interval.cancel(countTenSecondsInterval);
             $scope.myAnswers.push({ 'question' : i+1, 'correctAnswer' : 'false' });
-            //console.log($scope.myAnswers);
+            console.log($scope.myAnswers);
             socket.emit('answer', false, $scope.category, username, $scope.quizGame_ctrl.gameData.quizID, i);
 
             i++;
