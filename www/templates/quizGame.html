@@ -76,7 +76,7 @@
                  <!-- ELEMENTY QUIZOWE -->
 
 
-    <ul class="list" id="listWithQuestions">
+    <ul class="list item-text-wrap" id="listWithQuestions">
       <li class="item">
         <span class="bold"></span>{{ actualQuestion }}
       </li>
@@ -151,7 +151,7 @@
 
     </a>
 
-    <button class="button button-block button-positive">
+    <button class="button button-block button-positive" ng-click="quizGame_ctrl.backToBoard()">
       Return to lobby
     </button>
 
