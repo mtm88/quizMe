@@ -7,8 +7,8 @@ angular.module('pmApp.QuizGameCtrl', [])
       $('#progressbar').hide();
       $('#progressText').hide();
       $('#questionTimer').hide();
-
-     //$('#myAnswersList').hide();
+      $('#finalResultsDiv').hide();
+      $('#chooseCategoryAfterLoss').hide();
 
 
       $('#listWithQuestions').hide();
@@ -122,15 +122,15 @@ angular.module('pmApp.QuizGameCtrl', [])
 
       socket.on(userDbId + ' - opponent category results', function(opponentResult) {
 
-        $interval.cancel($scope.opponentAnswersInterval);
-
-
           $('#infoOnResults').show(400);
           $('#opponentAnswersListSpinner').text('Opponent answers: ');
           $scope.opponentAnswers = opponentResult;
+          $scope.$apply();
 
-          console.log('mam wszystkie odpowiedzi przeciwnika, anuluje interval');
+          console.log('mam wszystkie odpowiedzi przeciwnika');
           console.log(opponentResult);
+
+
 
           checkIfDraw();
 
@@ -145,18 +145,44 @@ angular.module('pmApp.QuizGameCtrl', [])
 
               if(myCorrectAnswersCount > opponentCorrectAnswersCount) {
                 $('#infoOnNewCategory').text('You have won this category');
-                $('#spinnerText').text('Opponent choosing next category...');
+                $('#newCategorySpinner').show(400);
+                $('#categorySpinnerText').text('Opponent choosing next category...');
               }
 
               else if(myCorrectAnswersCount < opponentCorrectAnswersCount) {
                 $('#infoOnNewCategory').text('You have lost this category');
                 $('#newCategorySpinner').hide(200);
+                $('#chooseCategoryAfterLoss').show(400);
+                $('#categoryChooserSpinnerText').text('Rolling categories...');
+
+                socket.emit('bring categories to choose', usedCategories, $scope.quizGame_ctrl.gameData.quizID);
+
               }
 
               else {
-                $('#infoOnNewCategory').text('We have a draw!');
-                $('#categorySpinnerText').text('Rolling new category...');
-                socket.emit('add me to draws', $scope.quizGame_ctrl.gameData.quizID, userDbId, usedCategories);
+
+                  if(usedCategories.length == 3) {
+
+                    $('#categorySpinnerText').text('Quiz Completed');
+
+                    $timeout(function() {
+                    
+                      $('#rollingCard').hide();
+                      $('#myAnswersInfo').hide();
+                      $('#opponentAnswers').hide();
+                      $('#infoOnNewCategory').hide();
+
+                      socket.emit('get quiz results', $scope.quizGame_ctrl.gameData.quizID, userDbId);
+                    }, 1500);
+
+                  }
+
+                  else {
+                  $('#infoOnNewCategory').text('We have a draw!');
+                  $('#categorySpinnerText').text('Rolling new category...');
+                  socket.emit('add me to draws', $scope.quizGame_ctrl.gameData.quizID, userDbId, usedCategories);
+                  }
+
               }
 
         }
@@ -164,18 +190,67 @@ angular.module('pmApp.QuizGameCtrl', [])
       });
 
 
+    socket.on('prepared categories after loss', function(temporaryArrayOfCategories) {
+
+      console.log(temporaryArrayOfCategories);
+      $('#infoOnResults').hide(200);
+      $('#categoryChooserSpinner').hide(200);
+      $('#categoryChooserSpinnerText').text('Choose new category: ');
+
+      $timeout(function() {
+      $scope.categoriesToChoose = temporaryArrayOfCategories;
+      })
+
+    });
+
+
+    $scope.chosenCategory = function(chosenCategory) {
+      socket.emit('chosen category after loss', chosenCategory, $scope.quizGame_ctrl.gameData);
+      $('#chooseCategoryAfterLoss').hide(400);
+      $scope.categoriesToChoose = '';
+    }
+
+    socket.on('final quiz results', function(quizAnswersArray) {
+
+      var myPositionInArray = quizAnswersArray[0];
+      var opponentPositionInArray = '';
+      if(myPositionInArray == 1)
+        opponentPositionInArray = 2;
+      else
+        opponentPositionInArray= 1;
+
+      $timeout(function (){
+      $scope.myAnswersResults = quizAnswersArray[myPositionInArray];
+      $scope.opponentAnswerResults = quizAnswersArray[opponentPositionInArray];
+      });
+
+      if($scope.myAnswersResults > $scope.opponentAnswerResults)
+        $('#finalResultsInfoFrame').text('You have won the Quiz :-)');
+
+      else if($scope.myAnswersResults < $scope.opponentAnswerResults)
+        $('#finalResultsInfoFrame').text('You have lost the Quiz :-(');
+
+      else
+        $('#finalResultsInfoFrame').text('Quiz ended as a draw');
+
+      $('#finalResultsDiv').show();
+
+
+
+    });
+
+
       function startAskingQuestions(i) {
 
-
+ 
         if(i > 0) $('#myAnswersInfo').show(400);
 
         if(i > 2) {
 
-          $scope.opponentAnswersInterval = $interval(function() {
+
             console.log(usedCategories);
-            console.log('Interval for opponent category results running...');
+          //  console.log('Interval for opponent category results running...');
           socket.emit('category results', userDbId, $scope.quizGame_ctrl.gameData, $scope.myAnswers, $scope.category);
-          }, 2000);
 
           $('#listWithQuestions').hide();
           $('#questionTimer').hide();
@@ -187,22 +262,33 @@ angular.module('pmApp.QuizGameCtrl', [])
 
         var answers = [];
 
-        answers.push($scope.questions[i].correctAnswer ,$scope.questions[i].incorrectAnswer1, $scope.questions[i].incorrectAnswer2, $scope.questions[i].incorrectAnswer3);
+        answers.push({ 'answer' : $scope.questions[i].correctAnswer, 'correct' : true }, { 'answer' : $scope.questions[i].incorrectAnswer1, 'correct' : false },
+         { 'answer' : $scope.questions[i].incorrectAnswer2, 'correct' : false });
 
         //console.log(answers);
 
-        var shuffledAnswers = shuffle(answers);
+        $scope.shuffledAnswers = shuffle(answers);
+
+        console.log($scope.shuffledAnswers);
 
         //console.log(shuffledAnswers);
 
 
         $timeout(function() {
         $scope.actualQuestion = $scope.questions[i].question;
-        $scope.firstAnswer = shuffledAnswers[0];
-        $scope.secondAnswer = shuffledAnswers[1];
-        $scope.thirdAnswer = shuffledAnswers[2];
-        $scope.thirdAnswer = shuffledAnswers[3];
-        $scope.questionTimer = 2;
+
+
+       /* $scope.firstAnswer = $scope.shuffledAnswers[0];
+        $scope.secondAnswer = $scope.shuffledAnswers[1];
+        $scope.thirdAnswer = $scope.shuffledAnswers[2];
+        $scope.fourthAnswer = $scope.shuffledAnswers[3];
+
+        */
+
+        $scope.questionTimer = 10;
+
+        $scope.correctAnswer = $scope.questions[i].correctAnswer;
+        $scope.actualQuestionNumber = i;
 
           $('#listWithQuestions').show(400);
           $('#questionTimer').show();
@@ -212,16 +298,53 @@ angular.module('pmApp.QuizGameCtrl', [])
 
       }
 
+      this.userAnswer = function(userAnswer) {
+
+        
+        if(!$scope.clickedAnswer) {
+        $scope.clickedAnswer = userAnswer;
+    
+        $interval.cancel($scope.countTenSecondsInterval);
+
+        console.log($scope.correctAnswer);
+
+
+        if(userAnswer == $scope.correctAnswer) {
+          $scope.checkedAnswer = true;
+        }
+
+        else {
+          $scope.checkedAnswer = false;
+        }
+
+        $timeout(function() {
+
+
+        $scope.myAnswers.push({ 'question' : $scope.actualQuestionNumber+1, 'correctAnswer' : $scope.checkedAnswer });
+        //console.log($scope.myAnswers);
+        socket.emit('answer', $scope.checkedAnswer, $scope.category, username, $scope.quizGame_ctrl.gameData.quizID, $scope.actualQuestionNumber);
+
+        $scope.checkedAnswer = '';
+        $scope.clickedAnswer = '';
+        $scope.actualQuestionNumber++;
+        startAskingQuestions($scope.actualQuestionNumber);
+
+      }, 800);
+
+        }
+
+
+      }
 
 
       function countTenSeconds(i) {
 
-        var countTenSecondsInterval = $interval(function() {
+        $scope.countTenSecondsInterval = $interval(function() {
           $scope.questionTimer--;
 
           if($scope.questionTimer == 0) {
-            $interval.cancel(countTenSecondsInterval);
-            $scope.myAnswers.push({ 'question' : i+1, 'correctAnswer' : 'false' });
+            $interval.cancel($scope.countTenSecondsInterval);
+            $scope.myAnswers.push({ 'question' : i+1, 'correctAnswer' : false });
             console.log($scope.myAnswers);
             socket.emit('answer', false, $scope.category, username, $scope.quizGame_ctrl.gameData.quizID, i);
 
@@ -259,9 +382,9 @@ angular.module('pmApp.QuizGameCtrl', [])
 
         for( i = 0 ; i < $scope.myAnswers.length ; i++ ) {
 
-          if($scope.myAnswers[i].correctAnswer == 'true')
+          if($scope.myAnswers[i].correctAnswer == true)
           myCorrectAnswers++;
-          if($scope.opponentAnswers[i].correctAnswer == 'true')
+          if($scope.opponentAnswers[i].correctAnswer == true)
           opponentCorrectAnswers++;
 
         }

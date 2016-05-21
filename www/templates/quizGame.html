@@ -57,8 +57,8 @@
 
 
           <div class="row text-center" id="opponentAnswersList">
-            <div ng-repeat="answer in opponentAnswers track by $index" ng-class="{'correctAnswerDiv col col-33 answerButtons' : answer.correctAnswer,
-               'incorrectAnswerDiv col col-offset-5 answerButtons' : !answer.correctAnswer }">
+            <div ng-repeat="answer in opponentAnswers track by $index" ng-class="{'correctAnswerDiv col col-33 answerButtons' : answer.correctAnswer == true,
+               'incorrectAnswerDiv col col-33 col-offset-5 answerButtons' : answer.correctAnswer == false }">
               {{ answer.question }}
             </div>
           </div>
@@ -78,20 +78,27 @@
 
     <ul class="list" id="listWithQuestions">
       <li class="item">
-        <span class="bold">A. </span>{{ actualQuestion }}
+        <span class="bold"></span>{{ actualQuestion }}
       </li>
 
-      <li class="item">
-        <span class="bold">B. </span>{{ firstAnswer }}
-      </li>
+      <a class="item" ng-click="quizGame_ctrl.userAnswer(data.answer)" ng-repeat="data in shuffledAnswers" id="{{ data.correct }}"
+       ng-class="{ 'incorrectAnswerGiven' : data.answer == clickedAnswer && data.correct == false,
+        'correctAnswerGiven' : clickedAnswer && data.correct == true       
+         }">
+        {{ data.answer }}
+      </a>
 
-      <li class="item">
-        <span class="bold">C. </span>{{ secondAnswer }}
-      </li>
+     <!-- <a class="item" ng-click="quizGame_ctrl.userAnswer(firstAnswer)" id="{{ shuffledAnswers[0] }}" >
+        <span class="bold">A. </span>{{ shuffledAnswers[0] }}
+      </a>
 
-      <li class="item">
-        <span class="bold">D. </span>{{ thirdAnswer }}
-      </li>
+      <a class="item" ng-click="quizGame_ctrl.userAnswer(secondAnswer)" id="{{ shuffledAnswers[1] }}">
+        <span class="bold">B. </span>{{ shuffledAnswers[1] }}
+      </a>
+
+      <a class="item" ng-click="quizGame_ctrl.userAnswer(thirdAnswer)" id="{{ shuffledAnswers[2] }}">
+        <span class="bold">C. </span>{{ shuffledAnswers[2] }}
+      </a> -->
 
 
     </ul>
@@ -109,8 +116,8 @@
       </div>
 
       <div class="row text-center" id="myAnswersList">
-        <div ng-repeat="answer in myAnswers track by $index" ng-class="{'correctAnswerDiv col col-33 answerButtons' : answer.correctAnswer,
-           'incorrectAnswerDiv col col-offset-5 answerButtons' : !answer.correctAnswer }">
+        <div ng-repeat="answer in myAnswers track by $index" ng-class="{'correctAnswerDiv col col-33 answerButtons' : answer.correctAnswer == true,
+           'incorrectAnswerDiv col col-33 col-offset-5 answerButtons' : answer.correctAnswer == false }">
           {{ answer.question }}
         </div>
       </div>
@@ -130,8 +137,38 @@
 
     </div>
 
+    <div id="finalResultsDiv">
+
+    <a class="item">
+      Your correct answer count: {{ myAnswersResults }}
+    </a>
+
+    <a class="item">
+      Opponent correct answer count: {{ opponentAnswerResults }}
+    </a>
+
+    <a class="item" id="finalResultsInfoFrame">
+
+    </a>
+
+    <button class="button button-block button-positive">
+      Return to lobby
+    </button>
+
+    </div>
 
 
+    <div class="item item-divider" id="chooseCategoryAfterLoss">
+
+    <div class="row" id="categoryChooser">
+        <div class="col col-10" id="categoryChooserSpinner"><ion-spinner icon="spiral"></ion-spinner></div> <div class="col" id="categoryChooserSpinnerText"></div>
+    </div>
+
+    </div>
+
+    <a class="item" ng-repeat="category in categoriesToChoose" ng-show="categoriesToChoose" ng-click="chosenCategory(category)">
+    {{ category }}
+    </a>
 
 
   </ion-content>

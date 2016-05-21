@@ -131,15 +131,6 @@ angular.module('pmApp.QuizQueCtrl', [])
 
       });
 
-      socket.on('dupa jelenia', function(allQuizData, firstCategory, questionsData) {
-        console.log(allQuizData);
-        console.log(firstCategory);
-        console.log(questionsData);
-      });
-
-
-
-
 
       // to not repeat myself
       function setFieldBackToNormal() {

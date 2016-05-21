@@ -71,14 +71,21 @@
   margin-right: 5px;
 }
 
-.correctAnswerDiv {
-  background-color: green;
+.incorrectAnswerDiv {
+  background-color: red;
 }
 
 .correctAnswerDiv {
-  background-color: red;
+  background-color: green;
 }
 
 #opponentAnswersList {
   margin-top: 0px;
 }
+
+.incorrectAnswerGiven {
+  background-color: red;
+}
+
+.correctAnswerGiven {
+  background-color: green;
