@@ -24,7 +24,7 @@ angular.module('pmApp.FriendCtrl', [])
                 me.noReceivedInvites = true;
               }
                 me.receivedInvites = response.receivedInvites;
-          });     
+          });
     };
 
     me.startInterval = function() {
@@ -37,7 +37,7 @@ angular.module('pmApp.FriendCtrl', [])
             })
 
         }, 10000);
-      }
+      };
 
 
 
@@ -50,11 +50,12 @@ angular.module('pmApp.FriendCtrl', [])
 
    friendList.sendInvite( { 'friendUsername' : formdata.userfield.$modelValue, 'ownUsername' : username } )
       .then(function() {
+
         formdata.userfield.$setValidity('friendFinder', true);
         me.inviteSent = true;
         formdata.userfield.$setViewValue(null);
         formdata.userfield.$render();
-      }); 
+      });
 
   };
 
@@ -69,7 +70,7 @@ angular.module('pmApp.FriendCtrl', [])
               me.friendList = response.friendList;
               me.receivedInvites = response.receivedInvites;
               me.acceptingInvite = false;
-            })
+            });
         })
 
     };

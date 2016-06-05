@@ -1,4 +1,4 @@
-angular.module('pmApp.friendFinderDirectives', [])
+  angular.module('pmApp.friendFinderDirectives', [])
 
 .directive('friendFinder', ['$http', 'SERVER', 'localStorageService', '$timeout', function($http, SERVER, localStorageService, $timeout) {
 
@@ -47,7 +47,7 @@ angular.module('pmApp.friendFinderDirectives', [])
       }
 
 
-      if(value == username)
+      else if(value == username)
         this.searchedForMyself = true;
 
       else       this.searchedForMyself = false;
@@ -63,7 +63,8 @@ angular.module('pmApp.friendFinderDirectives', [])
 
               if(response.friendExists == 'yes') {
 
-                scope.friendData = { friendExists : true, friendDetails : response.friendInfo, alreadyFriend : false, requestAlreadySent : response.requestAlreadySent, searchedForMyself : this.searchedForMyself };
+                scope.friendData = { friendExists : true, friendDetails : response.friendInfo, alreadyFriend : false,
+                  requestAlreadySent : response.requestAlreadySent, searchedForMyself : this.searchedForMyself };
 
                 // console.log(scope.$parent.home_ctrl.friendList);
 
@@ -71,14 +72,16 @@ angular.module('pmApp.friendFinderDirectives', [])
                 if(scope.$parent.friend_ctrl.friendList) {
                   for(i = 0; i < scope.$parent.friend_ctrl.friendList.length; i++) {
                     if(scope.$parent.friend_ctrl.friendList[i].userDbId == response.friendInfo._id) {
-                      scope.friendData = { friendExists : true, friendDetails : response.friendInfo, alreadyFriend : true, requestAlreadySent : response.requestAlreadySent, searchedForMyself : this.searchedForMyself };
+                      scope.friendData = { friendExists : true, friendDetails : response.friendInfo, alreadyFriend : true,
+                        requestAlreadySent : response.requestAlreadySent, searchedForMyself : this.searchedForMyself };
                       console.log('juz przyjaciel');
                     }
                   }
                 }
 
                 else {
-                  scope.friendData = { friendExists : true, friendDetails : response.friendInfo, alreadyFriend : false, requestAlreadySent : response.requestAlreadySent, searchedForMyself : this.searchedForMyself };
+                  scope.friendData = { friendExists : true, friendDetails : response.friendInfo, alreadyFriend : false,
+                    requestAlreadySent : response.requestAlreadySent, searchedForMyself : this.searchedForMyself };
                 }
 
               }
