@@ -22,7 +22,7 @@
         <span class="input-label">Username: </span>
         <input type="text"
                name="username"
-               ng-model="register_ctrl.registration.username"
+               ng-model="register_ctrl.username"
                ng-minlength="2"
                ng-maxlength="20"
                user-availability-validator
@@ -40,7 +40,7 @@
           <span class="input-label">Password: </span>
           <input type="password"
                  name="password"
-                 ng-model="register_ctrl.registration.password"
+                 ng-model="register_ctrl.password"
                  ng-minlength="3"
                  ng-maxlength="20"
                  clear-re-password
@@ -59,7 +59,7 @@
           <span class="input-label">Password again: </span>
           <input type="password"
                  name="RePassword"
-                 ng-model="register_ctrl.registration.RePassword"
+                 ng-model="register_ctrl.RePassword"
                  ng-maxlength="20"
                  password-validation
                  required />

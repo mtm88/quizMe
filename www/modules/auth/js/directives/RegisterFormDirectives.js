@@ -27,8 +27,8 @@ angular.module('pmApp.registerFormDirectives', [])
         if(value.length >= 2)
         scope.isSearching = true;
 
-        console.log(ngModel);
-        console.log(scope);
+        //console.log(ngModel);
+        //console.log(scope);
 
         var checkedUsername = ngModel.$viewValue;
 
@@ -48,6 +48,8 @@ angular.module('pmApp.registerFormDirectives', [])
             if(userInfo.exists == false) {
             setAsLoading(false);
             setAsAvailable(true);
+
+            
             }
 
             else if(userInfo.exists == true) {
@@ -90,7 +92,9 @@ angular.module('pmApp.registerFormDirectives', [])
 
 
       ngModel.$parsers.push(function(value) {
-          if(scope.registerForm.password.$viewValue == value && scope.registerForm.password.$valid == true) {
+        //console.log(ngModel);
+        
+          if(scope.register_ctrl.password == value && scope.registerForm.password.$valid == true) {
             checkIfMatch(true);
           }
 

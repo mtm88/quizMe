@@ -192,7 +192,7 @@ angular.module('pmApp.QuizGameCtrl', [])
 
     socket.on('prepared categories after loss', function(temporaryArrayOfCategories) {
 
-      console.log(temporaryArrayOfCategories);
+      //console.log(temporaryArrayOfCategories);
       $('#infoOnResults').hide(200);
       $('#categoryChooserSpinner').hide(200);
       $('#categoryChooserSpinnerText').text('Choose new category: ');

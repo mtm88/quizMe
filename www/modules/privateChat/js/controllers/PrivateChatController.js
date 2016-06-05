@@ -8,8 +8,6 @@ angular.module('pmApp.PrivateChatCtrl', ['pmApp.prvChatServices', 'angularMoment
 .controller('PrivateChatController', function($scope, $stateParams, prvChatService, $ionicHistory,
                                               localStorageService, $ionicScrollDelegate, $interval, $ionicLoading, PRIVATECHAT) {
 
-  window.cordova.plugins.Keyboard.disableScroll(true);
-
   var userDbId = localStorageService.get('userDbId');
   var loginService = localStorageService.get('loginService');
 

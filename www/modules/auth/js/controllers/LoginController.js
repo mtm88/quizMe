@@ -1,7 +1,7 @@
 
 angular.module('pmApp.LoginCtrl', [])
 
-.controller('LoginController', ['$scope', '$state', 'localStorageService', 'postData', function($scope, $state, localStorageService, postData) {
+.controller('LoginController', function($state, postData, localStorageService, $scope, friendList) {
 
         var me = this;
 
@@ -64,7 +64,7 @@ angular.module('pmApp.LoginCtrl', [])
 
             // SPRAWDZ W DB CZY TAKI USER ISTNIEJE
 
-            postData.findJwtUser({ 'username' : me.authorization.username, 'password' : me.authorization.password })
+            postData.findJwtUser({ 'username' : me.username, 'password' : me.password })
               .then(function(response) {
 
                 if(response.wrongPassword == true) {
@@ -85,14 +85,17 @@ angular.module('pmApp.LoginCtrl', [])
 
                 else {
 
-                  me.authorization.username = '';
-                  me.authorization.password = '';
+                  me.username = '';
+                  me.password = '';
 
                   localStorageService.set('user.id', response.username);
                   localStorageService.set('userDbId', response.userDbId);
                   localStorageService.set('user.authToken', response.userToken);
                   localStorageService.set('loginService', 'jwt');
                   me.logged_in = true;
+
+                  friendList.setOnlineStatus(response.userDbId, response.userToken, true);
+
                   $state.go('app.home');
 
                 }
@@ -114,6 +117,6 @@ angular.module('pmApp.LoginCtrl', [])
 
 
 
-}]);
+});
 
 

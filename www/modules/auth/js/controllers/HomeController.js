@@ -3,14 +3,14 @@
  */
 angular.module('pmApp.HomeCtrl', [])
 
-.controller('HomeController', ['$scope', '$state', 'localStorageService', 'postData', 'loginOrigin', 'friendList', '$interval', '$q',
-  function($scope, $state, localStorageService, postData, loginOrigin, friendList, $interval, $q) {
+.controller('HomeController', ['$scope', '$state', 'localStorageService', 'postData', 'loginOrigin', '$interval', '$q', 'friendList',
+  function($scope, $state, localStorageService, postData, loginOrigin, $interval, $q, friendList) {
 
   var me = this;
 
-  $scope.userDetails = null;
+  $scope.userDetails = undefined;
 
-  me.getUserInfo = function(){
+  me.getUserInfo = function() {
 
     loginOrigin.checkLoginOrigin()
       .then(function(respond) {
@@ -26,6 +26,7 @@ angular.module('pmApp.HomeCtrl', [])
             FBuser_id + "/?fields=picture,id,email,first_name,last_name,gender,age_range",
             ['public_profile', 'email'],
             function (successData) {
+              console.log('test');
               postData.findFbUser(successData, FBtoken, FBverified, userOrigin)
                 .then( function(response) {
 
@@ -39,6 +40,9 @@ angular.module('pmApp.HomeCtrl', [])
                   var deferred = $q.defer();
                     if(response) {
                       localStorageService.set('userDbId', response._id);
+
+                      friendList.setOnlineStatus(response._id, FBtoken, true);
+
                       deferred.resolve();
                     } else {
                       deferred.reject();
@@ -68,32 +72,39 @@ angular.module('pmApp.HomeCtrl', [])
 
   me.logout = function(){
 
-    this.loginServiceCheck = localStorageService.get('loginService');
+    var userDbId = localStorageService.get('userDbId');
+    var token = localStorageService.get('user.authToken');
+
+    friendList.setOnlineStatus(userDbId, token, false);
 
     $interval.cancel(me.friendListInterval);
 
-    if(this.loginServiceCheck == 'fb') {
-        facebookConnectPlugin.logout(
-          function(){
-            console.log('FB Logout successfull');
-            $scope.logged_in = false;
-            localStorageService.set('loginService', null);
-            localStorageService.set('user.authToken', null);
-            $state.go('app.login');
-          },
-          function(err){
-            console.log('Logout failed: %s', err);
-          }
-        );
+      var loginServiceCheck = localStorageService.get('loginService');
 
-    } else {
-      localStorageService.set('loginService', null);
-      localStorageService.set('userDbId', null);
-      localStorageService.set('user.authToken', null);
-      me.logged_in = false;
-      $state.go('app.login');
-      console.log('JWT Logout successfull');
-    }
+      if(loginServiceCheck == 'fb') {
+          facebookConnectPlugin.logout(
+            function(){
+              console.log('FB Logout successfull');
+              $scope.logged_in = false;
+              localStorageService.set('loginService', null);
+              localStorageService.set('user.authToken', null);
+              $state.go('app.login');
+            },
+            function(err){
+              console.log('Logout failed: %s', err);
+            }
+          );
+
+      } else {
+        localStorageService.set('loginService', null);
+        localStorageService.set('userDbId', null);
+        localStorageService.set('user.authToken', null);
+        me.logged_in = false;
+        $state.go('app.login');
+        console.log('JWT Logout successfull');
+      }
+
+
 
   };
 

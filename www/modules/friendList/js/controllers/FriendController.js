@@ -13,11 +13,9 @@ angular.module('pmApp.FriendCtrl', [])
      });
 
 
-
 //    me.currentView = $ionicHistory.currentView().stateId;
 
-    me.getUserInfo = function(){
-
+    me.getUserInfo = function() {
       friendList.getFriendList()
         .then(function(response){
           console.log(response);
@@ -26,12 +24,10 @@ angular.module('pmApp.FriendCtrl', [])
                 me.noReceivedInvites = true;
               }
                 me.receivedInvites = response.receivedInvites;
+          });     
+    };
 
-
-
-          });
-
-      me.startInterval = function() {
+    me.startInterval = function() {
 
         me.friendListInterval = $interval( function() {
           friendList.getFriendList()
@@ -42,21 +38,23 @@ angular.module('pmApp.FriendCtrl', [])
 
         }, 10000);
       }
-    };
 
 
 
-  me.inviteUser = function() {
+  me.inviteUser = function(formdata) {
+
+    console.log(formdata);
 
     var username = localStorageService.get('username');
 
-    friendList.sendInvite( { 'friendUsername' : me.userSearch.userField.$modelValue, 'ownUsername' : username } )
+
+   friendList.sendInvite( { 'friendUsername' : formdata.userfield.$modelValue, 'ownUsername' : username } )
       .then(function() {
-        me.userSearch.userField.$setValidity('friendFinder', true);
+        formdata.userfield.$setValidity('friendFinder', true);
         me.inviteSent = true;
-        me.userSearch.userField.$setViewValue(null);
-        me.userSearch.userField.$render();
-      });
+        formdata.userfield.$setViewValue(null);
+        formdata.userfield.$render();
+      }); 
 
   };
 

@@ -29,7 +29,7 @@ angular.module('pmApp.postDataServices', [])
 
               function registerUser(newUserData) {
 
-                console.log(newUserData);
+                //console.log(newUserData);
 
                 $ionicLoading.show();
 

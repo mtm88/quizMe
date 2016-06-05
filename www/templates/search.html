@@ -15,12 +15,12 @@
   <ion-content class="has-header padding has-tabs">
 
 
-    <form name="friend_ctrl.userSearch" novalidate ng-submit="friend_ctrl.inviteUser()">
+    <form name="friend_ctrl.userSearch" novalidate ng-submit="friend_ctrl.inviteUser(friend_ctrl.userSearch)">
 
       <ul class="list">
         <li class="item">
 
-              <input type="text" name="userField" placeholder="Search for a friend..." ng-model="userfield" friend-finder>
+              <input type="text" name="userfield" placeholder="Search for a friend..." ng-model="userfield" friend-finder>
 
         </li>
       </ul>

@@ -44,6 +44,8 @@ angular.module('pmApp.friendList', [])
       if(localData.loginService == 'fb')
         FBverified = true;
 
+      console.log(localData);
+
 
     $http.post(SERVER.url + '/api/getFriendlist', ({ userDbId : localData.userDbId, loginService: localData.loginService, token : localData.token, FBverified : FBverified }))
       .success(function(response){
