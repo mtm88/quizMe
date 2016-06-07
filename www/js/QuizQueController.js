@@ -132,7 +132,7 @@ angular.module('pmApp.QuizQueCtrl', [])
       });
 
 
-      // to not repeat myself
+      // DRY
       function setFieldBackToNormal() {
         $('#quizSearcher').hide(100);
         $('#lookingForOpponent').hide(100);

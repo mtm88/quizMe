@@ -41,7 +41,13 @@
     <div class="item item-divider" id="rollingCard">
 
         <div class="row" id="quizMeRow">
-            <div class="col col-10" id="colWithSpinner"><ion-spinner id="quizMeHeaderSpinner"></ion-spinner></div>
+            <div class="col col-10" id="colWithSpinner">
+
+              <div class="cssload-container">
+                <div class="cssload-whirlpool"></div>
+              </div>
+
+            </div>
           <div class="col spinnerText" id="quizMeHeader">Rolling category for first round...</div>
         </div>
 
@@ -51,7 +57,13 @@
     <div class="item item-divider" id="opponentAnswers">
 
           <div class="row" id="opponentAnswersListSpinner">
-            <div class="col col-10" ng-hide="opponentAnswers"><ion-spinner icon="spiral"></ion-spinner></div>
+            <div class="col col-10" ng-hide="opponentAnswers">
+
+              <div class="cssload-container">
+                <div class="cssload-whirlpool"></div>
+              </div>
+
+            </div>
             <div class="col spinnerText" >waiting for Opponent results...</div>
           </div>
 
@@ -59,7 +71,7 @@
           <div class="row text-center" id="opponentAnswersList">
             <div ng-repeat="answer in opponentAnswers track by $index" ng-class="{'correctAnswerDiv col col-33 answerButtons' : answer.correctAnswer == true,
                'incorrectAnswerDiv col col-33 col-offset-5 answerButtons' : answer.correctAnswer == false }">
-              {{ answer.question }}
+              {{ answer.questionNumber }}
             </div>
           </div>
 
@@ -82,24 +94,11 @@
       </li>
 
       <a class="item" ng-click="quizGame_ctrl.userAnswer(data.answer)" ng-repeat="data in shuffledAnswers" id="{{ data.correct }}"
-       ng-class="{ 'incorrectAnswerGiven' : data.answer == clickedAnswer && data.correct == false,
-        'correctAnswerGiven' : clickedAnswer && data.correct == true       
+       ng-class="{ 'correctAnswerGiven' : clickedAnswer && showCorrectAnswer && data.correct == true,
+        'incorrectAnswerGiven' : data.answer == clickedAnswer && data.correct == false
          }">
         {{ data.answer }}
       </a>
-
-     <!-- <a class="item" ng-click="quizGame_ctrl.userAnswer(firstAnswer)" id="{{ shuffledAnswers[0] }}" >
-        <span class="bold">A. </span>{{ shuffledAnswers[0] }}
-      </a>
-
-      <a class="item" ng-click="quizGame_ctrl.userAnswer(secondAnswer)" id="{{ shuffledAnswers[1] }}">
-        <span class="bold">B. </span>{{ shuffledAnswers[1] }}
-      </a>
-
-      <a class="item" ng-click="quizGame_ctrl.userAnswer(thirdAnswer)" id="{{ shuffledAnswers[2] }}">
-        <span class="bold">C. </span>{{ shuffledAnswers[2] }}
-      </a> -->
-
 
     </ul>
 
@@ -132,7 +131,13 @@
       </div>
 
       <div class="row" id="newCategorySpinner">
-        <div class="col col-10" ng-hide="category"><ion-spinner icon="spiral"></ion-spinner></div> <div class="col" id="categorySpinnerText"></div>
+        <div class="col col-10" ng-hide="category">
+
+          <div class="cssload-container">
+            <div class="cssload-whirlpool"></div>
+          </div>
+
+        </div> <div class="col" id="categorySpinnerText"></div>
       </div>
 
     </div>
@@ -161,13 +166,31 @@
     <div class="item item-divider" id="chooseCategoryAfterLoss">
 
     <div class="row" id="categoryChooser">
-        <div class="col col-10" id="categoryChooserSpinner"><ion-spinner icon="spiral"></ion-spinner></div> <div class="col" id="categoryChooserSpinnerText"></div>
+        <div class="col col-10" id="categoryChooserSpinner">
+
+          <div class="cssload-container">
+            <div class="cssload-whirlpool"></div>
+          </div>
+
+        </div> <div class="col" id="categoryChooserSpinnerText"></div>
     </div>
 
     </div>
 
     <a class="item" ng-repeat="category in categoriesToChoose" ng-show="categoriesToChoose" ng-click="chosenCategory(category)">
     {{ category }}
+    </a>
+
+    <a class="item" ng-show="loadingNewCategory">
+      <div class="row">
+      <div class="col col-10">
+
+        <div class="cssload-container">
+          <div class="cssload-whirlpool"></div>
+        </div>
+
+      </div> <div class="col"> Loading data...</div>
+      </div>
     </a>
 
 
