@@ -12,6 +12,15 @@ angular.module('pmApp.quizQueDirective', [])
 
         var quizQueArea = $('#quizQueArea');
 
+        var quizQueMainInfo = $('<div class="item item-divider spinnerDivider">' +
+        '<div class="row">' +
+        '<div class="col col-10" id="loadingDiv">' +
+        '<div class="cssload-container"><div class="cssload-whirlpool"></div></div>' +
+        '</div>' +
+        '<div class="col spinnerText" id="gameStatusText">Game Search in progress...</div>' +
+        '</div>' +
+        '</div>').hide();
+
         var quizMeChooser = $('' +
           '<div class="list" id="quizChooser">' +
           '<div class="item item-divider">' +
@@ -41,6 +50,14 @@ angular.module('pmApp.quizQueDirective', [])
           '</a>' +
           '</div>');
 
+        var confMenuQuestion = $('<div class="item item-divider text-center" id="confMenuQuestion">Would you like to start?</div>').hide();
+
+        var confMenuAnswers = $('<div class="button-bar">' +
+          '<a class="button button-balanced" id="yesAnswer">Yes</a>' +
+          '<a class="button button-assertive" id="discardQuiz">No</a>' +
+          '</div>').hide();
+
+
 
         prepareView();
 
@@ -61,19 +78,17 @@ angular.module('pmApp.quizQueDirective', [])
 
         scope.$on('startQuiz', function () {
           quizQueArea.empty();
-          quizQueArea.append(
-            '<div class="item item-divider spinnerDivider">' +
-            '<div class="row">' +
-            '<div class="col col-10" id="loadingDiv">' +
-            '<div class="cssload-container"><div class="cssload-whirlpool"></div></div>' +
-            '</div>' +
-            '<div class="col spinnerText" id="gameStatusText">Game Search in progress...</div>' +
-            '</div>' +
-            '</div>');
+
+
+
+          quizQueArea.append(quizQueMainInfo).show();
         });
 
 
         scope.$on('user added to que', function () {
+
+          console.log('user added to que received');
+
           var joinedQue = $('<a class="item queMarks" id="addedToQueMark">' +
             '<i class="icon ion-checkmark-round markIcon markGreen"></i><span class="markText">Joined the que</span></a>').hide();
           quizQueArea.append(joinedQue);
@@ -128,11 +143,8 @@ angular.module('pmApp.quizQueDirective', [])
             $('#gameStatusText').addClass('text-center').text('GAME READY!');
             $('.cssload-container, #loadingDiv').remove();
 
-            var confMenuQuestion = $('<div class="item item-divider text-center" id="confMenuQuestion">Would you like to start?</div>').hide();
-            var confMenuAnswers = $('<div class="button-bar">' +
-              '<a class="button button-balanced" id="yesAnswer">Yes</a>' +
-              '<a class="button button-assertive" id="discardQuiz">No</a>' +
-              '</div>').hide();
+            confMenuQuestion.insertAfter($('#preparingQuiz'));
+            confMenuAnswers.insertAfter($('#confMenuQuestion'));
 
             $('#yesAnswer').bind('click', function () {
               scope.$parent.quizQue_ctrl.acceptQuiz();
@@ -141,14 +153,23 @@ angular.module('pmApp.quizQueDirective', [])
               scope.$parent.quizQue_ctrl.discardQuiz();
             });
 
-            confMenuQuestion.insertAfter($('#preparingQuiz'));
-            confMenuAnswers.insertAfter($('#confMenuQuestion'));
-            
+
             confMenuQuestion.fadeIn('slow');
             confMenuAnswers.fadeIn('slow');
 
 
           }, 1500);
+        });
+
+
+        scope.$on('user accepted quiz', function() {
+
+          quizQueArea.empty();
+
+          $('gameStatusText').text('Waiting for Opponent...');
+
+          quizQueArea.append(quizQueMainInfo).fadeIn('slow');
+
         });
 
 

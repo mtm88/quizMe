@@ -99,8 +99,9 @@ angular.module('pmApp.QuizQueCtrl', ['pmApp.quizQueDirective'])
       });
 
       this.acceptQuiz = function () {
+        console.log('accept quiz');
         socket.emit('user accepted quiz', localData.username);
-        $('.opponentFoundDivs').hide(100);
+        $scope.$broadcast('user accepted quiz');
       };
 
       this.discardQuiz = function () {
