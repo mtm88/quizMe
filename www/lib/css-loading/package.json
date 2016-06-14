@@ -1,0 +1,76 @@
+{
+  "_args": [
+    [
+      "css-loading",
+      "c:\\aplikacje\\quizMe"
+    ]
+  ],
+  "_from": "css-loading@latest",
+  "_id": "css-loading@1.4.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/css-loading",
+  "_nodeVersion": "5.4.1",
+  "_npmOperationalInternal": {
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/css-loading-1.4.0.tgz_1461750563942_0.8925992487929761"
+  },
+  "_npmUser": {
+    "email": "jovey.zheng@gmail.com",
+    "name": "joveyzheng"
+  },
+  "_npmVersion": "2.14.20",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "css-loading",
+    "raw": "css-loading",
+    "rawSpec": "",
+    "scope": null,
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#DEV:/"
+  ],
+  "_resolved": "https://registry.npmjs.org/css-loading/-/css-loading-1.4.0.tgz",
+  "_shasum": "45e92356745c8ed06b5610d8c17c5f5fba2b52c5",
+  "_shrinkwrap": null,
+  "_spec": "css-loading",
+  "_where": "c:\\aplikacje\\quizMe",
+  "authors": "jovey-zheng",
+  "bugs": {
+    "url": "https://github.com/jovey-zheng/loader/issues"
+  },
+  "dependencies": {},
+  "description": "Pure css loading animations.",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "45e92356745c8ed06b5610d8c17c5f5fba2b52c5",
+    "tarball": "https://registry.npmjs.org/css-loading/-/css-loading-1.4.0.tgz"
+  },
+  "gitHead": "aec4f663b4e57766310cc5ec7a9a12019775c423",
+  "homepage": "http://jovey-zheng.github.io/loader",
+  "keywords": [
+    "css",
+    "loader",
+    "animation"
+  ],
+  "license": "MIT",
+  "main": "loaders.min.css",
+  "maintainers": [
+    {
+      "email": "jovey.zheng@gmail.com",
+      "name": "joveyzheng"
+    }
+  ],
+  "name": "css-loading",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jovey-zheng/loader.git"
+  },
+  "scripts": {},
+  "version": "1.4.0"
+}

@@ -3,7 +3,7 @@
 
   <ion-nav-bar class="bar-positive nav-title-slide-ios7">
     <ion-nav-title>
-      QuizME
+      {{ quizQue_ctrl.quizMeStage }}
     </ion-nav-title>
   </ion-nav-bar>
 
@@ -14,7 +14,11 @@
 
   <ion-content class="has-header padding">
 
-    <div class="list" id="quizSearcher">
+    <quiz-que-directive></quiz-que-directive>
+
+
+
+   <!-- <div class="list" id="quizSearcher">
 
       <div class="item item-divider spinnerDivider">
         <div class="row">
@@ -70,9 +74,9 @@
 
     </div>
 
-    </div>
+    </div> -->
 
-    <div class="list" id="quizChooser">
+    <!-- <div class="list" id="quizChooser">
 
       <div class="item item-divider">
         Please choose <span class="bold">QuizME</span> mode:
@@ -90,10 +94,10 @@
         Solo Quiz (no opponent)
       </a>
 
-    </div>
+    </div> -->
 
 
-    <div class="list">
+   <!-- <div class="list" id="userCount">
 
       <div class="item item-divider">
        Quiz'ing people atm:
@@ -107,7 +111,7 @@
         in Ranked mode: 125
       </a>
 
-    </div>
+    </div> -->
 
 
 
