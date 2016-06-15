@@ -1,4 +1,4 @@
-angular.module('pmApp.quizQueDirective', [])
+angular.module('pmApp')
 
 
   .directive('quizQueDirective', function () {
@@ -13,7 +13,7 @@ angular.module('pmApp.quizQueDirective', [])
         var quizQueArea = $('#quizQueArea');
 
         var quizQueMainInfo = $('<div class="item item-divider spinnerDivider">' +
-        '<div class="row">' +
+        '<div class="row" id="spinnerDividerRow">' +
         '<div class="col col-10" id="loadingDiv">' +
         '<div class="cssload-container"><div class="cssload-whirlpool"></div></div>' +
         '</div>' +
@@ -78,9 +78,6 @@ angular.module('pmApp.quizQueDirective', [])
 
         scope.$on('startQuiz', function () {
           quizQueArea.empty();
-
-
-
           quizQueArea.append(quizQueMainInfo).show();
         });
 
@@ -94,12 +91,10 @@ angular.module('pmApp.quizQueDirective', [])
           quizQueArea.append(joinedQue);
           joinedQue.fadeIn('slow');
 
-          setTimeout(function () {
             var findingOpponent = $('<a class="item queMarks" id="lookingForOpponent">' +
               '<i class="icon ion-stats-bars markIcon markBlue"></i><span class="markText">Looking for opponent...</span></a>').hide();
             findingOpponent.insertAfter($('#addedToQueMark'));
             findingOpponent.fadeIn('slow');
-          }, 1000);
 
           var cancelSearch = $('<a class="item text-center" id="cancelSearch">Cancel search</a>').hide();
           quizQueArea.append(cancelSearch);
@@ -166,9 +161,13 @@ angular.module('pmApp.quizQueDirective', [])
 
           quizQueArea.empty();
 
-          $('gameStatusText').text('Waiting for Opponent...');
+          quizQueArea.append(quizQueMainInfo);
 
-          quizQueArea.append(quizQueMainInfo).fadeIn('slow');
+          $('#spinnerDividerRow').prepend('<div class="col col-10" id="loadingDiv">' +
+            '<div class="cssload-container"><div class="cssload-whirlpool"></div></div>' +
+            '</div>');
+          $('#gameStatusText').removeClass('text-center').text('Waiting for Opponent...');
+          quizQueMainInfo.fadeIn('slow');
 
         });
 

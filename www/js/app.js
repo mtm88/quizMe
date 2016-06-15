@@ -1,5 +1,5 @@
 angular.module('pmApp', ['ionic', 'ngMessages', 'LocalStorageModule', 'pmApp.LoginCtrl', 'pmApp.RegisterCtrl', 'pmApp.HomeCtrl', 'pmApp.FriendCtrl', 'pmApp.ChatCtrl',
-  'pmApp.PrivateChatCtrl', 'pmApp.QuizQueCtrl', 'pmApp.QuizGameCtrl',
+  'pmApp.PrivateChatCtrl', 'pmApp.QuizGameCtrl',
   'pmApp.postDataServices', 'pmApp.loginOriginService', 'pmApp.registerFormDirectives', 'pmApp.friendList', 'pmApp.friendFinderDirectives', 'pmApp.chatServices'])
 
   .constant('SERVER', {
