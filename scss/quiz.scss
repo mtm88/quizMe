@@ -25,6 +25,10 @@
   color: green;
 }
 
+.markBlue {
+  color: dodgerblue;
+}
+
 .markIcon {
   font-size: 22px;
   padding-right: 15px;
@@ -91,16 +95,17 @@
   background-color: green;
 }
 
-#difficultyRow {
-  color: blue;
-  .col {
-    padding: 20px;
-    margin: 50px;
-  }
+#spinnerDivider {
+  margin-top: 10px;
 }
 
-.row {
-  background-color: red;
-  color: blue;
-  font-size: 20px;
+#catFound {
+  .markIcon {
+    font-size: 20px;
+  }
+  .col {
+    margin-top: 0px;
+    font-weight: normal;
+    font-size: 15px;
+  }
 }

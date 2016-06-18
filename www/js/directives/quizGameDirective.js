@@ -1,7 +1,7 @@
 angular.module('pmApp')
 
 
-  .directive('quizGameDirective', function () {
+  .directive('quizGameDirective', function ($timeout) {
 
     return {
 
@@ -10,11 +10,19 @@ angular.module('pmApp')
       template: '<div id="quizGameArea"></div>',
       link: function (scope, elem, attr) {
 
-
-        function randomRating () {
-         var randomNumber = Math.floor((Math.random() * 1000) + 1);
-          return randomNumber
+        //temporary until ranking will be implemented
+        function randomRating() {
+          return Math.floor((Math.random() * 1000) + 1);
         }
+
+        var quizGameSpinnerObject = $('<div class="item item-divider" id="spinnerDivider">' +
+          '<div class="row" id="spinnerDividerRow">' +
+          '<div class="col col-10">' +
+          '<div class="cssload-container"><div class="cssload-whirlpool"></div></div>' +
+          '</div>' +
+          '<div class="col spinnerText" id="gameStatusText">Rolling category for first round...</div>' +
+          '</div>' +
+          '</div>').hide();
 
         var quizGameMainInfo = $('<div class="item item-divider"><div class="col text-center" id="gameStatusText">Both players are ready!</div></div>').hide();
 
@@ -42,21 +50,46 @@ angular.module('pmApp')
           '</div>' +
 
 
-          '<div class="row text-center" id="dificultyRow">' +
-          '<div class="col" id="regular">Regular</div>' +
-          '<div class="col" id="ranked">Ranked</div>' +
-          '<div class="col" id="solo">Solo</div>' +
+          '<div class="row text-center" id="difficultyRow">' +
+          '<div class="col button button-small" id="regular">Regular</div>' +
+          '<div class="col button button-small" id="ranked">Ranked</div>' +
+          '<div class="col button button-small" id="solo">Solo</div>' +
 
           '</div>').hide();
-
-
 
         $('#quizGameArea').append(quizGameMainInfo);
         $('#quizGameArea').append(playersInfo);
         quizGameMainInfo.show();
         playersInfo.show();
 
-        $('#' + scope.quizGame_ctrl.gameData.players[0].difficulty).addClass('button button-small button-assertive');
+        $('#' + scope.quizGame_ctrl.gameData.players[0].difficulty).addClass('button button-small button-balanced');
+
+        $timeout(function () {
+          $('#quizGameArea').append(quizGameSpinnerObject);
+          quizGameSpinnerObject.fadeIn('slow');
+
+          $timeout(function () {
+            $('#spinnerDividerRow').fadeOut('fast');
+            $('#spinnerDivider').prepend('<div class="row" id="catFound">' +
+              '<div class="col col-10"><i class="icon ion-checkmark-round markIcon markGreen"></i></div>' +
+              '<div class="col doneText">Done!</div>' +
+              '</div>')
+              .hide().fadeIn('slow');
+
+            $timeout(function () {
+              $('#catFound').hide();
+
+              $('#catFound > .col-10 > i').removeClass('ion-checkmark-round markGreen').addClass('ion-university markBlue');
+              $('#catFound > .doneText').text('Rolled category: ').css('font-size', '15px');
+              $('#catFound').append('<div class="col">' + scope.category + '</div>');
+
+              $('#catFound').show();
+
+            }, 1500);
+
+          }, 2000);
+
+        }, 2000);
 
       }
     }

@@ -37,17 +37,7 @@ angular.module('pmApp.QuizGameCtrl', [])
     });
 
     $scope.$on('$ionicView.enter', function () {
-
-      $timeout(function () {
-        $('#rollingCard').show(400);
-
-        $timeout(function () {
-          $('#quizMeHeaderSpinner').hide();
-          $('#quizMeRow').text('Rolled category: ' + $scope.category);
-          startTimer();
-        }, 2000);
-
-      }, 1000)
+        //cleared after refactor, up for removal
     });
 
 
@@ -145,7 +135,7 @@ angular.module('pmApp.QuizGameCtrl', [])
         $('#infoOnResults').show(400);
 
         if (usedCategories.length == 3) {
-          
+
           $ionicLoading.show();
 
           $timeout(function () {
