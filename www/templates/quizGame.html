@@ -3,7 +3,7 @@
 
   <ion-nav-bar class="bar-positive nav-title-slide-ios7">
     <ion-nav-title>
-      QuizME
+      {{ quizQue_ctrl.quizMeStage }}
     </ion-nav-title>
   </ion-nav-bar>
 
@@ -14,29 +14,10 @@
 
   <ion-content class="has-header padding">
 
-    <div id="playersDiv">
-    <div class="item item-divider">
-      Players:
-    </div>
+   <quiz-game-directive></quiz-game-directive>
 
-    <a class="item">
-      {{ quizGame_ctrl.gameData.players[0].username }}
-    </a>
+<!--
 
-    <a class="item">
-      {{ quizGame_ctrl.gameData.players[1].username }}
-    </a>
-
-    <div class="item item-divider" id="difficultyDiv">
-      Difficulty:
-    </div>
-
-    <a class="item">
-      {{ quizGame_ctrl.gameData.players[0].difficulty }}
-    </a>
-
-    <br/>
-    </div>
 
     <div class="item item-divider" id="rollingCard">
 
@@ -85,7 +66,6 @@
 
 
 
-                 <!-- ELEMENTY QUIZOWE -->
 
 
     <ul class="list item-text-wrap" id="listWithQuestions">
@@ -193,7 +173,7 @@
       </div>
     </a>
 
-
+ -->
   </ion-content>
 
 

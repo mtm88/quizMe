@@ -84,23 +84,12 @@
       }, 2000);
     });
 
-
-    socket.on(localData.username + ' - user accepted quiz', function () {
-
-      $('.opponentFoundDivs').hide(100);
-      $('.waitingForServer').show(400);
-
-    });
-
     socket.on(localData.userDbId + ' - readyToLoadGame', function (info) {
-
       console.log(info);
       localStorageService.set('category', info.firstCategory);
       localStorageService.set('gameData', info.gameData);
       localStorageService.set('firstQuestionsData', info.questionsData);
       $state.go('app.quizGame');
-
-
     });
 
     this.acceptQuiz = function () {

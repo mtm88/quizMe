@@ -13,13 +13,13 @@ angular.module('pmApp')
         var quizQueArea = $('#quizQueArea');
 
         var quizQueMainInfo = $('<div class="item item-divider spinnerDivider">' +
-        '<div class="row" id="spinnerDividerRow">' +
-        '<div class="col col-10" id="loadingDiv">' +
-        '<div class="cssload-container"><div class="cssload-whirlpool"></div></div>' +
-        '</div>' +
-        '<div class="col spinnerText" id="gameStatusText">Game Search in progress...</div>' +
-        '</div>' +
-        '</div>').hide();
+          '<div class="row" id="spinnerDividerRow">' +
+          '<div class="col col-10" id="loadingDiv">' +
+          '<div class="cssload-container"><div class="cssload-whirlpool"></div></div>' +
+          '</div>' +
+          '<div class="col spinnerText" id="gameStatusText">Game Search in progress...</div>' +
+          '</div>' +
+          '</div>').hide();
 
         var quizMeChooser = $('' +
           '<div class="list" id="quizChooser">' +
@@ -58,7 +58,6 @@ angular.module('pmApp')
           '</div>').hide();
 
 
-
         prepareView();
 
         function prepareView() {
@@ -91,10 +90,10 @@ angular.module('pmApp')
           quizQueArea.append(joinedQue);
           joinedQue.fadeIn('slow');
 
-            var findingOpponent = $('<a class="item queMarks" id="lookingForOpponent">' +
-              '<i class="icon ion-stats-bars markIcon markBlue"></i><span class="markText">Looking for opponent...</span></a>').hide();
-            findingOpponent.insertAfter($('#addedToQueMark'));
-            findingOpponent.fadeIn('slow');
+          var findingOpponent = $('<a class="item queMarks" id="lookingForOpponent">' +
+            '<i class="icon ion-stats-bars markIcon markBlue"></i><span class="markText">Looking for opponent...</span></a>').hide();
+          findingOpponent.insertAfter($('#addedToQueMark'));
+          findingOpponent.fadeIn('slow');
 
           var cancelSearch = $('<a class="item text-center" id="cancelSearch">Cancel search</a>').hide();
           quizQueArea.append(cancelSearch);
@@ -155,9 +154,8 @@ angular.module('pmApp')
 
           }, 1500);
         });
-
-
-        scope.$on('user accepted quiz', function() {
+        
+        scope.$on('user accepted quiz', function () {
 
           quizQueArea.empty();
 
@@ -170,7 +168,6 @@ angular.module('pmApp')
           quizQueMainInfo.fadeIn('slow');
 
         });
-
 
       }
     }
