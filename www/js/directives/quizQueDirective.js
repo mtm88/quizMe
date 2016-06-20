@@ -1,7 +1,10 @@
+(function () {
 angular.module('pmApp')
 
 
-  .directive('quizQueDirective', function () {
+  .directive('quizQueDirective', quizQueDirective);
+
+    function quizQueDirective() {
 
     return {
 
@@ -154,7 +157,7 @@ angular.module('pmApp')
 
           }, 1500);
         });
-        
+
         scope.$on('user accepted quiz', function () {
 
           quizQueArea.empty();
@@ -171,4 +174,6 @@ angular.module('pmApp')
 
       }
     }
-  });
+  }
+
+}) ();
