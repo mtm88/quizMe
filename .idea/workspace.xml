@@ -3,12 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="cf63bade-43c5-4bd0-aec1-bf28ba9a4b67" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scss/quiz.scss" afterPath="$PROJECT_DIR$/scss/quiz.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/css/quiz.css" afterPath="$PROJECT_DIR$/www/css/quiz.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/QuizGameController.js" afterPath="$PROJECT_DIR$/www/js/QuizGameController.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/directives/quizGameDirective.js" afterPath="$PROJECT_DIR$/www/js/directives/quizGameDirective.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/directives/quizQueDirective.js" afterPath="$PROJECT_DIR$/www/js/directives/quizQueDirective.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/quizGame.html" afterPath="$PROJECT_DIR$/www/templates/quizGame.html" />
     </list>
     <ignored path="pm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,7 +24,7 @@
     <favorites_list name="pm" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="vertical" split-proportion="0.5">
+    <splitter split-orientation="vertical" split-proportion="0.5339603">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="quizQue.html" pinned="false" current-in-tab="false">
@@ -44,8 +40,8 @@
           <file leaf-file-name="quizGame.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/www/templates/quizGame.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-668">
-                  <caret line="70" column="52" selection-start-line="70" selection-start-column="39" selection-end-line="70" selection-end-column="52" />
+                <state relative-caret-position="150">
+                  <caret line="111" column="64" selection-start-line="111" selection-start-column="6" selection-end-line="111" selection-end-column="64" />
                   <folding />
                 </state>
               </provider>
@@ -54,8 +50,8 @@
           <file leaf-file-name="quizGameDirective.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/www/js/directives/quizGameDirective.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="80">
-                  <caret line="4" column="53" selection-start-line="4" selection-start-column="53" selection-end-line="4" selection-end-column="53" />
+                <state relative-caret-position="253">
+                  <caret line="298" column="16" selection-start-line="298" selection-start-column="16" selection-end-line="298" selection-end-column="16" />
                   <folding />
                 </state>
               </provider>
@@ -64,8 +60,8 @@
           <file leaf-file-name="QuizGameController.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/www/js/QuizGameController.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="100">
-                  <caret line="8" column="113" selection-start-line="8" selection-start-column="113" selection-end-line="8" selection-end-column="113" />
+                <state relative-caret-position="-40">
+                  <caret line="126" column="0" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -128,8 +124,8 @@
           <file leaf-file-name="QuizGameController.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/www/js/QuizGameController.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="160">
-                  <caret line="213" column="0" selection-start-line="213" selection-start-column="0" selection-end-line="213" selection-end-column="0" />
+                <state relative-caret-position="205">
+                  <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -206,9 +202,9 @@
         <option value="$PROJECT_DIR$/www/css/quiz.scss" />
         <option value="$PROJECT_DIR$/www/index.html" />
         <option value="$PROJECT_DIR$/scss/quiz.scss" />
+        <option value="$PROJECT_DIR$/www/js/directives/quizQueDirective.js" />
         <option value="$PROJECT_DIR$/www/templates/quizGame.html" />
         <option value="$PROJECT_DIR$/www/js/directives/quizGameDirective.js" />
-        <option value="$PROJECT_DIR$/www/js/directives/quizQueDirective.js" />
         <option value="$PROJECT_DIR$/www/js/QuizGameController.js" />
       </list>
     </option>
@@ -539,7 +535,7 @@
       <workItem from="1465148643655" duration="31123000" />
       <workItem from="1466189273222" duration="10000" />
       <workItem from="1466242945921" duration="291000" />
-      <workItem from="1466243866254" duration="28215000" />
+      <workItem from="1466243866254" duration="36308000" />
     </task>
     <task id="LOCAL-00001" summary="fixes in changing online status, several improvements to code">
       <created>1465120762882</created>
@@ -569,11 +565,18 @@
       <option name="project" value="LOCAL" />
       <updated>1466277329476</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="further refactors and jquery updates">
+      <created>1466425392507</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1466425392507</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="380015000" />
+    <option name="totallyTimeSpent" value="388108000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
@@ -853,22 +856,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/quizGame.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-668">
-          <caret line="70" column="52" selection-start-line="70" selection-start-column="39" selection-end-line="70" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/directives/quizGameDirective.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="4" column="53" selection-start-line="4" selection-start-column="53" selection-end-line="4" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/directives/quizQueDirective.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -885,10 +872,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/quizGame.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="111" column="64" selection-start-line="111" selection-start-column="6" selection-end-line="111" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/directives/quizGameDirective.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="298" column="16" selection-start-line="298" selection-start-column="16" selection-end-line="298" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/QuizGameController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="8" column="113" selection-start-line="8" selection-start-column="113" selection-end-line="8" selection-end-column="113" />
+        <state relative-caret-position="-40">
+          <caret line="126" column="0" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
           <folding />
         </state>
       </provider>

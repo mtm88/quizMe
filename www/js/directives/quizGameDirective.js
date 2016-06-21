@@ -1,12 +1,12 @@
 (function () {
 
-angular.module('pmApp')
+  angular.module('pmApp')
 
-  .directive('quizGameDirective', quizGameDirective);
+    .directive('quizGameDirective', quizGameDirective);
 
   quizGameDirective.$inject = ['$timeout', '$compile', '$interval'];
 
-    function quizGameDirective($timeout, $compile, $interval) {
+  function quizGameDirective($timeout, $compile, $interval) {
 
     return {
 
@@ -142,7 +142,7 @@ angular.module('pmApp')
 
           var questionTimerElement = $('<a class="item">' +
             'Time left: {{ questionTimer }}s' +
-            '<progress id="questionTimer" value="2" max="2" class="progressbar"></progress>' +
+            '<progress id="questionTimer" value="1" max="1" class="progressbar"></progress>' +
             '</a>').hide();
 
           $compile(questionTimerElement)(scope);
@@ -172,13 +172,14 @@ angular.module('pmApp')
             var answersList = $('<div class="item item-divider" id="myAnswersInfo">' +
               '<div class="row">' +
               '<div class="col">Your answers:</div>' +
-              '</div><div class="row text-center" id="myAnswersList">' +
+              '</div>' +
+              '<div class="row text-center" id="myAnswersList">' +
               '<div ng-repeat="answer in myAnswers track by $index" ng-class="{\'correctAnswerDiv col col-33 answerButtons\' : answer.correctAnswer == true,' +
               '\'incorrectAnswerDiv col col-33 col-offset-5 answerButtons\' : answer.correctAnswer == false }">' +
               '{{ answer.question }}' +
-              '</div></div></div>');
-             $compile(answersList)(scope);
-            answersList.insertAfter($('#quizGameArea'));
+              '</div></div></div>').hide();
+            $compile(answersList)(scope);
+            answersList.insertAfter($('#quizGameArea')).fadeIn('slow');
           }
 
           scope.myAnswers.push({'question': i + 1, 'correctAnswer': answer});
@@ -189,21 +190,225 @@ angular.module('pmApp')
           if (i < 3) {
             scope.$emit('start asking questions', i);
           } else {
-            showResults();
+            var waitingForOppElems = $('<div class="item item-divider" id="waitingForOppElems">' +
+              '<div class="row" id="opponentAnswersListSpinner">' +
+              '<div class="col col-10" ng-hide="opponentAnswers">' +
+              '<div class="cssload-container">' +
+              '<div class="cssload-whirlpool"></div>' +
+              '</div></div>' +
+              '<div class="col spinnerText" >waiting for Opponent results...</div>' +
+              '</div></div>').hide();
+
+            waitingForOppElems.insertAfter($('#myAnswersInfo'));
+            waitingForOppElems.fadeIn('slow');
+
+            scope.$emit('category results from directive');
           }
           $('#quizGameArea').empty();
-
         }
 
 
-        function showResults() {
+        scope.$on('opponent category results', function (event, opponentResults) {
 
+          $timeout(function () {
+            var oppResultsElems = $('<div class="item item-divider" id="oppResultsElems">' +
+              '<div class="row">' +
+              '<div class="col">Opponent answers:</div>' +
+              '</div>' +
+              '<div class="row text-center" id="opponentAnswersList">' +
+              '<div ng-repeat="answer in opponentAnswers track by $index" ng-class="{\'correctAnswerDiv col col-33 answerButtons\' : answer.correctAnswer == true,' +
+              '\'incorrectAnswerDiv col col-33 col-offset-5 answerButtons\' : answer.correctAnswer == false }">' +
+              '{{ answer.questionNumber }}' +
+              '</div>' +
+              '</div></div>').hide();
+
+            $compile(oppResultsElems)(scope);
+
+            $('#waitingForOppElems').fadeOut('fast');
+
+            oppResultsElems.insertAfter($('#myAnswersInfo'));
+            oppResultsElems.fadeIn('slow');
+
+            for (i = 0; i < 3; i++) {
+              opponentResults[i].questionNumber = i + 1;
+            }
+
+            scope.opponentAnswers = opponentResults;
+            scope.$apply();
+
+            checkIfDraw();
+
+          }, 1500);
+
+        });
+
+        scope.$on('new questions data from controller', function (event, data) {
+
+          scope.questions = data.questions;
+          scope.category = data.category;
+
+          console.log(data);
+          console.log(scope.questions);
+
+          scope.loadingNewCategory = false; //used for choosing category after loss/win - might be up for removal
+          //$scope.category = category;
+
+
+          $timeout(function () {
+
+          $('#resultCard').empty();
+
+          var newCategoryElems = $('<div class="item item-divider">' +
+            '<div class="row" id="newCategoryRow">' +
+            '<div class="col" id="newCategoryText"></div>' +
+            '</div></div>').hide();
+          $('#resultCard').append(newCategoryElems);
+          newCategoryElems.fadeIn('slow');
+
+          $('#newCategoryRow').prepend('<div class="col col-10">' +
+            '<i class="icon ion-university markBlue"></i>' +
+            '</div>');
+          $('#newCategoryText').text('New category: ').css('font-size', '15px');
+          $('#newCategoryRow').append($('<div class="col">' + scope.category + '</div>').css('font-weight', 'bold'));
+
+            var newCatCounter = $('<a class="item" id="newCatCountElem">'
+              + '<div id="newCatCountText"></div>' +
+              '<progress id="newCatProgBar" value="3" max="3" class="progressbar"></progress>' +
+              '</a>').hide();
+
+            $('#resultCard').append(newCatCounter);
+            newCatCounter.fadeIn('slow');
+
+            var actualValue = $('#newCatProgBar').attr('value');
+
+            $('#newCatCountText').prepend($('<div>Quiz starting in <span>' + actualValue + '</span> sec...</div>'));
+
+            var progressBarAnimate = $interval(function () {
+
+              actualValue--;
+              $('#newCatProgBar').val(actualValue);
+              $('#newCatCountText > div > span').text(actualValue);
+
+              console.log(actualValue);
+
+              if (actualValue === 0) {
+                $interval.cancel(progressBarAnimate);
+                //clean data from previous category
+                scope.myAnswers = [];
+                scope.opponentAnswers = [];
+                
+                //find out the state of I - which category is it as the limit is 3
+                var i = parseInt(scope.usedCategories.length);
+
+                scope.usedCategories.push(scope.category);
+
+                scope.$emit('start asking questions', i);
+                $('#quizGameArea').empty();
+                $('#resultCard').remove();
+              }
+            }, 1000);
+          }, 2000);
+        });
+
+        function checkIfDraw() {
+
+          var resultsElem = $('<div class="card" id="resultCard">' +
+            '<div class="item item-divider">' +
+            'Results' +
+            '</div>' +
+            '</div>').hide();
+
+          resultsElem.insertAfter($('#oppResultsElems'));
+          resultsElem.fadeIn('slow');
+
+          if (scope.usedCategories.length > 2) {
+
+            var finalResultsElems = $('<div class="item item-text-wrap">' +
+              '<div>Your correct answer count: {{ myAnswersResults }}</div>' +
+              '<div>Opponent correct answer count: {{ opponentAnswerResults }}</div>' +
+              '</div>').hide();
+
+            $compile(finalResultsElems)(scope);
+
+            $('#oppResultsElems').append(finalResultsElems);
+            finalResultsElems.fadeIn('slow');
+
+            $timeout(function () {
+              $('#categorySpinnerText').text('Quiz Completed');
+              socket.emit('get quiz results', $scope.quizGame_ctrl.gameData.quizID, userDbId);
+            }, 1500);
+          }
+
+          else {
+
+            var answersCountArray = decideWhoWon();
+
+            var myCorrectAnswersCount = answersCountArray[0];
+            var opponentCorrectAnswersCount = answersCountArray[1];
+
+            if (myCorrectAnswersCount > opponentCorrectAnswersCount) {
+              $('#infoOnNewCategory').text('You have won this category');
+              $('#newCategorySpinner').show(400);
+              $('#categorySpinnerText').text('Opponent choosing next category...');
+            }
+
+            else if (myCorrectAnswersCount < opponentCorrectAnswersCount) {
+              $('#infoOnNewCategory').text('You have lost this category');
+              $('#newCategorySpinner').hide(200);
+              $('#chooseCategoryAfterLoss').show(400);
+              $('#categoryChooserSpinnerText').text('Rolling categories...');
+              //socket.emit('bring categories to choose', scope.usedCategories, scope.quizGame_ctrl.gameData.quizID);
+
+            }
+
+            else {
+
+              var categoryResultsElems = $('<div class="item item-text-wrap">' +
+                '<div>We have a draw!</div>').hide();
+              $('#resultCard').append(categoryResultsElems);
+              categoryResultsElems.fadeIn('slow');
+
+              $timeout(function () {
+
+                var newCatElem = $('<div class="item item-text-wrap">' +
+                '<div class="row" id="spinnerDividerRow">' +
+                '<div class="col col-10">' +
+                '<div class="cssload-container"><div class="cssload-whirlpool"></div></div>' +
+                '</div>' +
+                '<div class="col spinnerText" id="gameStatusText">Rolling new category...</div>' +
+                '</div></div>').hide();
+
+                $('#resultCard').append(newCatElem);
+                newCatElem.fadeIn('slow');
+
+              }, 1500);
+
+              scope.$emit('directive requests for draw');
+
+              //
+            }
+
+          }
 
         }
 
+        function decideWhoWon() {
+
+          var myCorrectAnswers = 0;
+          var opponentCorrectAnswers = 0;
+
+          for (i = 0; i < scope.myAnswers.length; i++) {
+
+            if (scope.myAnswers[i].correctAnswer == true)
+              myCorrectAnswers++;
+            if (scope.opponentAnswers[i].correctAnswer == true)
+              opponentCorrectAnswers++;
+          }
+          return [myCorrectAnswers, opponentCorrectAnswers];
+        }
 
       }
     }
   }
 
-}) ();
+})();
