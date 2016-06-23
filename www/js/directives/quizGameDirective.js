@@ -106,8 +106,6 @@
                 $('#progressbar').val(actualValue);
                 $('#progressText > div > span').text(actualValue);
 
-                console.log(actualValue);
-
                 if (actualValue === 0) {
                   $interval.cancel(progressBarAnimate);
                   scope.$emit('start asking questions', 0);
@@ -187,8 +185,10 @@
           scope.$emit('add answer', {'valid': answer, 'i': i}); //post the answer to DB
 
           i++;
+          $('#quizGameArea').empty();
           if (i < 3) {
             scope.$emit('start asking questions', i);
+
           } else {
             var waitingForOppElems = $('<div class="item item-divider" id="waitingForOppElems">' +
               '<div class="row" id="opponentAnswersListSpinner">' +
@@ -204,7 +204,6 @@
 
             scope.$emit('category results from directive');
           }
-          $('#quizGameArea').empty();
         }
 
 
@@ -244,32 +243,26 @@
 
         scope.$on('new questions data from controller', function (event, data) {
 
-          scope.questions = data.questions;
-          scope.category = data.category;
-
-          console.log(data);
-          console.log(scope.questions);
-
-          scope.loadingNewCategory = false; //used for choosing category after loss/win - might be up for removal
-          //$scope.category = category;
-
+            scope.$parent.questions = data.questions;
+            scope.$parent.category = data.category;
+            scope.loadingNewCategory = false; //used for choosing category after loss/win - might be up for removal
 
           $timeout(function () {
 
-          $('#resultCard').empty();
+            $('#resultCard').empty();
 
-          var newCategoryElems = $('<div class="item item-divider">' +
-            '<div class="row" id="newCategoryRow">' +
-            '<div class="col" id="newCategoryText"></div>' +
-            '</div></div>').hide();
-          $('#resultCard').append(newCategoryElems);
-          newCategoryElems.fadeIn('slow');
+            var newCategoryElems = $('<div class="item item-divider">' +
+              '<div class="row" id="newCategoryRow">' +
+              '<div class="col" id="newCategoryText"></div>' +
+              '</div></div>').hide();
+            $('#resultCard').append(newCategoryElems);
+            newCategoryElems.fadeIn('slow');
 
-          $('#newCategoryRow').prepend('<div class="col col-10">' +
-            '<i class="icon ion-university markBlue"></i>' +
-            '</div>');
-          $('#newCategoryText').text('New category: ').css('font-size', '15px');
-          $('#newCategoryRow').append($('<div class="col">' + scope.category + '</div>').css('font-weight', 'bold'));
+            $('#newCategoryRow').prepend('<div class="col col-10">' +
+              '<i class="icon ion-university markBlue"></i>' +
+              '</div>');
+            $('#newCategoryText').text('New category: ').css('font-size', '15px');
+            $('#newCategoryRow').append($('<div class="col">' + scope.category + '</div>').css('font-weight', 'bold'));
 
             var newCatCounter = $('<a class="item" id="newCatCountElem">'
               + '<div id="newCatCountText"></div>' +
@@ -289,20 +282,17 @@
               $('#newCatProgBar').val(actualValue);
               $('#newCatCountText > div > span').text(actualValue);
 
-              console.log(actualValue);
-
               if (actualValue === 0) {
                 $interval.cancel(progressBarAnimate);
                 //clean data from previous category
                 scope.myAnswers = [];
                 scope.opponentAnswers = [];
-                
-                //find out the state of I - which category is it as the limit is 3
-                var i = parseInt(scope.usedCategories.length);
 
                 scope.usedCategories.push(scope.category);
 
-                scope.$emit('start asking questions', i);
+                scope.$emit('start asking questions', 0);
+                $('#myAnswersInfo').remove();
+                $('#oppResultsElems').remove();
                 $('#quizGameArea').empty();
                 $('#resultCard').remove();
               }
@@ -321,22 +311,8 @@
           resultsElem.insertAfter($('#oppResultsElems'));
           resultsElem.fadeIn('slow');
 
-          if (scope.usedCategories.length > 2) {
-
-            var finalResultsElems = $('<div class="item item-text-wrap">' +
-              '<div>Your correct answer count: {{ myAnswersResults }}</div>' +
-              '<div>Opponent correct answer count: {{ opponentAnswerResults }}</div>' +
-              '</div>').hide();
-
-            $compile(finalResultsElems)(scope);
-
-            $('#oppResultsElems').append(finalResultsElems);
-            finalResultsElems.fadeIn('slow');
-
-            $timeout(function () {
-              $('#categorySpinnerText').text('Quiz Completed');
-              socket.emit('get quiz results', $scope.quizGame_ctrl.gameData.quizID, userDbId);
-            }, 1500);
+          if (scope.usedCategories.length == 3) {
+            scope.$emit('directive requests final results');
           }
 
           else {
@@ -368,28 +344,23 @@
               $('#resultCard').append(categoryResultsElems);
               categoryResultsElems.fadeIn('slow');
 
+              scope.$emit('directive requests for draw');
+
               $timeout(function () {
 
                 var newCatElem = $('<div class="item item-text-wrap">' +
-                '<div class="row" id="spinnerDividerRow">' +
-                '<div class="col col-10">' +
-                '<div class="cssload-container"><div class="cssload-whirlpool"></div></div>' +
-                '</div>' +
-                '<div class="col spinnerText" id="gameStatusText">Rolling new category...</div>' +
-                '</div></div>').hide();
+                  '<div class="row" id="spinnerDividerRow">' +
+                  '<div class="col col-10">' +
+                  '<div class="cssload-container"><div class="cssload-whirlpool"></div></div>' +
+                  '</div>' +
+                  '<div class="col spinnerText" id="gameStatusText">Rolling new category...</div>' +
+                  '</div></div>').hide();
 
                 $('#resultCard').append(newCatElem);
                 newCatElem.fadeIn('slow');
-
               }, 1500);
-
-              scope.$emit('directive requests for draw');
-
-              //
             }
-
           }
-
         }
 
         function decideWhoWon() {
@@ -407,6 +378,47 @@
           return [myCorrectAnswers, opponentCorrectAnswers];
         }
 
+
+        scope.$on('final quiz results', function (quizAnswersArray) {
+
+
+          console.log('pokazuje finalowe rezultaty');
+
+          var finalResultsElems = $('<div class="item item-text-wrap">' +
+            '<div>Your correct answer count: {{ myAnswersResults }}</div>' +
+            '<div>Opponent correct answer count: {{ opponentAnswerResults }}</div>' +
+            '</div>').hide();
+
+          $compile(finalResultsElems)(scope);
+
+          $('#resultCard').append(finalResultsElems);
+          finalResultsElems.fadeIn('slow');
+          scope.$emit('directive requests for final results');
+
+          var myPositionInArray = quizAnswersArray[0];
+          var opponentPositionInArray = '';
+          if (myPositionInArray == 1)
+            opponentPositionInArray = 2;
+          else
+            opponentPositionInArray = 1;
+
+      /*    $timeout(function () {
+            $scope.myAnswersResults = quizAnswersArray[myPositionInArray];
+            $scope.opponentAnswerResults = quizAnswersArray[opponentPositionInArray];
+
+            if ($scope.myAnswersResults > $scope.opponentAnswerResults)
+              $('#finalResultsInfoFrame').text('You have won the Quiz :-)');
+
+            else if ($scope.myAnswersResults < $scope.opponentAnswerResults)
+              $('#finalResultsInfoFrame').text('You have lost the Quiz :-(');
+
+            else
+              $('#finalResultsInfoFrame').text('Quiz ended as a draw');
+
+            $('#finalResultsDiv').show();
+
+          }); */
+        });
       }
     }
   }

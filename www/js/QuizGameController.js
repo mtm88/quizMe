@@ -14,9 +14,6 @@
     $scope.category = localStorageService.get('category');
     $scope.questions = localStorageService.get('firstQuestionsData');
 
-    console.log($scope.questions);
-    console.log($scope.category);
-
     var username = localStorageService.get('username');
     var userDbId = localStorageService.get('userDbId');
 
@@ -35,10 +32,13 @@
     });
 
     $scope.$on('start asking questions', function (event, i) {
+      console.log($scope.questions);
+      console.log($scope.category);
       startAskingQuestions(i);
     });
 
     $scope.$on('add answer', function (event, data) {
+      //console.log($scope.category);
       socket.emit('answer', data.valid, $scope.category, username, $scope.quizGame_ctrl.gameData.quizID, data.i);
     });
 
@@ -48,6 +48,14 @@
 
     $scope.$on('directive requests for draw', function () {
       socket.emit('add me to draws', $scope.quizGame_ctrl.gameData.quizID, userDbId, $scope.usedCategories);
+    });
+
+    $scope.$on('directive requests for final results', function() {
+      socket.emit('get quiz results', $scope.quizGame_ctrl.gameData.quizID, userDbId);
+    });
+
+    $scope.$on('directive requests final results', function () {
+      socket.emit('get quiz results', $scope.quizGame_ctrl.gameData.quizID, userDbId);
     });
 
 
@@ -65,9 +73,15 @@
 
 
     socket.on(userDbId + ' - opponent category results', function (opponentResult) {
-      console.log('opponent results received, broadcasting');
       $scope.$broadcast('opponent category results', opponentResult);
     });
+
+    socket.on('final quiz results', function (quizAnswersArray) {
+      $scope.$broadcast('final quiz results', quizAnswersArray);
+    });
+
+
+
 
 
     socket.on('prepared categories after loss', function (temporaryArrayOfCategories) {
@@ -91,40 +105,9 @@
       $scope.loadingNewCategory = true;
     };
 
-    socket.on('final quiz results', function (quizAnswersArray) {
-
-      var myPositionInArray = quizAnswersArray[0];
-      var opponentPositionInArray = '';
-      if (myPositionInArray == 1)
-        opponentPositionInArray = 2;
-      else
-        opponentPositionInArray = 1;
-
-      $ionicLoading.hide();
-
-      $timeout(function () {
-        $scope.myAnswersResults = quizAnswersArray[myPositionInArray];
-        $scope.opponentAnswerResults = quizAnswersArray[opponentPositionInArray];
-
-        if ($scope.myAnswersResults > $scope.opponentAnswerResults)
-          $('#finalResultsInfoFrame').text('You have won the Quiz :-)');
-
-        else if ($scope.myAnswersResults < $scope.opponentAnswerResults)
-          $('#finalResultsInfoFrame').text('You have lost the Quiz :-(');
-
-        else
-          $('#finalResultsInfoFrame').text('Quiz ended as a draw');
-
-        $('#finalResultsDiv').show();
-
-      });
-
-    });
-
+  
 
     function startAskingQuestions(i) {
-
-      if (i > 0) $('#myAnswersInfo').show(400);
 
       var answers = [];
 
