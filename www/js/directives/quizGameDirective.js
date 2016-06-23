@@ -313,6 +313,7 @@
 
           if (scope.usedCategories.length == 3) {
             scope.$emit('directive requests final results');
+            return
           }
 
           else {
@@ -379,10 +380,17 @@
         }
 
 
-        scope.$on('final quiz results', function (quizAnswersArray) {
+        scope.$on('final quiz results for directive', function (event, quizAnswersArray) {
 
+          console.log(quizAnswersArray);
 
-          console.log('pokazuje finalowe rezultaty');
+          var myPositionInArray = quizAnswersArray[0];
+          var opponentPositionInArray = (myPositionInArray == 1) ? 2 : 1;
+
+          $timeout(function () {
+          scope.myAnswersResults = quizAnswersArray[myPositionInArray];
+          scope.opponentAnswerResults = quizAnswersArray[opponentPositionInArray];
+          });
 
           var finalResultsElems = $('<div class="item item-text-wrap">' +
             '<div>Your correct answer count: {{ myAnswersResults }}</div>' +
@@ -393,20 +401,11 @@
 
           $('#resultCard').append(finalResultsElems);
           finalResultsElems.fadeIn('slow');
-          scope.$emit('directive requests for final results');
 
-          var myPositionInArray = quizAnswersArray[0];
-          var opponentPositionInArray = '';
-          if (myPositionInArray == 1)
-            opponentPositionInArray = 2;
-          else
-            opponentPositionInArray = 1;
 
-      /*    $timeout(function () {
-            $scope.myAnswersResults = quizAnswersArray[myPositionInArray];
-            $scope.opponentAnswerResults = quizAnswersArray[opponentPositionInArray];
+          console.log('wynik 1: ' + scope.myAnswersResults + ' wynik 2: ' + scope.opponentAnswerResults);
 
-            if ($scope.myAnswersResults > $scope.opponentAnswerResults)
+            /*if ($scope.myAnswersResults > $scope.opponentAnswerResults)
               $('#finalResultsInfoFrame').text('You have won the Quiz :-)');
 
             else if ($scope.myAnswersResults < $scope.opponentAnswerResults)
@@ -415,9 +414,9 @@
             else
               $('#finalResultsInfoFrame').text('Quiz ended as a draw');
 
-            $('#finalResultsDiv').show();
+            $('#finalResultsDiv').show(); */
 
-          }); */
+
         });
       }
     }

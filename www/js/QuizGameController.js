@@ -32,13 +32,10 @@
     });
 
     $scope.$on('start asking questions', function (event, i) {
-      console.log($scope.questions);
-      console.log($scope.category);
       startAskingQuestions(i);
     });
 
     $scope.$on('add answer', function (event, data) {
-      //console.log($scope.category);
       socket.emit('answer', data.valid, $scope.category, username, $scope.quizGame_ctrl.gameData.quizID, data.i);
     });
 
@@ -77,7 +74,8 @@
     });
 
     socket.on('final quiz results', function (quizAnswersArray) {
-      $scope.$broadcast('final quiz results', quizAnswersArray);
+      console.log(quizAnswersArray);
+      $scope.$broadcast('final quiz results for directive', quizAnswersArray);
     });
 
 
@@ -105,7 +103,7 @@
       $scope.loadingNewCategory = true;
     };
 
-  
+
 
     function startAskingQuestions(i) {
 
